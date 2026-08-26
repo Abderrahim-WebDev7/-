@@ -1,0 +1,26 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Order;
+use Illuminate\Http\Request;
+
+class OrderController extends Controller
+{
+    public function index()
+    {
+        return response()->json(Order::all());
+    }
+
+    public function store(Request $request)
+    {
+        $order = Order::create($request->all());
+        return response()->json($order);
+    }
+
+    public function destroy($id)
+    {
+        Order::where('id', $id)->delete();
+        return response()->json(['success' => true]);
+    }
+}

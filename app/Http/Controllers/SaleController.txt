@@ -1,0 +1,34 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Sale;
+use Illuminate\Http\Request;
+
+class SaleController extends Controller
+{
+    public function index()
+    {
+        return response()->json(Sale::all());
+    }
+
+    public function store(Request $request)
+    {
+        $sale = Sale::create($request->all());
+        return response()->json($sale);
+    }
+
+    public function destroy($id)
+    {
+        Sale::where('id', $id)->delete();
+        return response()->json(['success' => true]);
+    }
+
+    public function exit($id)
+    {
+        $sale = Sale::find($id);
+        $sale->exited = true;
+        $sale->save();
+        return response()->json(['success' => true]);
+    }
+}
