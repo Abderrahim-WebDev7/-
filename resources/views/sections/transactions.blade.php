@@ -1,6 +1,5 @@
 <section class="panel" id="panel-transactions">
-    <!-- فورم موحد للشراء والبيع -->
-    <div class="card" style="margin-bottom:22px;">
+    <div class="card">
         <h3><span class="badge-dot"></span> تسجيل معاملة شراء وبيع</h3>
         <form id="transactionForm" style="border:2px solid transparent; padding:10px; border-radius:10px; transition:border-color 0.3s;">
             
@@ -41,21 +40,23 @@
             <div class="form-grid">
                 <div class="form-row">
                     <label>وحدة الكمية</label>
-                    <select id="tQtyType" required>
-                        <option value="plate">لوح (30 بيضة)</option>
-                        <option value="carton12">كرتون (12 لوح)</option>
-                    </select>
+                    <select id="tQtyType" required onchange="calculateTransactionTotals()">
+    <option value="plate">لوح (30 بيضة)</option>
+    <option value="carton12">كرتون (12 لوح)</option>
+</select>
                 </div>
                 <div class="form-row">
                     <label>العدد</label>
-                    <input type="number" id="tQtyCount" placeholder="مثال: 5" min="1" required>
+                    <input type="number" id="tQtyCount" placeholder="مثال: 5" min="1" required 
+       oninput="calculateTransactionTotals()">
                 </div>
             </div>
             
             <!-- سعر الشراء -->
             <div class="form-row">
                 <label>سعر شراء اللوح (دج)</label>
-                <input type="number" id="tPurchasePrice" placeholder="مثال: 300" min="0" required>
+                <input type="number" id="tPurchasePrice" placeholder="مثال: 300" min="0" required 
+       oninput="calculateTransactionTotals()">
             </div>
             
             <!-- اسم المشتري (مع إكمال تلقائي) -->
@@ -76,7 +77,8 @@
             <!-- سعر البيع -->
             <div class="form-row">
                 <label>سعر بيع اللوح (دج)</label>
-                <input type="number" id="tSalePrice" placeholder="مثال: 350" min="0" required>
+                <input type="number" id="tSalePrice" placeholder="مثال: 350" min="0" required 
+       oninput="calculateTransactionTotals()">
             </div>
             
             <!-- الإجماليات المحسوبة تلقائياً -->
@@ -151,7 +153,7 @@
             <button class="btn sm filter-btn" id="showPending" style="background:var(--panel-2); color:var(--text-dim);">⏳ قيد الانتظار</button>
         </div>
         
-        <div style="overflow-x:auto;">
+        <div class="table-wrap">
             <table>
                 <thead>
                     <tr>

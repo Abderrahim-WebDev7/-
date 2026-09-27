@@ -1,5 +1,5 @@
 <section class="panel" id="panel-costs">
-    <div class="card" style="margin-bottom:22px;">
+    <div class="card">
         <h3><span class="badge-dot"></span> إضافة تكلفة جديدة</h3>
         <form id="costForm">
             <div class="form-grid">
@@ -11,20 +11,16 @@
         </form>
     </div>
     <div class="section-actions">
-        <h3 style="margin:0; font-size:1.05rem; color:var(--cream);">سجل التكاليف</h3>
+        <h3>سجل التكاليف</h3>
         <div class="total-pill">إجمالي التكاليف: <b id="costsTotal">0</b> دج</div>
-    </div>
-    <div class="card" style="margin-bottom:22px;">
-        <table>
-            <thead><tr><th>التاريخ</th><th>السبب</th><th>المبلغ</th><th></th></tr></thead>
-            <tbody id="costsBody"><tr class="empty-row"><td colspan="4">لا توجد تكاليف مسجّلة</td></tr></tbody>
-        </table>
+        <h3 id="costsTotalCentime"></h3>
     </div>
     <div class="card">
-        <h3><span class="badge-dot"></span> التكاليف يوميًا</h3>
-        <table>
-            <thead><tr><th>التاريخ</th><th>عدد التكاليف</th><th>الإجمالي</th></tr></thead>
-            <tbody id="costsDailyBody"><tr class="empty-row"><td colspan="3">لا توجد بيانات بعد</td></tr></tbody>
-        </table>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>التاريخ</th><th>السبب</th><th>المبلغ</th><th>المبلغ بالسانتيم</th><th></th></tr></thead>
+                <tbody id="costsBody"><tr class="empty-row"><td colspan="5">لا توجد تكاليف مسجّلة</td></tr></tbody>
+            </table>
+        </div>
     </div>
 </section>

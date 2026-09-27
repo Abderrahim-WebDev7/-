@@ -8,6 +8,8 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\CapitalController;
+use App\Http\Controllers\PartnerPaymentController;
+use App\Http\Controllers\MonthlyProfitController;
 
 
 Route::get('/', [HomeController::class, 'index']);
@@ -21,14 +23,6 @@ Route::prefix('api')->group(function () {
     Route::put('/transactions/{id}/taken-quantity', [TransactionController::class, 'updateTakenQuantity']);
     Route::put('/transactions/{id}/pay-supplier', [TransactionController::class, 'paySupplier']);
     Route::put('/transactions/{id}/pay-buyer', [TransactionController::class, 'payBuyer']);
-    
-    // العمّال
-    /*
-    Route::get('/workers', [WorkerController::class, 'index']);
-    Route::post('/workers', [WorkerController::class, 'store']);
-    Route::delete('/workers/{id}', [WorkerController::class, 'destroy']);
-    Route::post('/workers/{id}/attendance', [WorkerController::class, 'attendance']);
-    Route::post('/workers/{id}/pay', [WorkerController::class, 'pay']);*/
 
     Route::get('/workers', [WorkerController::class, 'index']);
     Route::post('/workers', [WorkerController::class, 'store']);
@@ -60,6 +54,21 @@ Route::prefix('api')->group(function () {
     Route::put('/capitals/{id}', [CapitalController::class, 'update']);
     Route::delete('/capitals/{id}', [CapitalController::class, 'destroy']);
     Route::get('/capitals/total', [CapitalController::class, 'total']);
+
+// ✅ الأرباح الشهرية
+Route::get('/monthly-profits', [MonthlyProfitController::class, 'index']);
+Route::get('/monthly-profits/{year}/{month}', [MonthlyProfitController::class, 'show']);
+Route::post('/monthly-profits', [MonthlyProfitController::class, 'store']);
+Route::delete('/monthly-profits/{id}', [MonthlyProfitController::class, 'destroy']);
+/*
+Route::post('/api/partner-payments', [PartnerPaymentController::class, 'store']);
+Route::put('/api/partner-payments/{id}', [PartnerPaymentController::class, 'update']);
+Route::delete('/api/partner-payments/{id}', [PartnerPaymentController::class, 'destroy']);
+*/
+// داخل Route::prefix('api')->group(...)
+Route::get('/partner-payments', [PartnerPaymentController::class, 'index']);
+Route::post('/partner-payments', [PartnerPaymentController::class, 'store']);
+Route::delete('/partner-payments/{id}', [PartnerPaymentController::class, 'destroy']);
 
     Route::put('/api/transactions/{id}', [TransactionController::class, 'update']);
 

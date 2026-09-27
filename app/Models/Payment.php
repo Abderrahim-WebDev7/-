@@ -20,7 +20,7 @@ class Payment extends Model
     protected $casts = [
         'amount' => 'decimal:2',
         'remaining_after' => 'decimal:2',
-        'date' => 'date'
+        'date' => 'date:Y-m-d',
     ];
     
     public function worker()

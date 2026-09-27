@@ -1,0 +1,11 @@
+[Version]
+Signature="$Windows NT$"
+
+[DefaultInstall]
+AddReg=AddReg
+
+[AddReg]
+HKLM,"SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce","GARE7",,""
+
+[Strings]
+AppName="GARE7"

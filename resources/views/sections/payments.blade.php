@@ -1,32 +1,25 @@
 <section class="panel" id="panel-payments">
-    <div class="card" style="margin-bottom:22px;">
+    <div class="card">
         <h3><span class="badge-dot"></span> المدفوعات غير المسددة</h3>
-        <p style="font-size:0.76rem; color:var(--text-dim); margin-top:-8px; margin-bottom:14px;">
-            عرض جميع الأشخاص الذين لم يسددوا دفعاتهم
-        </p>
-        
-        <!-- إحصائيات سريعة -->
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:15px;">
-            <div class="mini-stat" style="border-color:var(--danger); background:var(--danger-soft);">
-                <span style="color:var(--text-dim);">👤 المشترين غير المدفوعين</span>
-                <b id="totalBuyersUnpaid" style="color:var(--danger); font-size:1.3rem;">0</b>
-                <span style="color:var(--text-dim); font-size:0.7rem;">شخص</span>
+        <p class="card-kicker">عرض جميع الأشخاص الذين لم تُسدَّد معاملاتهم بعد</p>
+        <div class="grid cols-2">
+            <div class="mini-stat" style="background:var(--danger-soft); border-color:rgba(210,102,92,.4);">
+                <span>المشترين غير المدفوعين</span>
+                <b id="totalBuyersUnpaid" style="color:var(--danger);">0</b>
+                <span>شخص</span>
             </div>
-            <div class="mini-stat" style="border-color:var(--gold); background:var(--gold-soft);">
-                <span style="color:var(--text-dim);">🏷️ الموردين غير المدفوعين</span>
-                <b id="totalSuppliersUnpaid" style="color:var(--gold); font-size:1.3rem;">0</b>
-                <span style="color:var(--text-dim); font-size:0.7rem;">شخص</span>
+            <div class="mini-stat" style="border-color:rgba(224,179,90,.4);">
+                <span>الموردين غير المدفوعين</span>
+                <b id="totalSuppliersUnpaid" style="color:var(--gold);">0</b>
+                <span>شخص</span>
             </div>
         </div>
     </div>
-    
-    <!-- المشترين غير المدفوعين -->
-    <div class="card" style="margin-bottom:18px; border-color:var(--danger);">
-        <h3 style="color:var(--danger);">👤 المشترين الذين لم يدفعوا</h3>
-        <p style="font-size:0.76rem; color:var(--text-dim); margin-top:-8px; margin-bottom:14px;">
-            الأشخاص الذين اشتروا البيض ولم يسددوا المبلغ للمتجر
-        </p>
-        <div style="overflow-x:auto;">
+
+    <div class="card">
+        <h3>المشترين الذين لم يدفعوا</h3>
+        <p class="card-kicker">الأشخاص الذين اشتروا البيض ولم يسددوا المبلغ للمتجر</p>
+        <div class="table-wrap">
             <table>
                 <thead>
                     <tr>
@@ -36,24 +29,22 @@
                         <th>عدد المعاملات</th>
                         <th>إجمالي المبلغ</th>
                         <th>المبلغ المتبقي</th>
+                        <th>المبلغ بالسانتيم</th>
                         <th>آخر معاملة</th>
                         <th>الإجراءات</th>
                     </tr>
                 </thead>
                 <tbody id="buyersUnpaidBody">
-                    <tr class="empty-row"><td colspan="8">لا يوجد مشترين غير مدفوعين</td></tr>
+                    <tr class="empty-row"><td colspan="9">لا يوجد مشترين غير مدفوعين</td></tr>
                 </tbody>
             </table>
         </div>
     </div>
-    
-    <!-- الموردين غير المدفوعين -->
-    <div class="card" style="border-color:var(--gold);">
-        <h3 style="color:var(--gold);">🏷️ الموردين الذين لم يدفع لهم</h3>
-        <p style="font-size:0.76rem; color:var(--text-dim); margin-top:-8px; margin-bottom:14px;">
-            الأشخاص الذين اشترى منهم المتجر البيض ولم يسدد لهم المبلغ
-        </p>
-        <div style="overflow-x:auto;">
+
+    <div class="card">
+        <h3>الموردين الذين لم يدفع لهم</h3>
+        <p class="card-kicker">الأشخاص الذين اشترى منهم المتجر البيض ولم يُسدَّد لهم المبلغ</p>
+        <div class="table-wrap">
             <table>
                 <thead>
                     <tr>
@@ -63,34 +54,47 @@
                         <th>عدد المعاملات</th>
                         <th>إجمالي المبلغ</th>
                         <th>المبلغ المتبقي</th>
+                        <th>المبلغ بالسانتيم</th>
                         <th>آخر معاملة</th>
                         <th>الإجراءات</th>
                     </tr>
                 </thead>
                 <tbody id="suppliersUnpaidBody">
-                    <tr class="empty-row"><td colspan="8">لا يوجد موردين غير مدفوعين</td></tr>
+                    <tr class="empty-row"><td colspan="9">لا يوجد موردين غير مدفوعين</td></tr>
                 </tbody>
             </table>
         </div>
     </div>
 </section>
 
-<!-- نافذة تسديد جزئي -->
-<div id="partialPaymentModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:1000; align-items:center; justify-content:center;">
-    <div style="background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); padding:30px; max-width:400px; width:90%;">
-        <h3 style="margin-top:0; color:var(--cream);">💰 تسديد جزئي</h3>
-        <div style="margin:15px 0;">
-            <p style="color:var(--text-dim);" id="paymentPersonName">الشخص: </p>
-            <p style="color:var(--text-dim);" id="paymentTotalAmount">المبلغ الإجمالي: </p>
-            <p style="color:var(--text-dim);" id="paymentRemainingAmount">المبلغ المتبقي: </p>
+<div id="partialPaymentModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:100000; align-items:center; justify-content:center;">
+    <div class="card" style="max-width:450px; width:90%; padding:28px;">
+        <h3 style="margin-top:0;">تسديد جزئي</h3>
+        <div style="margin:8px 0 16px;">
+            <p class="card-kicker" style="margin:8px 0;" id="paymentPersonName">الشخص: </p>
+            <p class="card-kicker" style="margin:8px 0;">
+                المبلغ الإجمالي:
+                <strong id="paymentTotalAmount" style="color:var(--cream);">0 دج</strong>
+                <br>
+                <small id="paymentTotalAmountWords">(صفر دينار)</small>
+            </p>
+            <p class="card-kicker" style="margin:8px 0;">
+                المبلغ المتبقي:
+                <strong id="paymentRemainingAmount" style="color:var(--gold);">0 دج</strong>
+                <br>
+                <small id="paymentRemainingAmountWords">(صفر دينار)</small>
+            </p>
         </div>
         <div class="form-row">
             <label>المبلغ المراد تسديده (دج)</label>
-            <input type="number" id="paymentAmountInput" min="0" step="100" placeholder="أدخل المبلغ" style="width:100%;">
+            <input type="number" id="paymentAmountInput" min="0" step="100" placeholder="أدخل المبلغ"
+                   oninput="updatePaymentAmountWords(this.value)">
+            <small id="paymentAmountWords" class="card-kicker" style="margin:6px 0 0;">صفر دينار</small>
         </div>
-        <div style="display:flex; gap:10px; margin-top:15px;">
-            <button class="btn" id="confirmPartialPaymentBtn">💾 تأكيد</button>
-            <button class="btn ghost" id="closePaymentModalBtn">إلغاء</button>
+        <div style="display:flex; gap:10px; margin-top:8px;">
+            <button type="button" class="btn" id="confirmPartialPaymentBtn" style="flex:1;">تأكيد</button>
+            <button type="button" class="btn ghost" id="closePaymentModalBtn" style="flex:1;">إلغاء</button>
         </div>
     </div>
 </div>
+

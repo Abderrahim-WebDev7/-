@@ -1,88 +1,108 @@
 <section class="panel" id="panel-profits">
-    <div class="card" style="margin-bottom:20px;">
-        <div class="month-bar">
-            <label style="font-size:0.82rem; color:var(--cream-dim);">اختر السنة:</label>
-            <select id="profitYear" style="max-width:150px; padding:8px 12px; background:var(--panel-2); border:1px solid var(--border); border-radius:9px; color:var(--text);">
-                <!-- سيتم تعبئتها بالجافاسكريبت -->
-            </select>
-            <button class="btn sm" id="refreshProfitsBtn" style="background:var(--gold); color:#1b1608;">🔄 تحديث</button>
+    <div class="card">
+        <h3><span class="badge-dot"></span> فلترة الفترة</h3>
+        <div class="form-grid g3">
+            <div class="form-row">
+                <label>اختر السنة</label>
+                <select id="profitYear"></select>
+            </div>
+            <div class="form-row">
+                <label>اختر الشهر</label>
+                <select id="profitMonth">
+                    <option value="all">كل الأشهر</option>
+                    <option value="01">جانفي</option>
+                    <option value="02">فيفري</option>
+                    <option value="03">مارس</option>
+                    <option value="04">أفريل</option>
+                    <option value="05">ماي</option>
+                    <option value="06">جوان</option>
+                    <option value="07">جويلية</option>
+                    <option value="08">أوت</option>
+                    <option value="09">سبتمبر</option>
+                    <option value="10">أكتوبر</option>
+                    <option value="11">نوفمبر</option>
+                    <option value="12">ديسمبر</option>
+                </select>
+            </div>
+            <div class="form-row" style="justify-content:flex-end;">
+                <label>&nbsp;</label>
+                <div style="display:flex; gap:8px;">
+                    <button class="btn" id="refreshProfitsBtn" type="button">تحديث</button>
+                    <button class="btn ghost" id="resetProfitsBtn" type="button">إعادة تعيين</button>
+                </div>
+            </div>
         </div>
-        
-        <!-- الإحصائيات الرئيسية -->
-        <div class="grid cols-4" style="margin-bottom:15px;">
-            <div class="mini-stat" style="border-color:var(--gold);">
-                <span style="color:var(--text-dim);">💰 إجمالي المشتريات</span>
+
+        <div class="grid cols-4">
+            <div class="mini-stat">
+                <span>إجمالي المشتريات</span>
                 <b id="pfTotalPurchases" style="color:var(--gold);">0 دج</b>
+                <span id="pfTotalPurchasesCentime">صفر دينار</span>
             </div>
-            <div class="mini-stat" style="border-color:var(--success);">
-                <span style="color:var(--text-dim);">📈 إجمالي المبيعات</span>
+            <div class="mini-stat">
+                <span>إجمالي المبيعات</span>
                 <b id="pfTotalSales" style="color:var(--success);">0 دج</b>
+                <span id="pfTotalSalesCentime">صفر دينار</span>
             </div>
-            <div class="mini-stat" style="border-color:var(--gold);">
-                <span style="color:var(--text-dim);">💵 الربح الصافي</span>
+            <div class="mini-stat">
+                <span>الربح من المعاملات</span>
                 <b id="pfNetProfit" style="color:var(--gold);">0 دج</b>
+                <span id="pfNetProfitCentime">صفر دينار</span>
             </div>
-            <div class="mini-stat" style="border-color:var(--blue);">
-                <span style="color:var(--text-dim);">📊 عدد المعاملات</span>
+            <div class="mini-stat">
+                <span>عدد المعاملات</span>
                 <b id="pfTransactionsCount" style="color:var(--blue);">0</b>
             </div>
-            <div class="mini-stat" style="border-color:var(--gold);">
-    <span style="color:var(--text-dim);">📊 إجمالي الأرباح</span>
-    <b id="pfTotalProfitWithLoss" style="color:var(--gold);">0 دج</b>
-    <span style="color:var(--text-dim); font-size:0.6rem;" class="profit-note">(0 دج أجور العمال)</span>
-</div>
-        </div>
-        
-        <!-- التفاصيل -->
-        <div class="grid cols-3" style="margin-bottom:15px;">
-            <div class="mini-stat" style="border-color:var(--danger); background:var(--danger-soft);">
-                <span style="color:var(--text-dim);">👤 المشترين غير المدفوعين</span>
-                <b id="pfBuyersUnpaid" style="color:var(--danger);">0 دج</b>
-            </div>
-            <div class="mini-stat" style="border-color:var(--gold); background:var(--gold-soft);">
-                <span style="color:var(--text-dim);">🏷️ الموردين غير المدفوعين</span>
-                <b id="pfSuppliersUnpaid" style="color:var(--gold);">0 دج</b>
-            </div>
-            <div class="mini-stat" style="border-color:var(--blue); background:var(--blue-soft);">
-                <span style="color:var(--text-dim);">👷 أجور العمال المدفوعة</span>
-                <b id="pfWagesPaid" style="color:var(--blue);">0 دج</b>
-            </div>
-        </div>
-        
-        <div class="grid cols-2">
-            <div class="mini-stat" style="border-color:var(--text-dim);">
-                <span style="color:var(--text-dim);">📋 التكاليف الأخرى</span>
-                <b id="pfOtherCosts" style="color:var(--cream-dim);">0 دج</b>
-            </div>
-            <div class="mini-stat" style="border-color:var(--gold);">
-                <span style="color:var(--text-dim);">📊 إجمالي الأرباح</span>
-                <b id="pfTotalProfitWithLoss" style="color:var(--gold);">0 دج</b>
-            </div>
-        </div>
-        
-        <div style="font-size:0.72rem; color:var(--text-dim); margin-top:12px; padding:10px; background:var(--panel-2); border-radius:9px; border:1px solid var(--border);">
-            <strong>📌 ملاحظة:</strong> 
-            الربح الصافي = إجمالي المبيعات − إجمالي المشتريات − أجور العمال − التكاليف الأخرى
         </div>
     </div>
 
-    <!-- الرسم البياني -->
-    <div class="card" style="margin-top:20px;">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; flex-wrap:wrap; gap:10px;">
-            <h3 style="margin:0; color:var(--cream);">
-                <span class="badge-dot"></span> مقارنة الأرباح والمبيعات والمشتريات
-            </h3>
-            <div style="display:flex; gap:10px; flex-wrap:wrap;">
-                <button class="btn sm chart-type-btn" id="chartTypeBar" style="background:var(--gold); color:#1b1608;">📊 أشرطة</button>
-                <button class="btn sm chart-type-btn" id="chartTypeLine" style="background:var(--panel-2); color:var(--text-dim);">📈 خطوط</button>
+    <div class="grid cols-3">
+        <div class="mini-stat" style="border-color:rgba(210,102,92,.45); background:var(--danger-soft);">
+            <span>المشترين غير المدفوعين</span>
+            <b id="pfBuyersUnpaid" style="color:var(--danger);">0 دج</b>
+            <span id="pfBuyersUnpaidCentime">صفر دينار</span>
+        </div>
+        <div class="mini-stat" style="border-color:rgba(224,179,90,.4);">
+            <span>الموردين غير المدفوعين</span>
+            <b id="pfSuppliersUnpaid" style="color:var(--gold);">0 دج</b>
+            <span id="pfSuppliersUnpaidCentime">صفر دينار</span>
+        </div>
+        <div class="mini-stat" style="background:var(--blue-soft);">
+            <span>أجور العمال المدفوعة</span>
+            <b id="pfWagesPaid" style="color:var(--blue);">0 دج</b>
+            <span id="pfWagesPaidCentime">صفر دينار</span>
+        </div>
+    </div>
+
+    <div class="grid cols-2">
+        <div class="mini-stat">
+            <span>التكاليف الأخرى</span>
+            <b id="pfOtherCosts">0 دج</b>
+            <span id="pfOtherCostsCentime">صفر دينار</span>
+        </div>
+        <div class="mini-stat" style="border-color:rgba(224,179,90,.45);">
+            <span>إجمالي الأرباح</span>
+            <b id="pfTotalProfitWithLoss" style="color:var(--gold);">0 دج</b>
+            <span id="pfTotalProfitWithLossCentime">صفر دينار</span>
+            <span class="profit-note">بعد خصم التكاليف وأجور العمال</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <p class="card-kicker" style="margin:0;">الربح الصافي = إجمالي المبيعات − إجمالي المشتريات − أجور العمال − التكاليف الأخرى</p>
+    </div>
+
+    <div class="card">
+        <div class="section-actions">
+            <h3><span class="badge-dot"></span> مقارنة الأرباح والمبيعات والمشتريات</h3>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                <button class="btn sm chart-type-btn" id="chartTypeBar" type="button">أشرطة</button>
+                <button class="btn sm ghost chart-type-btn" id="chartTypeLine" type="button">خطوط</button>
             </div>
         </div>
-        
-        <div style="position:relative; height:400px; width:100%;">
-            <canvas id="profitChartCanvas" style="width:100% !important; height:100% !important;"></canvas>
-        </div> 
-        <div style="font-size:0.7rem; color:var(--text-dim); margin-top:10px; text-align:center;">
-            * يعرض الرسم البياني الأشهر (جانفي - ديسمبر) للسنة المحددة
+        <div class="chart-container" style="margin-top:16px; height:400px;">
+            <canvas id="profitChartCanvas"></canvas>
         </div>
+        <p class="card-kicker" style="margin:12px 0 0; text-align:center;">يعرض الرسم البياني الأشهر (جانفي - ديسمبر) للسنة المحددة بالدينار الجزائري</p>
     </div>
 </section>

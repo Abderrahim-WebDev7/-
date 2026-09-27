@@ -1,5 +1,5 @@
 <section class="panel" id="panel-workers">
-    <div class="card" style="margin-bottom:22px;">
+    <div class="card">
         <h3><span class="badge-dot"></span> إضافة عامل جديد</h3>
         <form id="workerForm">
             <div class="form-grid">
@@ -12,7 +12,7 @@
     </div>
 
     <div class="section-actions">
-        <h3 style="margin:0; font-size:1.05rem; color:var(--cream);">قائمة العمّال</h3>
+        <h3>قائمة العمّال</h3>
         <div class="total-pill">إجمالي العمّال: <b id="workersCount">0</b></div>
     </div>
     <div id="workersList"></div>

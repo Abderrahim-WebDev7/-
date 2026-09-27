@@ -12,5 +12,6 @@ class Attendance extends Model
     
     protected $casts = [
         'paid' => 'boolean',
+        'date' => 'date:Y-m-d',
     ];
 }

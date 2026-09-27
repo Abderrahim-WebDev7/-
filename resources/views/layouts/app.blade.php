@@ -22,24 +22,30 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0b0b0d;
-    --panel:#151417;
-    --panel-2:#1c1b1f;
-    --border:#2b292e;
-    --border-soft:#221f24;
-    --cream:#f3ead8;
-    --cream-dim:#c9c0ad;
-    --gold:#dba743;
-    --gold-soft:#8a6a2c;
-    --blue:#6f9ec7;
-    --blue-soft:#213241;
-    --text:#eae6dd;
-    --text-dim:#948e84;
-    --danger:#c1554b;
-    --danger-soft:#3a2321;
-    --success:#7ea683;
-    --success-soft:#20281f;
-    --radius:14px;
+    --bg:#09090b;
+    --panel:#141218;
+    --panel-2:#1b1920;
+    --panel-3:#221f28;
+    --border:#2e2a33;
+    --border-soft:#241f28;
+    --cream:#f6efe0;
+    --cream-dim:#cfc6b4;
+    --gold:#e0b35a;
+    --gold-soft:#8d6d30;
+    --gold-glow:rgba(224,179,90,.18);
+    --blue:#7aadd1;
+    --blue-soft:#1d2e3c;
+    --text:#efeae0;
+    --text-dim:#9a9388;
+    --danger:#d2665c;
+    --danger-soft:#3c2422;
+    --success:#86b38b;
+    --success-soft:#1e2a1e;
+    --radius:18px;
+    --radius-sm:12px;
+    --control-h:44px;
+    --space:18px;
+    --shadow:0 18px 40px rgba(0,0,0,.28);
     --egg-radius:52% 48% 48% 52% / 62% 58% 42% 38%;
     font-size:16px;
   }
@@ -48,137 +54,189 @@
   body{
     margin:0;
     background:
-      radial-gradient(circle at 15% -10%, rgba(219,167,67,0.08), transparent 45%),
+      radial-gradient(ellipse 80% 50% at 100% -10%, rgba(224,179,90,.09), transparent 50%),
+      radial-gradient(ellipse 60% 40% at 0% 100%, rgba(122,173,209,.06), transparent 45%),
       var(--bg);
     color:var(--text);
     font-family:'IBM Plex Sans Arabic', 'Segoe UI', sans-serif;
     min-height:100vh;
+    letter-spacing:.01em;
   }
   h1,h2,h3,.brand-mark{font-family:'Fraunces', 'IBM Plex Sans Arabic', serif;}
   ::selection{background:var(--gold-soft); color:var(--cream);}
   a{color:inherit;}
   button{font-family:inherit;}
 
-  /* ---------- layout ---------- */
-  .app{display:grid; grid-template-columns:260px 1fr; min-height:100vh;}
+  .app{display:grid; grid-template-columns:272px 1fr; min-height:100vh;}
   .sidebar{
-    background:linear-gradient(180deg, #121114, #0e0d10);
+    background:linear-gradient(180deg, #16141a 0%, #100e13 100%);
     border-left:1px solid var(--border-soft);
-    padding:26px 20px;
+    padding:22px 16px;
     display:flex; flex-direction:column;
     position:sticky; top:0; height:100vh;
   }
-  .brand{display:flex; align-items:center; gap:12px; margin-bottom:34px; padding:0 4px;}
+  .brand{display:flex; align-items:center; gap:12px; margin-bottom:28px; padding:8px 8px 18px; border-bottom:1px solid var(--border-soft);}
   .egg-mark{
-    width:34px; height:40px;
-    background:linear-gradient(160deg, var(--gold), #b5822f);
+    width:36px; height:42px;
+    background:linear-gradient(160deg, #f0c56e, #c58a2c);
     border-radius:var(--egg-radius);
     flex-shrink:0;
-    box-shadow:0 4px 14px rgba(219,167,67,0.25);
+    box-shadow:0 8px 22px var(--gold-glow);
   }
-  .brand-mark{font-size:1.5rem; font-weight:700; color:var(--cream); letter-spacing:0.5px;}
-  .brand-sub{font-size:0.68rem; color:var(--text-dim); letter-spacing:1.5px; margin-top:-2px;}
+  .brand-mark{font-size:1.45rem; font-weight:700; color:var(--cream); letter-spacing:0.6px; line-height:1;}
+  .brand-sub{font-size:0.68rem; color:var(--text-dim); letter-spacing:1.6px; margin-top:4px;}
 
-  nav.nav{display:flex; flex-direction:column; gap:4px; flex:1;}
+  .nav-group{font-size:.65rem; color:var(--text-dim); letter-spacing:1.4px; padding:14px 12px 6px; text-transform:uppercase;}
+  nav.nav{display:flex; flex-direction:column; gap:4px; flex:1; overflow:auto;}
   .nav-item{
     display:flex; align-items:center; gap:12px;
-    padding:11px 14px; border-radius:10px;
-    color:var(--text-dim); cursor:pointer; font-size:0.92rem; font-weight:500;
+    padding:11px 14px; border-radius:12px;
+    color:var(--text-dim); cursor:pointer; font-size:0.9rem; font-weight:500;
     border:1px solid transparent;
-    transition:background .15s, color .15s, border-color .15s;
+    transition:background .18s, color .18s, border-color .18s, transform .12s;
     user-select:none;
+    min-height:44px;
   }
   .nav-item svg{width:18px; height:18px; flex-shrink:0; stroke:currentColor;}
   .nav-item:hover{background:var(--panel-2); color:var(--cream);}
-  .nav-item.active{background:var(--panel-2); color:var(--gold); border-color:var(--border);}
+  .nav-item.active{
+    background:linear-gradient(90deg, rgba(224,179,90,.14), rgba(224,179,90,.04));
+    color:var(--gold);
+    border-color:rgba(224,179,90,.28);
+    box-shadow:inset 0 0 0 1px rgba(224,179,90,.08);
+  }
   .nav-item.active svg{stroke:var(--gold);}
 
   .sidebar-foot{border-top:1px solid var(--border-soft); padding-top:16px; margin-top:16px; font-size:0.72rem; color:var(--text-dim); line-height:1.7;}
   .sidebar-foot b{color:var(--cream-dim);}
 
-  .content-outer{display:flex; justify-content:center; padding:28px 24px 60px; position:relative; height:100vh; overflow-y:auto; overflow-x:hidden;}
-  .content{max-width:840px; width:100%; padding-right:6px; margin-bottom: 20px; padding-bottom: 20px;}
-  .topbar{display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:26px; flex-wrap:wrap; gap:10px;}
-  .topbar h1{margin:0; font-size:1.7rem; color:var(--cream); font-weight:600;}
-  .topbar .desc{color:var(--text-dim); font-size:0.85rem; margin-top:4px;}
-  .today-chip{background:var(--panel); border:1px solid var(--border); padding:8px 16px; border-radius:100px; font-size:0.8rem; color:var(--cream-dim);}
-
-  .panel{display:none;}
-  .panel.active{display:block; animation:fade .25s ease;  margin-bottom: 20px; padding-bottom: 20px;}
-  @keyframes fade{from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:none;}}
-
-  .grid{display:grid; gap:18px;}
-  .grid.cols-4{grid-template-columns:repeat(4,1fr);}
-  .grid.cols-5{grid-template-columns:repeat(5,1fr);}
-  .grid.cols-6{grid-template-columns:repeat(6,1fr);}
-  .grid.cols-2{grid-template-columns:1.1fr 1.4fr;}
-  .grid.cols-3{grid-template-columns:repeat(3,1fr);}
-  @media(max-width:980px){ .grid.cols-4{grid-template-columns:repeat(2,1fr);} .grid.cols-5{grid-template-columns:repeat(2,1fr);} .grid.cols-6{grid-template-columns:repeat(2,1fr);} .grid.cols-2{grid-template-columns:1fr;} .grid.cols-3{grid-template-columns:1fr;} }
-
-  .card{
+  .content-outer{display:flex; justify-content:center; padding:28px 28px 72px; position:relative; height:100vh; overflow-y:auto; overflow-x:hidden;}
+  .content{max-width:1180px; width:100%; padding-right:4px; margin-bottom: 20px; padding-bottom: 20px;}
+  .topbar{display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:24px; flex-wrap:wrap; gap:12px;}
+  .topbar h1{margin:0; font-size:1.72rem; color:var(--cream); font-weight:600; line-height:1.2;}
+  .topbar .desc{color:var(--text-dim); font-size:0.86rem; margin-top:6px;}
+  .today-chip{
     background:var(--panel);
     border:1px solid var(--border);
-    border-radius:var(--radius);
-    padding:20px;
+    padding:10px 16px;
+    border-radius:100px;
+    font-size:0.8rem;
+    color:var(--cream-dim);
+    min-height:44px;
+    display:inline-flex;
+    align-items:center;
+    box-shadow:var(--shadow);
   }
-  .card h3{margin:0 0 14px; font-size:1rem; color:var(--cream); font-weight:600; display:flex; align-items:center; gap:8px;}
-  .card h3 .badge-dot{width:6px; height:6px; border-radius:50%; background:var(--gold);}
 
-  .stat-card{padding:18px 20px;}
+  /* ✅ حماية من شاشة الترحيب إذا بقيت في DOM */
+  #splashScreen[style*="display: none"],
+  #splashScreen.hidden {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    height: 0 !important;
+    width: 0 !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    z-index: -1 !important;
+  }
+
+  .panel{display:none;}
+  .panel.active{display:flex; flex-direction:column; gap:var(--space); animation:fade .28s ease; margin-bottom:20px; padding-bottom:20px;}
+  .panel.active > .card,
+  .panel.active > .section-actions{margin-bottom:0 !important; margin-top:0 !important;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+
+  .grid{display:grid; gap:16px;}
+  .grid.cols-4{grid-template-columns:repeat(4,minmax(0,1fr));}
+  .grid.cols-5{grid-template-columns:repeat(5,minmax(0,1fr));}
+  .grid.cols-6{grid-template-columns:repeat(6,minmax(0,1fr));}
+  .grid.cols-2{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .grid.cols-3{grid-template-columns:repeat(3,minmax(0,1fr));}
+  .grid.cols-1{grid-template-columns:1fr;}
+  @media(max-width:1100px){
+    .grid.cols-6{grid-template-columns:repeat(3,minmax(0,1fr));}
+    .grid.cols-5,.grid.cols-4{grid-template-columns:repeat(2,minmax(0,1fr));}
+  }
+  @media(max-width:720px){
+    .grid.cols-6,.grid.cols-5,.grid.cols-4,.grid.cols-3,.grid.cols-2{grid-template-columns:1fr;}
+  }
+
+  .card{
+    background:linear-gradient(180deg, rgba(255,255,255,.02), transparent 40%), var(--panel);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:22px;
+    box-shadow:0 1px 0 rgba(255,255,255,.03) inset;
+  }
+  .card h3{margin:0 0 16px; font-size:1.02rem; color:var(--cream); font-weight:600; display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
+  .card h3 .badge-dot{width:7px; height:7px; border-radius:50%; background:var(--gold); box-shadow:0 0 0 4px var(--gold-glow);}
+  .card-kicker{font-size:.75rem; color:var(--text-dim); margin:-6px 0 16px; line-height:1.6;}
+
+  .stat-card{padding:18px 18px 16px; min-height:118px; display:flex; flex-direction:column; justify-content:space-between;}
   .stat-label{font-size:0.76rem; color:var(--text-dim); margin-bottom:8px;}
-  .stat-num{font-size:1.5rem; color:var(--cream); font-weight:600; font-family:'IBM Plex Sans Arabic', sans-serif;}
-  .stat-num small{font-size:0.8rem; color:var(--text-dim); font-weight:400;}
+  .stat-num{font-size:1.35rem; color:var(--cream); font-weight:600; font-family:'IBM Plex Sans Arabic', sans-serif; line-height:1.25; word-break:break-word;}
+  .stat-num small{font-size:0.78rem; color:var(--text-dim); font-weight:400;}
 
-  .form-row{display:flex; flex-direction:column; gap:6px; margin-bottom:14px;}
-  .form-row label{font-size:0.78rem; color:var(--cream-dim);}
+  .form-row{display:flex; flex-direction:column; gap:7px; margin-bottom:14px;}
+  .form-row label{font-size:0.78rem; color:var(--cream-dim); font-weight:500;}
   .form-grid{display:grid; grid-template-columns:1fr 1fr; gap:0 14px;}
   .form-grid.g3{grid-template-columns:1fr 1fr 1fr;}
   input, select, textarea{
     background:var(--panel-2);
     border:1px solid var(--border);
     color:var(--text);
-    padding:10px 12px;
-    border-radius:9px;
-    font-size:0.88rem;
+    padding:0 14px;
+    height:var(--control-h);
+    border-radius:var(--radius-sm);
+    font-size:0.9rem;
     font-family:inherit;
     outline:none;
-    transition:border-color .15s;
+    transition:border-color .15s, box-shadow .15s;
     width:100%;
   }
-  input:focus, select:focus, textarea:focus{border-color:var(--gold);}
+  textarea{height:auto; min-height:88px; padding:12px 14px;}
+  input:focus, select:focus, textarea:focus{
+    border-color:rgba(224,179,90,.7);
+    box-shadow:0 0 0 3px var(--gold-glow);
+  }
   input::placeholder{color:#5f5a54;}
   select{cursor:pointer;}
 
   .total-display{
-    background:var(--panel-2); border:1px dashed var(--gold-soft); border-radius:9px;
-    padding:10px 12px; font-size:0.92rem; color:var(--gold); font-weight:600;
+    background:var(--panel-2); border:1px dashed var(--gold-soft); border-radius:var(--radius-sm);
+    padding:12px 14px; font-size:0.92rem; color:var(--gold); font-weight:600; min-height:44px;
   }
 
   .btn{
     display:inline-flex; align-items:center; justify-content:center; gap:8px;
-    background:var(--gold); color:#1b1608; border:none;
-    padding:10px 18px; border-radius:9px; font-weight:600; font-size:0.85rem;
-    cursor:pointer; transition:transform .1s, filter .15s;
+    background:linear-gradient(180deg, #ecc36a, var(--gold));
+    color:#1b1608; border:none;
+    padding:0 18px; height:var(--control-h); border-radius:var(--radius-sm);
+    font-weight:600; font-size:0.86rem;
+    cursor:pointer; transition:transform .1s, filter .15s, box-shadow .15s;
+    box-shadow:0 8px 18px var(--gold-glow);
   }
-  .btn:hover{filter:brightness(1.08);}
-  .btn:active{transform:scale(.97);}
+  .btn:hover{filter:brightness(1.06);}
+  .btn:active{transform:scale(.98);}
   .btn.block{width:100%;}
-  .btn.ghost{background:transparent; color:var(--cream-dim); border:1px solid var(--border);}
-  .btn.ghost:hover{color:var(--cream); border-color:var(--gold-soft);}
-  .btn.sm{padding:6px 12px; font-size:0.76rem;}
-  .btn.danger{background:var(--danger-soft); color:#f0a49c; border:1px solid #4a2a26;}
-  .btn.success{background:var(--success-soft); color:#a8cbad; border:1px solid #33422f;}
-  .btn.info{background:var(--blue-soft); color:#a9c8e0; border:1px solid #2c435a;}
-  .btn:disabled{opacity:.45; cursor:not-allowed;}
+  .btn.ghost{background:transparent; color:var(--cream-dim); border:1px solid var(--border); box-shadow:none; height:var(--control-h);}
+  .btn.ghost:hover{color:var(--cream); border-color:var(--gold-soft); background:rgba(224,179,90,.06);}
+  .btn.sm{padding:0 12px; height:34px; font-size:0.76rem; box-shadow:none;}
+  .btn.danger{background:var(--danger-soft); color:#f0a49c; border:1px solid #4a2a26; box-shadow:none;}
+  .btn.success{background:var(--success-soft); color:#a8cbad; border:1px solid #33422f; box-shadow:none;}
+  .btn.info{background:var(--blue-soft); color:#a9c8e0; border:1px solid #2c435a; box-shadow:none;}
+  .btn:disabled{opacity:.45; cursor:not-allowed; box-shadow:none;}
 
+  .table-wrap{overflow-x:auto; border-radius:12px;}
   table{width:100%; border-collapse:collapse; font-size:0.85rem;}
-  thead th{text-align:right; color:var(--text-dim); font-weight:500; font-size:0.72rem; letter-spacing:.4px; padding:0 10px 10px; text-transform:uppercase; border-bottom:1px solid var(--border);}
-  tbody td{padding:11px 10px; border-bottom:1px solid var(--border-soft); color:var(--text); font-family:'IBM Plex Sans Arabic', sans-serif;}
+  thead th{text-align:right; color:var(--text-dim); font-weight:500; font-size:0.72rem; letter-spacing:.4px; padding:8px 12px 12px; text-transform:uppercase; border-bottom:1px solid var(--border);}
+  tbody td{padding:13px 12px; border-bottom:1px solid var(--border-soft); color:var(--text); font-family:'IBM Plex Sans Arabic', sans-serif; vertical-align:middle;}
   tbody tr:last-child td{border-bottom:none;}
-  tbody tr:hover{background:rgba(255,255,255,0.015);}
-  .empty-row td{text-align:center; color:var(--text-dim); padding:26px 10px; font-size:0.82rem;}
+  tbody tr:hover{background:rgba(255,255,255,0.025);}
+  .empty-row td{text-align:center; color:var(--text-dim); padding:28px 10px; font-size:0.82rem;}
 
-  .badge{padding:3px 10px; border-radius:100px; font-size:0.72rem; font-weight:600; display:inline-block;}
+  .badge{padding:4px 10px; border-radius:100px; font-size:0.72rem; font-weight:600; display:inline-block;}
   .badge.present{background:var(--success-soft); color:#a8cbad;}
   .badge.absent{background:var(--danger-soft); color:#f0a49c;}
   .badge.rest{background:var(--blue-soft); color:#a9c8e0;}
@@ -186,18 +244,32 @@
   .badge.pending{background:var(--panel-2); color:var(--text-dim); border:1px solid var(--border);}
   .badge.exited{background:#2a2717; color:var(--gold); border:1px solid var(--gold-soft);}
 
-  .worker-card{border:1px solid var(--border); border-radius:var(--radius); background:var(--panel); margin-bottom:14px; overflow:hidden;}
+  .worker-card{border:1px solid var(--border); border-radius:var(--radius); background:var(--panel); overflow:hidden;}
   .worker-head{display:flex; align-items:center; justify-content:space-between; padding:16px 18px; gap:14px; flex-wrap:wrap;}
   .worker-info{display:flex; align-items:center; gap:12px;}
-  .avatar{width:42px; height:42px; border-radius:var(--egg-radius); background:linear-gradient(160deg,#2c2a2f,#1b1a1d); display:flex; align-items:center; justify-content:center; color:var(--gold); font-weight:700; font-size:0.95rem; flex-shrink:0; border:1px solid var(--border);}
+  .avatar{width:44px; height:44px; border-radius:var(--egg-radius); background:linear-gradient(160deg,#2c2a2f,#1b1a1d); display:flex; align-items:center; justify-content:center; color:var(--gold); font-weight:700; font-size:0.95rem; flex-shrink:0; border:1px solid var(--border);}
   .worker-name{font-weight:600; color:var(--cream); font-size:0.95rem;}
   .worker-phone{font-size:0.76rem; color:var(--text-dim); margin-top:2px; font-family:'IBM Plex Sans Arabic', sans-serif;}
   .worker-actions{display:flex; gap:8px; flex-wrap:wrap;}
   .worker-body{border-top:1px solid var(--border-soft); padding:16px 18px; display:none; background:var(--panel-2);}
   .worker-body.open{display:block;}
   .summary-strip{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px;}
-  .mini-stat{background:var(--panel); border:1px solid var(--border); border-radius:9px; padding:10px 14px; font-size:0.78rem; color:var(--text-dim); flex:1; min-width:130px;}
-  .mini-stat b{display:block; color:var(--cream); font-size:1.05rem; margin-top:2px; font-family:'IBM Plex Sans Arabic', sans-serif;}
+  .mini-stat{
+    background:var(--panel-2);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:14px 16px;
+    font-size:0.78rem;
+    color:var(--text-dim);
+    flex:1;
+    min-width:150px;
+    min-height:108px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    gap:6px;
+  }
+  .mini-stat b{display:block; color:var(--cream); font-size:1.08rem; margin-top:4px; font-family:'IBM Plex Sans Arabic', sans-serif; line-height:1.3; word-break:break-word;}
 
   .toast{
     position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px);
@@ -207,8 +279,21 @@
   }
   .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
 
-  .section-actions{display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:10px;}
-  .total-pill{background:var(--panel-2); border:1px solid var(--border); padding:8px 16px; border-radius:100px; font-size:0.82rem; color:var(--cream-dim); font-family:'IBM Plex Sans Arabic', sans-serif;}
+  .section-actions{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;}
+  .section-actions h3{margin:0; font-size:1.05rem; color:var(--cream);}
+  .total-pill{
+    background:var(--panel);
+    border:1px solid var(--border);
+    padding:10px 16px;
+    border-radius:100px;
+    font-size:0.82rem;
+    color:var(--cream-dim);
+    font-family:'IBM Plex Sans Arabic', sans-serif;
+    min-height:44px;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+  }
   .total-pill b{color:var(--gold);}
 
   .month-bar{display:flex; align-items:center; gap:10px; margin-bottom:18px;}
@@ -252,34 +337,22 @@
   .hamburger{display:none;}
   @media(max-width:880px){
     .app{grid-template-columns:1fr;}
-    .sidebar{position:fixed; z-index:50; width:250px; transform:translateX(102%); transition:transform .25s ease; box-shadow:-10px 0 40px rgba(0,0,0,.5);}
+    .sidebar{position:fixed; z-index:50; width:272px; transform:translateX(102%); transition:transform .25s ease; box-shadow:-10px 0 40px rgba(0,0,0,.5);}
     .sidebar.open{transform:translateX(0);}
-    .content-outer{padding:20px 14px 60px;}
-    .hamburger{display:flex; align-items:center; justify-content:center; width:38px; height:38px; border-radius:9px; border:1px solid var(--border); background:var(--panel); cursor:pointer;}
+    .content-outer{padding:18px 14px 72px;}
+    .hamburger{display:flex; align-items:center; justify-content:center; width:44px; height:44px; border-radius:12px; border:1px solid var(--border); background:var(--panel); cursor:pointer;}
     .hamburger svg{width:18px; height:18px; stroke:var(--cream);}
-    .grid.cols-4{grid-template-columns:1fr 1fr;}
     .form-grid, .form-grid.g3{grid-template-columns:1fr;}
   }
-  ::-webkit-scrollbar{
-    width:10px;
-  }
-  ::-webkit-scrollbar-track{
-    background: #151417;
-    position: absolute;
-    left: 100%;
-  }
-  ::-webkit-scrollbar-thumb{
-    background: #ffca67;
-    border-radius: 1px;
-  }
-  ::-webkit-scrollbar-thumb:hover{
-    background: #b5822f;
-  }
-  ::-webkit-scrollbar-corner{
-    background: #20281f;
-  }
+  #workersList{display:flex; flex-direction:column; gap:14px;}
+  ::-webkit-scrollbar{width:10px; height:10px;}
+  ::-webkit-scrollbar-track{background: #121015;}
+  ::-webkit-scrollbar-thumb{background: #c9a050; border-radius: 8px;}
+  ::-webkit-scrollbar-thumb:hover{background: #b5822f;}
+  ::-webkit-scrollbar-corner{background: #121015;}
+
   /* أنماط الاقتراحات */
-#supplierSuggestions, #buyerSuggestions {
+  #supplierSuggestions, #buyerSuggestions {
     background: var(--panel-2);
     border: 1px solid var(--border);
     border-radius: 9px;
@@ -287,70 +360,230 @@
     overflow-y: auto;
     box-shadow: 0 8px 30px rgba(0,0,0,0.5);
     z-index: 1000;
-}
-
-#supplierSuggestions div, #buyerSuggestions div {
+  }
+  #supplierSuggestions div, #buyerSuggestions div {
     padding: 10px 14px;
     cursor: pointer;
     border-bottom: 1px solid var(--border-soft);
     transition: background 0.2s;
-}
-
-#supplierSuggestions div:hover, #buyerSuggestions div:hover {
+  }
+  #supplierSuggestions div:hover, #buyerSuggestions div:hover {
     background: var(--panel);
-}
-
-#supplierSuggestions div:last-child, #buyerSuggestions div:last-child {
+  }
+  #supplierSuggestions div:last-child, #buyerSuggestions div:last-child {
     border-bottom: none;
-}
+  }
 
-/* أنماط جدول رأس المال */
-#capitalsBody tr:hover {
-    background: rgba(255,255,255,0.02);
-}
+  /* أنماط جدول رأس المال */
+  #capitalsBody tr:hover { background: rgba(255,255,255,0.02); }
+  #capitalsBody .percentage-bar {
+    display: inline-block; height: 4px; border-radius: 2px;
+    background: var(--gold); margin-top: 4px; transition: width 0.5s ease;
+  }
+  #capitalsBody .percentage-text { font-weight: bold; font-size: 1.05rem; }
+  #capitalsBody .percentage-detail { color: var(--text-dim); font-size: 0.65rem; }
 
-#capitalsBody .percentage-bar {
-    display: inline-block;
-    height: 4px;
-    border-radius: 2px;
-    background: var(--gold);
-    margin-top: 4px;
-    transition: width 0.5s ease;
-}
+  /* تنسيق الرسم البياني */
+  #profitChartCanvas { width: 100% !important; height: 100% !important; }
+  .chart-container { position: relative; height: 350px; width: 100%; }
+  #chartTypeBar, #chartTypeLine { transition: all 0.3s ease; min-width: 80px; }
+  #chartTypeBar:hover, #chartTypeLine:hover { transform: scale(1.05); }
 
-#capitalsBody .percentage-text {
-    font-weight: bold;
-    font-size: 1.05rem;
-}
+  .custom-confirm-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    display: none; align-items: center; justify-content: center;
+    z-index: 999999; direction: rtl;
+  }
+  .custom-confirm-overlay.show { display: flex; }
+  .custom-confirm-box {
+    width: 90%; max-width: 420px;
+    background: var(--panel); color: var(--cream);
+    border: 1px solid var(--border); border-radius: 18px;
+    padding: 28px; text-align: center;
+    box-shadow: var(--shadow);
+    animation: confirmPopup 0.18s ease;
+  }
+  .custom-confirm-icon { font-size: 42px; margin-bottom: 12px; }
+  .custom-confirm-box h3 { margin: 0 0 12px; font-size: 22px; }
+  .custom-confirm-box p { margin: 0 0 24px; color: #ccc; font-size: 16px; line-height: 1.7; }
+  .custom-confirm-actions { display: flex; gap: 12px; }
+  .custom-confirm-actions button {
+    flex: 1; border: none; border-radius: 10px;
+    padding: 12px; cursor: pointer; font-size: 15px;
+  }
+  #customConfirmCancel { background: #333; color: white; }
+  #customConfirmOk { background: #d9534f; color: white; }
+  #customConfirmCancel:hover { background: #444; }
+  #customConfirmOk:hover { background: #c9302c; }
+  @keyframes confirmPopup {
+    from { opacity: 0; transform: scale(0.92); }
+    to { opacity: 1; transform: scale(1); }
+  }
 
-#capitalsBody .percentage-detail {
-    color: var(--text-dim);
-    font-size: 0.65rem;
-}
-/* تنسيق الرسم البياني */
-#profitChartCanvas {
-    width: 100% !important;
-    height: 100% !important;
-}
+  /* زر التحديث الثابت */
+  .global-refresh-btn {
+    position: fixed;
+    top: 22px; left: 22px;
+    width: 44px; height: 44px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--panel);
+    color: var(--gold);
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 90;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease, border-color .2s;
+  }
+  .global-refresh-btn:hover { transform: rotate(90deg) scale(1.05); }
+  .global-refresh-btn:active { transform: rotate(180deg) scale(0.95); }
 
-.chart-container {
+  /* ✅ تنسيق خاص لزر الآلة الحاسبة */
+  .nav-item[data-target="calculator"] {
+    margin-top: auto;
+    border-top: 1px solid var(--border-soft);
+    padding-top: 16px;
+    margin-top: 16px;
+  }
+  .nav-item[data-target="calculator"]:hover { color: var(--gold); }
+  .nav-item[data-target="calculator"].active {
+    color: var(--gold);
+    border-color: var(--gold-soft);
+  }
+
+  /* ============================================ */
+  /*  🎬 شاشة الترحيب - الأنماط النهائية          */
+  /* ============================================ */
+
+  #splashScreen {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: #0b0b0d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 25px;
+    z-index: 999999;
+    direction: ltr;
+    transition: opacity 0.7s ease, visibility 0.7s ease;
+    will-change: opacity;
+  }
+
+  #splashScreen.splash-hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  #splashScreen.splash-removed {
+    display: none !important;
+  }
+
+  #splashEgg {
+    width: 110px;
+    height: 140px;
+    border-radius: 52% 48% 48% 52% / 62% 58% 42% 38%;
+    background: #f5f5f5;
+    box-shadow: 0 8px 40px rgba(219, 167, 67, 0.2);
+    transition: all 0.8s ease;
     position: relative;
-    height: 350px;
-    width: 100%;
-}
+    animation: eggPulse 1.2s ease infinite;
+  }
 
-/* تنسيق أزرار الرسم البياني */
-#chartTypeBar, #chartTypeLine {
-    transition: all 0.3s ease;
-    min-width: 80px;
-}
+  .egg-shine {
+    position: absolute;
+    top: 18%; left: 22%;
+    width: 28px; height: 18px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    transform: rotate(-25deg);
+  }
 
-#chartTypeBar:hover, #chartTypeLine:hover {
-    transform: scale(1.05);
-}
+  @keyframes eggPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.04); }
+  }
+
+  #splashText {
+    font-size: 4.5rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    font-family: 'Fraunces', serif;
+    display: flex;
+    gap: 5px;
+    direction: ltr;
+  }
+
+  .splash-char {
+    color: #f5f5f5;
+    opacity: 0;
+    transform: translateY(20px) scale(0.8);
+    transition: all 0.6s ease;
+    display: inline-block;
+  }
+
+  .splash-char.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  .splash-char.gold {
+    color: #dba743;
+    text-shadow: 0 0 40px rgba(219, 167, 67, 0.5);
+  }
+
+  #splashSub {
+    color: #948e84;
+    font-size: 0.9rem;
+    letter-spacing: 6px;
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: all 0.8s ease;
+    direction: rtl;
+  }
+
+  #splashSub.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  #splashBar {
+    width: 200px;
+    height: 3px;
+    background: #2b292e;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 10px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  #splashBar.visible {
+    opacity: 1;
+  }
+
+  #splashFill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #dba743, #f5c842);
+    border-radius: 2px;
+    transition: width 1.8s ease;
+  }
 </style>
 </head>
+
 <body>
+
+<!-- زر تحديث ثابت -->
+<button id="globalRefreshBtn" class="global-refresh-btn" title="تحديث الصفحة">
+    🔄
+</button>
+
 <div class="app">
   @include('partials.sidebar')
 
@@ -364,16 +597,41 @@
     @include('sections.orders')
     @include('sections.sales')
     @include('sections.profits')
-
-@include('sections.transactions')
-@include('sections.people')
-@include('sections.payments')
-@include('sections.capitals')
+    @include('sections.transactions')
+    @include('sections.people')
+    @include('sections.payments')
+    @include('sections.capitals')
+    @include('sections.calculator')
   </main>
   </div>
 </div>
 
-<!-- @include('partials.calculator') -->
+<!-- ============================================ -->
+<!--  🎬 شاشة الترحيب (Splash Screen)             -->
+<!--  تظهر مرة واحدة فقط عند أول فتح              -->
+<!-- ============================================ -->
+<div id="splashScreen">
+    <div id="splashEgg">
+        <div class="egg-shine"></div>
+    </div>
+
+    <div id="splashText">
+        <span class="splash-char" data-index="0">G</span>
+        <span class="splash-char" data-index="1">A</span>
+        <span class="splash-char" data-index="2">R</span>
+        <span class="splash-char" data-index="3">E</span>
+        <span class="splash-char" data-index="4">H</span>
+    </div>
+
+    <div id="splashSub">نظام إدارة منتجات البيض</div>
+
+    <div id="splashBar">
+        <div id="splashFill"></div>
+    </div>
+</div>
+<!-- ============================================ -->
+<!--  نهاية شاشة الترحيب                          -->
+<!-- ============================================ -->
 
 <div class="toast" id="toast"></div>
 
@@ -383,28 +641,32 @@
 
     // ================= Helper Functions =================
     function pad(n) { return String(n).padStart(2, '0'); }
-
     function localISODate(d) { return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`; }
-
     function todayStr() { return localISODate(new Date()); }
-
+    function dateKey(iso) { if (!iso) return ''; return String(iso).slice(0, 10); }
     function fmtDate(iso) {
         if (!iso) return '—';
-        const [y, m, d] = iso.split('-');
+        const key = dateKey(iso);
+        const [y, m, d] = key.split('-');
+        if (!y || !m || !d) return '—';
         return `${d}/${m}/${y}`;
     }
+    function fmtMoney(n) { return Number(n || 0).toLocaleString('en-US'); }
+    function monthKey(iso) { return iso ? dateKey(iso).slice(0, 7) : ''; }
 
-    function fmtMoney(n) {
-        return Number(n || 0).toLocaleString('en-US');
+    function workerPaidAmount(w) {
+        if (!w) return 0;
+        if (w.paid_amount != null && w.paid_amount !== '') return Number(w.paid_amount) || 0;
+        if (Array.isArray(w.payments)) {
+            return w.payments.reduce((s, p) => s + Number(p.amount || 0), 0);
+        }
+        return 0;
     }
-
-    function monthKey(iso) { return iso ? iso.slice(0, 7) : ''; }
-
-    function monthKeyOf(y, m) { return `${y}-${pad(m + 1)}`; }
-
-    function roundMoney(amount) {
-        return Math.round(amount * 100) / 100;
+    function workerTotalSalary(w) {
+        if (!w) return 0;
+        return (Number(w.present_days || 0) * Number(w.wage || 0)) + (Number(w.rest_days || 0) * Number(w.wage || 0));
     }
+    function roundMoney(amount) { return Math.round(amount * 100) / 100; }
 
     const QTY_TYPES = {
         plate: { unit: 'لوح', plural: 'ألواح', eggsEach: 30, extra: '', plates: 1 },
@@ -412,19 +674,16 @@
     };
 
     function isFiniteNum(v) { return typeof v === 'number' && isFinite(v); }
-
     function eggsOf(item) {
         const type = QTY_TYPES[item.qty_type] ? item.qty_type : 'plate';
         const count = Number(item.qty_count);
         return (isFiniteNum(count) ? count : 0) * QTY_TYPES[type].eggsEach;
     }
-
     function platesOf(qtyType, count) {
         const type = QTY_TYPES[qtyType] ? qtyType : 'plate';
         const c = Number(count);
         return (isFiniteNum(c) ? c : 0) * QTY_TYPES[type].plates;
     }
-
     function qtyText(type, count) {
         const m = QTY_TYPES[type] || QTY_TYPES.plate;
         const totalEggs = count * m.eggsEach;
@@ -440,20 +699,16 @@
     let transactions = [];
     let people = [];
     let capitals = [];
+    let partnerPayments = [];
+    let monthlyProfits = []; 
     let currentFilter = 'all';
     let peopleFilter = 'all';
     let editingPersonId = null;
     let editingCapitalId = null;
-    let partialPaymentData = {
-        type: '',
-        name: '',
-        totalAmount: 0,
-        remainingAmount: 0
-    };
+    let partialPaymentData = { type: '', name: '', totalAmount: 0, remainingAmount: 0 };
 
     // ================= Toast =================
     let toastTimer;
-
     function toast(msg) {
         const t = document.getElementById('toast');
         if (!t) return;
@@ -463,7 +718,7 @@
         toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
     }
 
-    // ================= Navigation =================
+    // ================= Navigation Titles =================
     const titles = {
         home: ['الرئيسية', 'نظرة سريعة على نشاط الشركة اليوم'],
         workers: ['العمّال والأجور', 'إضافة العمّال ومتابعة الحضور والدفع'],
@@ -472,21 +727,103 @@
         people: ['الأشخاص', 'إدارة الموردين والمشترين'],
         payments: ['المدفوعات', 'متابعة المدفوعات غير المسددة'],
         capitals: ['رأس المال', 'إدارة رأس المال والشركاء'],
-        profits: ['الأرباح الشهرية', 'حساب الأرباح من المبيعات وأجور العمّال']
+        profits: ['الأرباح الشهرية', 'حساب الأرباح من المبيعات وأجور العمّال'],
+        calculator: ['🧮 آلة حاسبة', 'آلة حاسبة بسيطة للاستخدام اليومي']
     };
+
+    // ================= Format Functions =================
+    function formatNumberToWords(number) {
+        if (number === 0) return 'صفر';
+        const absNumber = Math.abs(number);
+        const isNegative = number < 0;
+        let result = '';
+        let remaining = absNumber;
+
+        const billions = Math.floor(remaining / 1000000000);
+        if (billions > 0) {
+            if (billions === 1) result += 'مليار ';
+            else if (billions === 2) result += 'ملياران ';
+            else if (billions >= 3 && billions <= 10) result += billions + ' مليارات ';
+            else result += billions + ' مليار ';
+            remaining -= billions * 1000000000;
+        }
+        const millions = Math.floor(remaining / 1000000);
+        if (millions > 0) {
+            if (result.length > 0) result += 'و ';
+            if (millions === 1) result += 'مليون ';
+            else if (millions === 2) result += 'مليونان ';
+            else if (millions >= 3 && millions <= 10) result += millions + ' ملايين ';
+            else result += millions + ' مليون ';
+            remaining -= millions * 1000000;
+        }
+        const thousands = Math.floor(remaining / 1000);
+        if (thousands > 0) {
+            if (result.length > 0) result += 'و ';
+            if (thousands === 1) result += 'ألف ';
+            else if (thousands === 2) result += 'ألفان ';
+            else if (thousands >= 3 && thousands <= 10) result += thousands + ' آلاف ';
+            else result += thousands + ' ألف ';
+            remaining -= thousands * 1000;
+        }
+        const hundreds = Math.floor(remaining / 100);
+        if (hundreds > 0) {
+            if (result.length > 0) result += 'و ';
+            const hundredsWords = ['', 'مئة', 'مئتان', 'ثلاثمئة', 'أربعمئة', 'خمسمئة', 'ستمئة', 'سبعمئة', 'ثمانمئة', 'تسعمئة'];
+            result += hundredsWords[hundreds] + ' ';
+            remaining -= hundreds * 100;
+        }
+        if (remaining > 0) {
+            if (result.length > 0) result += 'و ';
+            const ones = ['', 'واحد', 'اثنان', 'ثلاثة', 'أربعة', 'خمسة', 'ستة', 'سبعة', 'ثمانية', 'تسعة',
+                          'عشرة', 'أحد عشر', 'اثنا عشر', 'ثلاثة عشر', 'أربعة عشر', 'خمسة عشر',
+                          'ستة عشر', 'سبعة عشر', 'ثمانية عشر', 'تسعة عشر'];
+            const tens = ['', '', 'عشرون', 'ثلاثون', 'أربعون', 'خمسون', 'ستون', 'سبعون', 'ثمانون', 'تسعون'];
+            if (remaining < 20) result += ones[remaining];
+            else {
+                const unit = remaining % 10;
+                const ten = Math.floor(remaining / 10);
+                if (unit > 0) result += ones[unit] + ' و' + tens[ten];
+                else result += tens[ten];
+            }
+        }
+        if (isNegative) result = 'خسارة ' + result;
+        return result.trim().replace(/\s+/g, ' ');
+    }
+
+    function formatMoneyWithWords(amount) {
+        if (amount === null || amount === undefined || isNaN(amount)) return 'صفر سنتيم';
+        const numAmount = Number(amount);
+        if (numAmount === 0) return 'صفر سنتيم';
+        const absAmount = Math.abs(numAmount);
+        const isNegative = numAmount < 0;
+        const millions = Math.floor(absAmount / 10000);
+        const remainder = absAmount % 10000;
+        const remainderCentimes = Math.round(remainder * 100);
+        let parts = [];
+        if (millions > 0) {
+            let millionsText = formatNumberToWords(millions);
+            if (millions === 1) parts.push('مليون سنتيم');
+            else if (millions === 2) parts.push('مليونان سنتيم');
+            else if (millions >= 3 && millions <= 10) parts.push(millionsText + ' ملايين سنتيم');
+            else parts.push(millionsText + ' مليون سنتيم');
+        }
+        if (remainderCentimes > 0) {
+            let remainderText = formatNumberToWords(remainderCentimes);
+            parts.push(remainderText + ' سنتيم');
+        }
+        let result = parts.join(' و ');
+        if (!result) result = 'صفر سنتيم';
+        if (isNegative) result = 'خسارة ' + result;
+        return result;
+    }
 
     // ================= API Functions =================
     async function fetchData(url) {
         try {
             const response = await fetch(url, {
-                headers: {
-                    'Accept': 'application/json',
-                    'X-Requested-With': 'XMLHttpRequest'
-                }
+                headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' }
             });
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             return await response.json();
         } catch (error) {
             console.error(`Error fetching ${url}:`, error);
@@ -496,26 +833,18 @@
 
     async function postData(url, data) {
         try {
-            console.log('📤 POST to:', url);
-            console.log('📤 Data:', data);
-
             const response = await fetch(url, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || '',
                     'X-Requested-With': 'XMLHttpRequest'
                 },
                 body: JSON.stringify(data)
             });
-
             const result = await response.json();
-            console.log('📥 Response:', result);
-
-            if (!response.ok) {
-                throw new Error(result.error || `HTTP error! status: ${response.status}`);
-            }
+            if (!response.ok) throw new Error(result.error || `HTTP error! status: ${response.status}`);
             return result;
         } catch (error) {
             console.error('❌ Error posting data:', error);
@@ -533,9 +862,7 @@
                     'X-Requested-With': 'XMLHttpRequest'
                 }
             });
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             return await response.json();
         } catch (error) {
             console.error('Error deleting data:', error);
@@ -545,9 +872,6 @@
 
     async function putData(url, data) {
         try {
-            console.log('📤 PUT to:', url);
-            console.log('📤 Data:', data);
-
             const response = await fetch(url, {
                 method: 'PUT',
                 headers: {
@@ -558,13 +882,8 @@
                 },
                 body: JSON.stringify(data)
             });
-
             const result = await response.json();
-            console.log('📥 PUT Response:', result);
-
-            if (!response.ok) {
-                throw new Error(result.error || `HTTP error! status: ${response.status}`);
-            }
+            if (!response.ok) throw new Error(result.error || `HTTP error! status: ${response.status}`);
             return result;
         } catch (error) {
             console.error('❌ Error updating data:', error);
@@ -572,18 +891,22 @@
         }
     }
 
-    // ================= Load Data Functions =================
+    // ================= Load All Data =================
     async function loadAllData() {
         try {
             console.log('🔄 Loading all data...');
-
-            const [workersData, transactionsData, costsData, peopleData, capitalsData, paymentsData] = await Promise.all([
+            const [
+                workersData, transactionsData, costsData, peopleData,
+                capitalsData, paymentsData, partnerPaymentsData, monthlyProfitsData
+            ] = await Promise.all([
                 fetchData('/api/workers'),
                 fetchData('/api/transactions'),
                 fetchData('/api/costs'),
                 fetchData('/api/people'),
                 fetchData('/api/capitals'),
-                fetchData('/api/payments')
+                fetchData('/api/payments'),
+                fetchData('/api/partner-payments'),
+                fetchData('/api/monthly-profits')
             ]);
 
             workers = workersData || [];
@@ -592,8 +915,15 @@
             people = peopleData || [];
             capitals = capitalsData || [];
             payments = paymentsData || [];
+            partnerPayments = partnerPaymentsData || [];
+            monthlyProfits = monthlyProfitsData || [];
 
-            console.log('✅ Data loaded:', { workers, transactions, costs, people, capitals, payments });
+            console.log('✅ Data loaded:', {
+                workers: workers.length, transactions: transactions.length,
+                costs: costs.length, people: people.length,
+                capitals: capitals.length, payments: payments.length,
+                partnerPayments: partnerPayments.length, monthlyProfits: monthlyProfits.length
+            });
 
             renderWorkers();
             renderCosts();
@@ -603,13 +933,21 @@
             renderCapitals();
             renderProfits();
             renderHome();
+            renderPartnerPayments();
+            renderMonthlyProfits();
+            updatePartnerSelect();
             updateTransactionStats();
             updateTransactionTotals();
             updateCapitalTotal();
 
             setTimeout(() => {
-                console.log('🔄 Initializing chart...');
-                initProfitChart();
+                updatePartnerSelect();
+                console.log('✅ تم تحديث قائمة الشركاء بعد حساب الأرباح');
+            }, 200);
+
+            setTimeout(() => {
+                if (profitChart) updateChart();
+                else initProfitChart();
             }, 500);
 
         } catch (error) {
@@ -633,7 +971,8 @@
     }
 
     async function deleteWorker(id) {
-        if (!confirm('حذف هذا العامل نهائيًا؟')) return;
+        const confirmed = await customConfirm('هل تريد حذف هذا العامل نهائيًا؟', 'حذف العامل');
+        if (!confirmed) return;
         const result = await deleteData(`/api/workers/${id}`);
         if (result && result.success) {
             workers = workers.filter(w => w.id != id);
@@ -643,60 +982,84 @@
         }
     }
 
-    
-
-
-    async function markAttendance(workerId, status) {
-        const data = { status: status };
-        const result = await postData(`/api/workers/${workerId}/attendance`, data);
-        
-        if (result && result.success) {
-            const labels = {
-                present: '✅ تم تسجيل الحضور',
-                absent: '❌ تم تسجيل الغياب',
-                rest: '🛌 تم تسجيل يوم راحة'
-            };
-            toast(labels[status]);
-            
-            const worker = workers.find(w => w.id == workerId);
-            if (worker && result.worker) {
-                worker.present_days = result.worker.present_days;
-                worker.absent_days = result.worker.absent_days;
-                worker.rest_days = result.worker.rest_days;
-                worker.current_status = result.worker.current_status;
-                worker.last_attendance_date = result.worker.last_attendance_date;
+    const attendanceLocks = new Set();
+    function mergeWorker(workerId, src) {
+        if (!src) return;
+        const worker = workers.find(w => w.id == workerId);
+        if (!worker) { workers.push(src); return; }
+        Object.assign(worker, src);
+    }
+    function applyWorkerPayment(workerId, result) {
+        if (!result) return;
+        mergeWorker(workerId, result.worker);
+        const worker = workers.find(w => w.id == workerId);
+        if (worker) {
+            if (result.total_paid != null) worker.paid_amount = result.total_paid;
+            if (result.remaining != null) worker.remaining_salary = result.remaining;
+            if (result.total_salary != null) worker.total_salary = result.total_salary;
+            if (result.payment) {
+                if (!Array.isArray(worker.payments)) worker.payments = [];
+                worker.payments.push(result.payment);
+                payments.push(result.payment);
             }
-            
-            renderWorkers();
-        } else {
-            toast('حدث خطأ في تسجيل الحضور');
+        } else if (result.payment) {
+            payments.push(result.payment);
         }
     }
 
-    // ===== إدارة الراتب =====
+    function closeSalaryModal() {
+        const modal = document.getElementById('salaryPaymentModal');
+        if (modal) modal.remove();
+    }
+
+    async function markAttendance(workerId, status) {
+        const lockKey = String(workerId);
+        if (attendanceLocks.has(lockKey)) return;
+        attendanceLocks.add(lockKey);
+        try {
+            const result = await postData(`/api/workers/${workerId}/attendance`, { status: status });
+            if (result && result.success) {
+                const labels = {
+                    present: '✅ تم تسجيل الحضور',
+                    absent: '❌ تم تسجيل الغياب',
+                    rest: '🛌 تم تسجيل يوم راحة'
+                };
+                toast(labels[status]);
+                mergeWorker(workerId, result.worker);
+                renderWorkers();
+                renderHome();
+                renderProfits();
+            } else {
+                toast((result && result.error) || 'حدث خطأ في تسجيل الحضور');
+            }
+        } finally {
+            attendanceLocks.delete(lockKey);
+        }
+    }
+
+    async function submitWorkerPay(workerId, payload) {
+        const result = await postData(`/api/workers/${workerId}/pay`, payload);
+        if (result && result.success) {
+            applyWorkerPayment(workerId, result);
+            renderWorkers();
+            renderHome();
+            renderProfits();
+            closeSalaryModal();
+            return result;
+        }
+        toast((result && result.error) || 'حدث خطأ في معالجة الدفع');
+        return null;
+    }
+
     async function processPayment(workerId) {
         const worker = workers.find(w => w.id == workerId);
-        if (!worker) {
-            toast('العامل غير موجود');
-            return;
-        }
-        
-        const totalSalary = worker.present_days * worker.wage + worker.rest_days * worker.wage;
-        const paidAmount = worker.paid_amount || 0;
-        const remaining = totalSalary - paidAmount;
-        
-        console.log('📊 Worker data:', { 
-            name: worker.name, 
-            totalSalary, 
-            paidAmount, 
-            remaining,
-            present: worker.present_days,
-            rest: worker.rest_days,
-            wage: worker.wage 
-        });
-        
+        if (!worker) { toast('العامل غير موجود'); return; }
+        const totalSalary = workerTotalSalary(worker);
+        const paidAmount = workerPaidAmount(worker);
+        const remaining = Math.max(0, roundMoney(totalSalary - paidAmount));
+
         const modalHtml = `
-            <div id="paymentModal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); display:flex; align-items:center; justify-content:center; z-index:9999;">
+            <div id="salaryPaymentModal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); display:flex; align-items:center; justify-content:center; z-index:9999;">
                 <div id="paymentDiv" style="background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); padding:30px; max-width:450px; width:90%; max-height:90vh; overflow-y:auto;">
                     <h3 style="margin-top:0; color:var(--cream);">💰 إدارة الراتب</h3>
                     <p style="color:var(--text-dim);">العامل: <strong style="color:var(--cream);">${worker.name}</strong></p>
@@ -707,202 +1070,81 @@
                         <p style="border-top:1px solid var(--border); padding-top:10px; margin-top:10px;">
                             إجمالي المستحق: <strong style="color:var(--gold);">${fmtMoney(totalSalary)} دج</strong>
                         </p>
-                        <p>
-                            المبلغ المدفوع: <strong style="color:var(--blue);">${fmtMoney(paidAmount)} دج</strong>
-                        </p>
-                        <p>
-                            المبلغ المتبقي: <strong style="color:var(--gold);">${fmtMoney(remaining)} دج</strong>
-                        </p>
+                        <p>المبلغ المدفوع: <strong style="color:var(--blue);">${fmtMoney(paidAmount)} دج</strong></p>
+                        <p>المبلغ المتبقي: <strong style="color:var(--gold);">${fmtMoney(remaining)} دج</strong></p>
                     </div>
                     <div class="form-row">
                         <label>المبلغ المراد خصمه (دج)</label>
-                        <input type="number" id="deductAmount" min="0" step="100" 
-                               placeholder="0 = دفع كامل الراتب" 
-                               style="width:100%; padding:10px; background:var(--panel-2); border:1px solid var(--border); border-radius:9px; color:var(--text);">
-                        <small style="color:var(--text-dim); font-size:0.7rem;">
-                            💡 اترك 0 لدفع كامل الراتب المتبقي
-                        </small>
+                        <input type="number" id="deductAmount" min="0" step="100" placeholder="أدخل المبلغ المراد دفعه" style="width:100%; padding:10px; background:var(--panel-2); border:1px solid var(--border); border-radius:9px; color:var(--text);">
+                        <small style="color:var(--text-dim); font-size:0.7rem;">💡 اترك الحقل فارغاً أو 0 لدفع كامل المتبقي</small>
                     </div>
                     <div style="display:flex; gap:10px; margin-top:15px; flex-wrap:wrap;">
-                        <button class="btn" id="confirmPaymentBtn" data-id="${workerId}" style="flex:1; min-width:100px;">
-                            💾 تأكيد
-                        </button>
-                        <button class="btn ghost" id="fullPaymentBtn" data-id="${workerId}" style="flex:1; min-width:100px; border:1px solid var(--gold); color:var(--gold);">
-                            💰 دفع الكل
-                        </button>
-                        <button class="btn ghost" id="closePaymentModalBtn" style="flex:1; min-width:100px; border:1px solid var(--border);">
-                            ❌ إلغاء
-                        </button>
+                        <button type="button" class="btn" id="confirmSalaryPaymentBtn" style="flex:1; min-width:100px;">💾 تأكيد</button>
+                        <button type="button" class="btn ghost" id="fullSalaryPaymentBtn" style="flex:1; min-width:100px; border:1px solid var(--gold); color:var(--gold);">💰 دفع الكل</button>
+                        <button type="button" class="btn ghost" id="closeSalaryModalBtn" style="flex:1; min-width:100px; border:1px solid var(--border);">❌ إلغاء</button>
                     </div>
                 </div>
             </div>
         `;
-        
-        const oldModal = document.getElementById('paymentModal');
-        if (oldModal) oldModal.remove();
+        closeSalaryModal();
         document.body.insertAdjacentHTML('beforeend', modalHtml);
-        
-        const closePaymentModalBtn = document.getElementById('closePaymentModalBtn');
-        const paymentDiv = document.getElementById('paymentDiv');
-        const paymentModal = document.getElementById('paymentModal');
-        
-        if (closePaymentModalBtn) {
-            closePaymentModalBtn.onclick = function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                const modal = document.getElementById('paymentModal');
-                if (modal) {
-                    modal.remove();
-                    console.log('✅ Modal closed by cancel button');
-                }
-            };
-        }
-        
-        if (paymentModal) {
-            paymentModal.addEventListener('click', function(e) {
-                if (e.target === this) {
-                    this.remove();
-                    console.log('✅ Modal closed by clicking outside');
-                }
-            });
-        }
-        
-        const fullBtn = document.getElementById('fullPaymentBtn');
+
+        const salaryModal = document.getElementById('salaryPaymentModal');
+        const closeSalaryBtn = document.getElementById('closeSalaryModalBtn');
+        const fullBtn = document.getElementById('fullSalaryPaymentBtn');
+        const confirmBtn = document.getElementById('confirmSalaryPaymentBtn');
+        const deductInput = document.getElementById('deductAmount');
+
+        if (closeSalaryBtn) closeSalaryBtn.addEventListener('click', function(e) { e.preventDefault(); e.stopPropagation(); closeSalaryModal(); });
+        if (salaryModal) salaryModal.addEventListener('click', function(e) { if (e.target === salaryModal) closeSalaryModal(); });
+
         if (fullBtn) {
-            fullBtn.addEventListener('click', async function() {
-                this.disabled = true;
-                this.textContent = 'جاري...';
-                const confirmBtn = document.getElementById('confirmPaymentBtn');
+            fullBtn.addEventListener('click', async function(e) {
+                e.preventDefault(); e.stopPropagation();
+                if (remaining <= 0) { toast('لا يوجد مبلغ متبقي للدفع'); return; }
+                this.disabled = true; this.textContent = 'جاري...';
                 if (confirmBtn) confirmBtn.disabled = true;
-                
                 try {
-                    const result = await postData(`/api/workers/${workerId}/pay`, { 
-                        amount: remaining, 
-                        type: 'full' 
-                    });
-                    
-                    console.log('📥 Full payment result:', result);
-                    
-                    if (result && result.success) {
-                        const worker = workers.find(w => w.id == workerId);
-                        if (worker && result.worker) {
-                            worker.total_salary = result.worker.total_salary;
-                            worker.remaining_salary = result.worker.remaining_salary;
-                            if (result.payment) {
-                                if (!worker.payments) worker.payments = [];
-                                worker.payments.push(result.payment);
-                            }
-                        }
-                        
-                        renderWorkers();
-                        renderHome();
-                        
-                        toast(`✅ تم دفع كامل الراتب (${fmtMoney(result.deducted)} دج)`);
-                        
-                        const modal = document.getElementById('paymentModal');
-                        if (modal) modal.remove();
-                    } else {
-                        toast('❌ حدث خطأ في دفع الراتب');
-                    }
-                } catch (error) {
-                    console.error('❌ Full payment error:', error);
-                    toast('❌ حدث خطأ في دفع الراتب');
+                    const result = await submitWorkerPay(workerId, { amount: remaining, type: 'full' });
+                    if (result) toast(`✅ تم دفع كامل الراتب (${fmtMoney(result.deducted)} دج)`);
                 } finally {
-                    this.disabled = false;
-                    this.textContent = '💰 دفع الكل';
+                    this.disabled = false; this.textContent = '💰 دفع الكل';
                     if (confirmBtn) confirmBtn.disabled = false;
                 }
             });
         }
-        
-        const confirmBtn = document.getElementById('confirmPaymentBtn');
+
         if (confirmBtn) {
-            confirmBtn.addEventListener('click', async function() {
-                const amountInput = document.getElementById('deductAmount');
-                const amount = Number(amountInput?.value || 0);
-                const maxAmount = remaining;
-                
-                this.disabled = true;
-                this.textContent = 'جاري...';
-                const fullBtnEl = document.getElementById('fullPaymentBtn');
-                if (fullBtnEl) fullBtnEl.disabled = true;
-                
+            confirmBtn.addEventListener('click', async function(e) {
+                e.preventDefault(); e.stopPropagation();
+                const amount = Number(deductInput?.value || 0);
+                if (remaining <= 0) { toast('لا يوجد مبلغ متبقي للدفع'); return; }
+                if (amount > remaining) { toast(`⚠️ المبلغ المدخل (${fmtMoney(amount)} دج) يتجاوز المبلغ المتبقي (${fmtMoney(remaining)} دج)`); return; }
+                this.disabled = true; this.textContent = 'جاري...';
+                if (fullBtn) fullBtn.disabled = true;
                 try {
-                    let result;
-                    
-                    if (amount <= 0) {
-                        result = await postData(`/api/workers/${workerId}/pay`, { 
-                            amount: remaining, 
-                            type: 'full' 
-                        });
-                    } else {
-                        if (amount > maxAmount) {
-                            toast(`⚠️ المبلغ المدخل (${fmtMoney(amount)} دج) يتجاوز المبلغ المتبقي (${fmtMoney(maxAmount)} دج)`);
-                            this.disabled = false;
-                            this.textContent = '💾 تأكيد';
-                            if (fullBtnEl) fullBtnEl.disabled = false;
-                            return;
-                        }
-                        result = await postData(`/api/workers/${workerId}/pay`, { 
-                            amount: amount, 
-                            type: 'partial' 
-                        });
+                    const isFull = amount <= 0 || amount >= remaining;
+                    const result = await submitWorkerPay(workerId, { amount: isFull ? remaining : amount, type: isFull ? 'full' : 'partial' });
+                    if (result) {
+                        toast(isFull
+                            ? `✅ تم دفع كامل الراتب المتبقي (${fmtMoney(result.deducted)} دج)`
+                            : `✅ تم دفع ${fmtMoney(result.deducted)} دج، المتبقي: ${fmtMoney(result.remaining)} دج`);
                     }
-                    
-                    console.log('📥 Payment result:', result);
-                    
-                    if (result && result.success) {
-                        const worker = workers.find(w => w.id == workerId);
-                        if (worker && result.worker) {
-                            worker.total_salary = result.worker.total_salary;
-                            worker.remaining_salary = result.worker.remaining_salary;
-                            if (result.payment) {
-                                if (!worker.payments) worker.payments = [];
-                                worker.payments.push(result.payment);
-                            }
-                        }
-                        
-                        renderWorkers();
-                        renderHome();
-                        
-                        const message = amount <= 0 ? 
-                            `✅ تم دفع كامل الراتب المتبقي (${fmtMoney(result.deducted)} دج)` :
-                            `✅ تم خصم ${fmtMoney(result.deducted)} دج، المتبقي: ${fmtMoney(result.remaining)} دج`;
-                        
-                        toast(message);
-                        
-                        const modal = document.getElementById('paymentModal');
-                        if (modal) modal.remove();
-                    } else {
-                        toast('❌ حدث خطأ في معالجة الدفع');
-                    }
-                } catch (error) {
-                    console.error('❌ Payment error:', error);
-                    toast('❌ حدث خطأ في معالجة الدفع');
                 } finally {
-                    this.disabled = false;
-                    this.textContent = '💾 تأكيد';
-                    if (fullBtnEl) fullBtnEl.disabled = false;
+                    this.disabled = false; this.textContent = '💾 تأكيد';
+                    if (fullBtn) fullBtn.disabled = false;
                 }
             });
         }
-        
-        const deductInput = document.getElementById('deductAmount');
+
         if (deductInput) {
             deductInput.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter') {
-                    const confirmBtnEl = document.getElementById('confirmPaymentBtn');
-                    if (confirmBtnEl) confirmBtnEl.click();
-                }
+                if (e.key === 'Enter') { e.preventDefault(); if (confirmBtn) confirmBtn.click(); }
             });
-            
-            setTimeout(() => {
-                deductInput.focus();
-            }, 100);
+            setTimeout(() => deductInput.focus(), 100);
         }
     }
 
-    // ===== دالة renderWorkers =====
     function renderWorkers() {
         const countEl = document.getElementById('workersCount');
         if (countEl) countEl.textContent = workers.length;
@@ -912,72 +1154,29 @@
             list.innerHTML = '<div class="card" style="text-align:center; color:var(--text-dim); padding:34px;">لا يوجد عمّال بعد — أضف أول عامل من النموذج أعلاه</div>';
             return;
         }
-        
+
         list.innerHTML = workers.map(w => {
             const today = todayStr();
-            const lastDate = w.last_attendance_date;
+            const lastDate = dateKey(w.last_attendance_date);
             const isToday = lastDate === today;
             const currentStatus = isToday ? w.current_status : 'pending';
-            
-            const totalSalary = (w.present_days * w.wage) + (w.rest_days * w.wage);
-            const paidAmount = w.paid_amount || 0;
-            const remaining = totalSalary - paidAmount;
-            
-            const presentBtn = `
-                <button class="btn sm success" data-act="present" data-id="${w.id}" 
-                    ${currentStatus === 'present' ? 'style="background:var(--success); color:#1b1608; border:2px solid var(--gold);"' : ''}
-                    onclick="markAttendance(${w.id}, 'present')">
-                    ${currentStatus === 'present' ? '✅' : ''} حاضر اليوم
-                </button>
-            `;
-            
-            const absentBtn = `
-                <button class="btn sm danger" data-act="absent" data-id="${w.id}"
-                    ${currentStatus === 'absent' ? 'style="background:var(--danger); color:#f0a49c; border:2px solid var(--gold);"' : ''}
-                    onclick="markAttendance(${w.id}, 'absent')">
-                    ${currentStatus === 'absent' ? '❌' : ''} غائب اليوم
-                </button>
-            `;
-            
-            const restBtn = `
-                <button class="btn sm info" data-act="rest" data-id="${w.id}"
-                    ${currentStatus === 'rest' ? 'style="background:var(--blue); color:#a9c8e0; border:2px solid var(--gold);"' : ''}
-                    onclick="markAttendance(${w.id}, 'rest')">
-                    ${currentStatus === 'rest' ? '🛌' : ''} راحة
-                </button>
-            `;
-            
+            const totalSalary = workerTotalSalary(w);
+            const paidAmount = workerPaidAmount(w);
+            const remaining = Math.max(0, roundMoney(totalSalary - paidAmount));
+
+            const presentBtn = `<button type="button" class="btn sm success" data-act="present" data-id="${w.id}" ${currentStatus === 'present' ? 'style="background:var(--success); color:#1b1608; border:2px solid var(--gold);"' : ''}>${currentStatus === 'present' ? '✅' : ''} حاضر اليوم</button>`;
+            const absentBtn = `<button type="button" class="btn sm danger" data-act="absent" data-id="${w.id}" ${currentStatus === 'absent' ? 'style="background:var(--danger); color:#f0a49c; border:2px solid var(--gold);"' : ''}>${currentStatus === 'absent' ? '❌' : ''} غائب اليوم</button>`;
+            const restBtn = `<button type="button" class="btn sm info" data-act="rest" data-id="${w.id}" ${currentStatus === 'rest' ? 'style="background:var(--blue); color:#a9c8e0; border:2px solid var(--gold);"' : ''}>${currentStatus === 'rest' ? '🛌' : ''} راحة</button>`;
+
             let rowsHtml = `
-                <tr>
-                    <td>أيام حضور</td>
-                    <td><span class="badge present">${w.present_days}</span></td>
-                    <td>${fmtMoney(w.present_days * w.wage)} دج</td>
-                </tr>
-                <tr>
-                    <td>أيام غياب</td>
-                    <td><span class="badge absent">${w.absent_days}</span></td>
-                    <td>0 دج</td>
-                </tr>
-                <tr>
-                    <td>أيام راحة مدفوعة</td>
-                    <td><span class="badge rest">${w.rest_days}</span></td>
-                    <td>${fmtMoney(w.rest_days * w.wage)} دج</td>
-                </tr>
-                <tr style="border-top:2px solid var(--gold);">
-                    <td><strong>إجمالي المستحق</strong></td>
-                    <td><strong>${w.present_days + w.rest_days}</strong></td>
-                    <td><strong style="color:var(--gold);">${fmtMoney(totalSalary)} دج</strong></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><strong>المبلغ المدفوع</strong></td>
-                    <td><strong style="color:var(--blue);">${fmtMoney(paidAmount)} دج</strong></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><strong>المبلغ المتبقي</strong></td>
-                    <td><strong style="color:var(--gold);">${fmtMoney(remaining)} دج</strong></td>
-                </tr>
+                <tr><td>أيام حضور</td><td><span class="badge present">${w.present_days}</span></td><td>${fmtMoney(w.present_days * w.wage)} دج</td><td style="color:var(--text-dim); font-size:0.7rem;">${formatMoneyWithWords(w.present_days * w.wage)}</td></tr>
+                <tr><td>أيام غياب</td><td><span class="badge absent">${w.absent_days}</span></td><td>0 دج</td><td style="color:var(--text-dim); font-size:0.7rem;">صفر دينار</td></tr>
+                <tr><td>أيام راحة مدفوعة</td><td><span class="badge rest">${w.rest_days}</span></td><td>${fmtMoney(w.rest_days * w.wage)} دج</td><td style="color:var(--text-dim); font-size:0.7rem;">${formatMoneyWithWords(w.rest_days * w.wage)}</td></tr>
+                <tr style="border-top:2px solid var(--gold);"><td><strong>إجمالي المستحق</strong></td><td><strong>${w.present_days + w.rest_days}</strong></td><td><strong style="color:var(--gold);">${fmtMoney(totalSalary)} دج</strong></td><td style="color:var(--text-dim); font-size:0.7rem;"><strong>${formatMoneyWithWords(totalSalary)}</strong></td></tr>
+                <tr><td colspan="2"><strong>المبلغ المدفوع</strong></td><td><strong style="color:var(--blue);">${fmtMoney(paidAmount)} دج</strong></td><td style="color:var(--text-dim); font-size:0.7rem;"><strong>${formatMoneyWithWords(paidAmount)}</strong></td></tr>
+                <tr><td colspan="2"><strong>المبلغ المتبقي</strong></td><td><strong style="color:var(--gold);">${fmtMoney(remaining)} دج</strong></td><td style="color:var(--text-dim); font-size:0.7rem;"><strong>${formatMoneyWithWords(remaining)}</strong></td></tr>
             `;
-            
+
             return `
                 <div class="worker-card">
                     <div class="worker-head">
@@ -985,20 +1184,15 @@
                             <div class="avatar">${w.name ? w.name.substring(0, 2).toUpperCase() : '??'}</div>
                             <div>
                                 <div class="worker-name">${w.name}</div>
-                                <div class="worker-phone">${w.phone || '---'} · أجرة اليوم: ${fmtMoney(w.wage)} دج</div>
-                                <div style="font-size:0.7rem; color:var(--text-dim);">
-                                    الحالة: ${currentStatus === 'present' ? '✅ حاضر' : currentStatus === 'absent' ? '❌ غائب' : currentStatus === 'rest' ? '🛌 راحة' : '⏳ لم يسجل'}
-                                    ${remaining <= 0 ? ' | 💰 تم دفع الراتب' : ''}
-                                </div>
+                                <div class="worker-phone">${w.phone || '---'} · أجرة اليوم: ${fmtMoney(w.wage)} دج<br><small style="color:var(--text-dim); font-size:0.7rem;">(${formatMoneyWithWords(w.wage)})</small></div>
+                                <div style="font-size:0.7rem; color:var(--text-dim);">الحالة: ${currentStatus === 'present' ? '✅ حاضر' : currentStatus === 'absent' ? '❌ غائب' : currentStatus === 'rest' ? '🛌 راحة' : '⏳ لم يسجل'}${remaining <= 0 ? ' | 💰 تم دفع الراتب' : ''}</div>
                             </div>
                         </div>
                         <div class="worker-actions">
-                            ${presentBtn}
-                            ${absentBtn}
-                            ${restBtn}
+                            ${presentBtn}${absentBtn}${restBtn}
                             <button class="btn sm ghost" data-act="toggle" data-id="${w.id}">📊 التفاصيل</button>
-                            <button class="btn sm ghost" data-act="pay" data-id="${w.id}" style="color:var(--gold);" onclick="processPayment(${w.id})">💰 راتب</button>
-                            <button class="btn sm ghost" data-act="delete" data-id="${w.id}" style="color:#e08a82;" onclick="deleteWorker(${w.id})">🗑️ حذف</button>
+                            <button class="btn sm ghost" data-act="pay" data-id="${w.id}" style="color:var(--gold);">💰 راتب</button>
+                            <button type="button" class="btn sm ghost" data-act="delete" data-id="${w.id}" style="color:#e08a82;">🗑️ حذف</button>
                         </div>
                     </div>
                     <div class="worker-body" id="body-${w.id}">
@@ -1006,21 +1200,15 @@
                             <div class="mini-stat">أيام حضور<b>${w.present_days}</b></div>
                             <div class="mini-stat">أيام غياب<b>${w.absent_days}</b></div>
                             <div class="mini-stat">أيام راحة<b>${w.rest_days}</b></div>
-                            <div class="mini-stat">المستحق<b>${fmtMoney(totalSalary)} دج</b></div>
-                            <div class="mini-stat">المدفوع<b style="color:var(--blue);">${fmtMoney(paidAmount)} دج</b></div>
-                            <div class="mini-stat">المتبقي<b style="color:var(--gold);">${fmtMoney(remaining)} دج</b></div>
+                            <div class="mini-stat">المستحق<b>${fmtMoney(totalSalary)} دج</b><small style="color:var(--text-dim); font-size:0.65rem; display:block;">(${formatMoneyWithWords(totalSalary)})</small></div>
+                            <div class="mini-stat">المدفوع<b style="color:var(--blue);">${fmtMoney(paidAmount)} دج</b><small style="color:var(--text-dim); font-size:0.65rem; display:block;">(${formatMoneyWithWords(paidAmount)})</small></div>
+                            <div class="mini-stat">المتبقي<b style="color:var(--gold);">${fmtMoney(remaining)} دج</b><small style="color:var(--text-dim); font-size:0.65rem; display:block;">(${formatMoneyWithWords(remaining)})</small></div>
                         </div>
                         <table style="margin-bottom:14px; width:100%;">
-                            <thead>
-                                <tr>
-                                    <th style="text-align:right;">الوصف</th>
-                                    <th style="text-align:right;">الأيام</th>
-                                    <th style="text-align:right;">المبلغ</th>
-                                </tr>
-                            </thead>
+                            <thead><tr><th style="text-align:right;">الوصف</th><th style="text-align:right;">الأيام</th><th style="text-align:right;">المبلغ</th><th style="text-align:right;">المبلغ بالسانتيم</th></tr></thead>
                             <tbody>${rowsHtml}</tbody>
                         </table>
-                        <button class="btn" data-act="pay" data-id="${w.id}" style="background:var(--gold); color:#1b1608;" onclick="processPayment(${w.id})">💰 إدارة الراتب</button>
+                        <button class="btn" data-act="pay" data-id="${w.id}" style="background:var(--gold); color:#1b1608;">💰 إدارة الراتب</button>
                     </div>
                 </div>
             `;
@@ -1030,57 +1218,29 @@
     // ================= Costs Functions =================
     async function addCost(data) {
         const result = await postData('/api/costs', data);
-        if (result) {
-            costs.push(result);
-            renderCosts();
-            renderHome();
-            toast('تم تسجيل التكلفة');
-        }
+        if (result) { costs.push(result); renderCosts(); renderHome(); toast('تم تسجيل التكلفة'); }
         return result;
     }
-
     async function deleteCost(id) {
         const result = await deleteData(`/api/costs/${id}`);
-        if (result) {
-            costs = costs.filter(c => c.id != id);
-            renderCosts();
-            renderHome();
-            toast('تم حذف التكلفة');
-        }
+        if (result) { costs = costs.filter(c => c.id != id); renderCosts(); renderHome(); toast('تم حذف التكلفة'); }
     }
-
     function renderCosts() {
         const total = costs.reduce((s, c) => s + Number(c.amount || 0), 0);
         const totalEl = document.getElementById('costsTotal');
         if (totalEl) totalEl.textContent = fmtMoney(total);
+        const totalCentimeEl = document.getElementById('costsTotalCentime');
+        if (totalCentimeEl) totalCentimeEl.textContent = formatMoneyWithWords(total);
 
         const body = document.getElementById('costsBody');
         if (!body) return;
-        if (costs.length === 0) {
-            body.innerHTML = '<tr class="empty-row"><td colspan="4">لا توجد تكاليف مسجّلة</td></tr>';
-        } else {
+        if (costs.length === 0) body.innerHTML = '<tr class="empty-row"><td colspan="4">لا توجد تكاليف مسجّلة</td></tr>';
+        else {
             const sorted = [...costs].sort((a, b) => b.date.localeCompare(a.date));
             body.innerHTML = sorted.map(c => `
-                        <tr>
-                            <td>${fmtDate(c.date)}</td>
-                            <td>${c.reason}</td>
-                            <td>${fmtMoney(c.amount)} دج</td>
-                            <td><button class="btn sm danger" data-id="${c.id}" data-type="cost">حذف</button></td>
-                        </tr>
-                    `).join('');
-        }
-
-        const dailyBody = document.getElementById('costsDailyBody');
-        if (!dailyBody) return;
-        const dates = Array.from(new Set(costs.map(c => c.date))).sort((a, b) => b.localeCompare(a));
-        if (dates.length === 0) {
-            dailyBody.innerHTML = '<tr class="empty-row"><td colspan="3">لا توجد بيانات بعد</td></tr>';
-        } else {
-            dailyBody.innerHTML = dates.map(date => {
-                const dayCosts = costs.filter(c => c.date === date);
-                const dayTotal = dayCosts.reduce((s, c) => s + Number(c.amount || 0), 0);
-                return `<tr><td>${fmtDate(date)}</td><td>${dayCosts.length}</td><td>${fmtMoney(dayTotal)} دج</td></tr>`;
-            }).join('');
+                <tr><td>${fmtDate(c.date)}</td><td>${c.reason}</td><td>${fmtMoney(c.amount)} دج</td><td>${formatMoneyWithWords(c.amount)}</td>
+                <td><button class="btn sm danger" data-id="${c.id}" data-type="cost">حذف</button></td></tr>
+            `).join('');
         }
     }
 
@@ -1088,11 +1248,8 @@
     function getPhoneNumber(name, type) {
         if (!name) return '—';
         const person = people.find(p => {
-            if (type === 'buyer') {
-                return p.full_name === name && (p.type === 'buyer' || p.type === 'both');
-            } else {
-                return p.full_name === name && (p.type === 'supplier' || p.type === 'both');
-            }
+            if (type === 'buyer') return p.full_name === name && (p.type === 'buyer' || p.type === 'both');
+            return p.full_name === name && (p.type === 'supplier' || p.type === 'both');
         });
         return person ? person.phone || '—' : '—';
     }
@@ -1100,53 +1257,32 @@
     function renderPeople() {
         const body = document.getElementById('peopleBody');
         if (!body) return;
-
         let filtered = people;
-        if (peopleFilter === 'suppliers') {
-            filtered = people.filter(p => p.type === 'supplier' || p.type === 'both');
-        } else if (peopleFilter === 'buyers') {
-            filtered = people.filter(p => p.type === 'buyer' || p.type === 'both');
-        }
-
-        if (filtered.length === 0) {
-            body.innerHTML = '<tr class="empty-row"><td colspan="7">لا يوجد أشخاص مسجّلين</td></tr>';
-            return;
-        }
-
+        if (peopleFilter === 'suppliers') filtered = people.filter(p => p.type === 'supplier' || p.type === 'both');
+        else if (peopleFilter === 'buyers') filtered = people.filter(p => p.type === 'buyer' || p.type === 'both');
+        if (filtered.length === 0) { body.innerHTML = '<tr class="empty-row"><td colspan="7">لا يوجد أشخاص مسجّلين</td></tr>'; return; }
         const typeLabels = { supplier: '🏷️ بائع', buyer: '🛒 مشتري', both: '🔄 بائع ومشتري' };
         const typeClasses = { supplier: 'badge info', buyer: 'badge success', both: 'badge paid' };
-
         body.innerHTML = filtered.map((p, index) => `
-                <tr>
-                    <td>${index + 1}</td>
-                    <td><strong>${p.full_name}</strong></td>
-                    <td>${p.phone || '—'}</td>
-                    <td>${p.address || '—'}</td>
-                    <td><span class="${typeClasses[p.type]}">${typeLabels[p.type]}</span></td>
-                    <td>${p.notes || '—'}</td>
-                    <td style="display:flex; gap:6px; flex-wrap:wrap;">
-                        <button class="btn sm info" data-act="edit" data-id="${p.id}" data-type="people">✏️ تعديل</button>
-                        <button class="btn sm danger" data-act="del" data-id="${p.id}" data-type="people">🗑️ حذف</button>
-                    </td>
-                </tr>
-            `).join('');
-
+            <tr>
+                <td>${index + 1}</td><td><strong>${p.full_name}</strong></td><td>${p.phone || '—'}</td><td>${p.address || '—'}</td>
+                <td><span class="${typeClasses[p.type]}">${typeLabels[p.type]}</span></td><td>${p.notes || '—'}</td>
+                <td style="display:flex; gap:6px; flex-wrap:wrap;">
+                    <button class="btn sm info" data-act="edit" data-id="${p.id}" data-type="people">✏️ تعديل</button>
+                    <button class="btn sm danger" data-act="del" data-id="${p.id}" data-type="people">🗑️ حذف</button>
+                </td>
+            </tr>
+        `).join('');
         const countEl = document.getElementById('peopleCount');
         if (countEl) countEl.textContent = filtered.length;
     }
 
     async function addPerson(data) {
         const result = await postData('/api/people', data);
-        if (result && result.success) {
-            people.unshift(result.person);
-            renderPeople();
-            toast('تمت إضافة الشخص بنجاح 🎉');
-        } else {
-            toast('حدث خطأ في إضافة الشخص');
-        }
+        if (result && result.success) { people.unshift(result.person); renderPeople(); toast('تمت إضافة الشخص بنجاح 🎉'); }
+        else toast('حدث خطأ في إضافة الشخص');
         return result;
     }
-
     async function updatePerson(id, data) {
         const result = await putData(`/api/people/${id}`, data);
         if (result && result.success) {
@@ -1154,22 +1290,14 @@
             if (index !== -1) people[index] = result.person;
             renderPeople();
             toast('تم تحديث الشخص بنجاح 🎉');
-        } else {
-            toast('حدث خطأ في تحديث الشخص');
-        }
+        } else toast('حدث خطأ في تحديث الشخص');
         return result;
     }
-
     async function deletePerson(id) {
-        if (!confirm('هل أنت متأكد من حذف هذا الشخص؟')) return;
+        if (!await customConfirm('هل أنت متأكد من حذف هذا الشخص؟')) return;
         const result = await deleteData(`/api/people/${id}`);
-        if (result && result.success) {
-            people = people.filter(p => p.id != id);
-            renderPeople();
-            toast('تم حذف الشخص بنجاح');
-        }
+        if (result && result.success) { people = people.filter(p => p.id != id); renderPeople(); toast('تم حذف الشخص بنجاح'); }
     }
-
     function editPerson(id) {
         const person = people.find(p => p.id == id);
         if (!person) return;
@@ -1182,7 +1310,6 @@
         document.querySelector('#personForm button[type="submit"]').textContent = 'تحديث الشخص';
         toast('قم بتعديل البيانات ثم اضغط تحديث');
     }
-
     function setPeopleFilter(filter) {
         peopleFilter = filter;
         renderPeople();
@@ -1192,22 +1319,14 @@
         });
         const btnId = filter === 'all' ? 'showAllPeople' : filter === 'suppliers' ? 'showSuppliers' : 'showBuyers';
         const activeBtn = document.getElementById(btnId);
-        if (activeBtn) {
-            activeBtn.style.background = 'var(--gold)';
-            activeBtn.style.color = '#1b1608';
-        }
+        if (activeBtn) { activeBtn.style.background = 'var(--gold)'; activeBtn.style.color = '#1b1608'; }
     }
 
-    // ================= Autocomplete Functions =================
+    // ================= Autocomplete =================
     function showAllSuppliers() {
         const input = document.getElementById('tSupplierName');
         const suggestions = document.getElementById('supplierSuggestions');
-
-        if (!input || !suggestions) {
-            console.warn('Supplier autocomplete elements not found');
-            return;
-        }
-
+        if (!input || !suggestions) return;
         const rect = input.getBoundingClientRect();
         suggestions.style.position = 'fixed';
         suggestions.style.top = (rect.bottom + 5) + 'px';
@@ -1222,35 +1341,23 @@
         suggestions.style.display = 'block';
 
         const suppliers = people.filter(p => p.type === 'supplier' || p.type === 'both');
-
         if (suppliers.length === 0) {
             suggestions.innerHTML = '<div style="padding:10px 14px; color:var(--text-dim);">لا يوجد بائعون مسجلون</div>';
-            suggestions.style.display = 'block';
             return;
         }
-
         suggestions.innerHTML = suppliers.map(p =>
-            `<div style="padding:10px 14px; cursor:pointer; border-bottom:1px solid var(--border); hover:background:var(--panel); transition:background 0.2s;" 
-                      onmouseover="this.style.background='var(--panel)'" 
-                      onmouseout="this.style.background='transparent'"
-                      onclick="window.selectSupplier('${p.full_name.replace(/'/g, "\\'")}')">
-                        <span style="color:var(--cream);">${p.full_name}</span>
-                        ${p.phone ? `<span style="color:var(--text-dim); font-size:0.8rem;"> 📞 ${p.phone}</span>` : ''}
-                        ${p.address ? `<span style="color:var(--text-dim); font-size:0.8rem;"> 📍 ${p.address}</span>` : ''}
-                    </div>`
+            `<div style="padding:10px 14px; cursor:pointer; border-bottom:1px solid var(--border);" onmouseover="this.style.background='var(--panel)'" onmouseout="this.style.background='transparent'" onclick="window.selectSupplier('${p.full_name.replace(/'/g, "\\'")}')">
+                <span style="color:var(--cream);">${p.full_name}</span>
+                ${p.phone ? `<span style="color:var(--text-dim); font-size:0.8rem;"> 📞 ${p.phone}</span>` : ''}
+                ${p.address ? `<span style="color:var(--text-dim); font-size:0.8rem;"> 📍 ${p.address}</span>` : ''}
+            </div>`
         ).join('');
-        suggestions.style.display = 'block';
     }
 
     function showAllBuyers() {
         const input = document.getElementById('tBuyerName');
         const suggestions = document.getElementById('buyerSuggestions');
-
-        if (!input || !suggestions) {
-            console.warn('Buyer autocomplete elements not found');
-            return;
-        }
-
+        if (!input || !suggestions) return;
         const rect = input.getBoundingClientRect();
         suggestions.style.position = 'fixed';
         suggestions.style.top = (rect.bottom + 5) + 'px';
@@ -1265,31 +1372,23 @@
         suggestions.style.display = 'block';
 
         const buyers = people.filter(p => p.type === 'buyer' || p.type === 'both');
-
         if (buyers.length === 0) {
             suggestions.innerHTML = '<div style="padding:10px 14px; color:var(--text-dim);">لا يوجد مشترون مسجلون</div>';
-            suggestions.style.display = 'block';
             return;
         }
-
         suggestions.innerHTML = buyers.map(p =>
-            `<div style="padding:10px 14px; cursor:pointer; border-bottom:1px solid var(--border); hover:background:var(--panel); transition:background 0.2s;" 
-                      onmouseover="this.style.background='var(--panel)'" 
-                      onmouseout="this.style.background='transparent'"
-                      onclick="window.selectBuyer('${p.full_name.replace(/'/g, "\\'")}')">
-                        <span style="color:var(--cream);">${p.full_name}</span>
-                        ${p.phone ? `<span style="color:var(--text-dim); font-size:0.8rem;"> 📞 ${p.phone}</span>` : ''}
-                        ${p.address ? `<span style="color:var(--text-dim); font-size:0.8rem;"> 📍 ${p.address}</span>` : ''}
-                    </div>`
+            `<div style="padding:10px 14px; cursor:pointer; border-bottom:1px solid var(--border);" onmouseover="this.style.background='var(--panel)'" onmouseout="this.style.background='transparent'" onclick="window.selectBuyer('${p.full_name.replace(/'/g, "\\'")}')">
+                <span style="color:var(--cream);">${p.full_name}</span>
+                ${p.phone ? `<span style="color:var(--text-dim); font-size:0.8rem;"> 📞 ${p.phone}</span>` : ''}
+                ${p.address ? `<span style="color:var(--text-dim); font-size:0.8rem;"> 📍 ${p.address}</span>` : ''}
+            </div>`
         ).join('');
-        suggestions.style.display = 'block';
     }
 
     window.selectSupplier = function(name) {
         document.getElementById('tSupplierName').value = name;
         document.getElementById('supplierSuggestions').style.display = 'none';
     };
-
     window.selectBuyer = function(name) {
         document.getElementById('tBuyerName').value = name;
         document.getElementById('buyerSuggestions').style.display = 'none';
@@ -1299,90 +1398,42 @@
     function renderTransactions() {
         const body = document.getElementById('transactionsBody');
         if (!body) return;
-
         let filtered = transactions;
-        if (currentFilter === 'exited') {
-            filtered = transactions.filter(t => t.is_exited === true);
-        } else if (currentFilter === 'pending') {
-            filtered = transactions.filter(t => t.is_exited === false);
-        }
-
-        if (filtered.length === 0) {
-            body.innerHTML = '<tr class="empty-row"><td colspan="11">لا توجد معاملات مسجّلة</td></tr>';
-            return;
-        }
-
+        if (currentFilter === 'exited') filtered = transactions.filter(t => t.is_exited === true);
+        else if (currentFilter === 'pending') filtered = transactions.filter(t => t.is_exited === false);
+        if (filtered.length === 0) { body.innerHTML = '<tr class="empty-row"><td colspan="11">لا توجد معاملات مسجّلة</td></tr>'; return; }
         const sorted = [...filtered].sort((a, b) => b.date.localeCompare(a.date));
-
         body.innerHTML = sorted.map(t => {
             const dateObj = new Date(t.date);
             const day = String(dateObj.getDate()).padStart(2, '0');
             const month = String(dateObj.getMonth() + 1).padStart(2, '0');
             const year = dateObj.getFullYear();
             const formattedDate = `${day}/${month}/${year}`;
-
-            const statusHtml = t.is_exited ?
-                '<span class="badge exited">✅ تم الخروج</span>' :
-                '<span class="badge pending">⏳ قيد الانتظار</span>';
-
+            const statusHtml = t.is_exited ? '<span class="badge exited">✅ تم الخروج</span>' : '<span class="badge pending">⏳ قيد الانتظار</span>';
             const profitClass = t.profit >= 0 ? 'success' : 'danger';
-
-            const qtyStatusLabels = {
-                'full': '📦 كامل',
-                'partial': '📦 جزئي',
-                'empty': '📦 فارغ'
-            };
-            const qtyStatusColors = {
-                'full': 'var(--success)',
-                'partial': 'var(--gold)',
-                'empty': 'var(--danger)'
-            };
-
+            const qtyStatusLabels = { 'full': '📦 كامل', 'partial': '📦 جزئي', 'empty': '📦 فارغ' };
+            const qtyStatusColors = { 'full': 'var(--success)', 'partial': 'var(--gold)', 'empty': 'var(--danger)' };
             const totalQty = t.total_qty || t.qty_count;
             const takenQty = t.taken_qty || 0;
             const remainingQty = t.remaining_qty || (totalQty - takenQty);
-
             const unitLabel = t.qty_type === 'plate' ? 'لوح' : 'كرتون';
             const qtyDisplay = `${t.qty_count} ${unitLabel}`;
-            const remainingDisplay = t.total_qty > 0 ?
-                `<br><small style="color:var(--text-dim);">المتبقي: ${fmtMoney(remainingQty)} ${unitLabel}</small>` :
-                '';
-
-            const supplierPaidHtml = t.supplier_paid ?
-                '<span class="badge paid">✅ مدفوع</span>' :
-                '<span class="badge pending">⏳ غير مدفوع</span>';
-
-            const buyerPaidHtml = t.buyer_paid ?
-                '<span class="badge paid">✅ مدفوع</span>' :
-                '<span class="badge pending">⏳ غير مدفوع</span>';
-
+            const remainingDisplay = t.total_qty > 0 ? `<br><small style="color:var(--text-dim);">المتبقي: ${fmtMoney(remainingQty)} ${unitLabel}</small>` : '';
+            const supplierPaidHtml = t.supplier_paid ? '<span class="badge paid">✅ مدفوع</span>' : '<span class="badge pending">⏳ غير مدفوع</span>';
+            const buyerPaidHtml = t.buyer_paid ? '<span class="badge paid">✅ مدفوع</span>' : '<span class="badge pending">⏳ غير مدفوع</span>';
             return `
-                    <tr>
-                        <td>${formattedDate}</td>
-                        <td>${t.supplier_name || '—'}</td>
-                        <td>${t.buyer_name || '—'}</td>
-                        <td>${t.egg_type || '—'}</td>
-                        <td>${qtyDisplay}${remainingDisplay}</td>
-                        <td>${fmtMoney(t.purchase_price)} دج</td>
-                        <td>${fmtMoney(t.sale_price)} دج</td>
-                        <td style="color:var(--${profitClass}); font-weight:bold;">${fmtMoney(t.profit)} دج</td>
-                        <td>
-                            ${statusHtml}
-                            <br>
-                            <small style="color:${qtyStatusColors[t.quantity_status] || 'var(--text-dim)'};">${qtyStatusLabels[t.quantity_status] || ''}</small>
-                        </td>
-                        <td>
-                            دفع البائع: ${supplierPaidHtml}<br>
-                            دفع المشتري: ${buyerPaidHtml}
-                        </td>
-                        <td style="display:flex; gap:4px; flex-wrap:wrap;">
-                            ${!t.is_exited ?
-                                `<button class="btn sm success" data-act="exit" data-id="${t.id}" data-type="transaction">✅ خروج</button>` :
-                                ''}
-                            <button class="btn sm info" data-act="quantity" data-id="${t.id}" data-type="transaction">📦 كمية</button>
-                            <button class="btn sm danger" data-act="del" data-id="${t.id}" data-type="transaction">🗑️ حذف</button>
-                        </td>
-                    </tr>`;
+                <tr>
+                    <td>${formattedDate}</td><td>${t.supplier_name || '—'}</td><td>${t.buyer_name || '—'}</td><td>${t.egg_type || '—'}</td>
+                    <td>${qtyDisplay}${remainingDisplay}</td><td>${fmtMoney(t.purchase_price)} دج</td><td>${fmtMoney(t.sale_price)} دج</td>
+                    <td style="color:var(--${profitClass}); font-weight:bold;">${fmtMoney(t.profit)} دج</td>
+                    <td>${statusHtml}<br><small style="color:${qtyStatusColors[t.quantity_status] || 'var(--text-dim)'};">${qtyStatusLabels[t.quantity_status] || ''}</small></td>
+                    <td>دفع البائع: ${supplierPaidHtml}<br>دفع المشتري: ${buyerPaidHtml}</td>
+                    <td style="display:flex; gap:4px; flex-wrap:wrap;">
+                        ${!t.is_exited ? `<button class="btn sm success" data-act="exit" data-id="${t.id}" data-type="transaction">✅ خروج</button>` : ''}
+                        <button class="btn sm info" data-act="quantity" data-id="${t.id}" data-type="transaction">📦 كمية</button>
+                        <button class="btn sm danger" data-act="del" data-id="${t.id}" data-type="transaction">🗑️ حذف</button>
+                    </td>
+                </tr>`;
         }).join('');
     }
 
@@ -1390,41 +1441,21 @@
         const totalPurchases = transactions.reduce((s, t) => s + Number(t.total_purchase || 0), 0);
         const totalSales = transactions.reduce((s, t) => s + Number(t.total_sale || 0), 0);
         const totalProfit = transactions.reduce((s, t) => s + Number(t.profit || 0), 0);
-
         const purchasesEl = document.getElementById('totalPurchases');
         if (purchasesEl) purchasesEl.textContent = fmtMoney(totalPurchases) + ' دج';
-
         const salesEl = document.getElementById('totalSales');
         if (salesEl) salesEl.textContent = fmtMoney(totalSales) + ' دج';
-
         const profitEl = document.getElementById('totalProfit');
-        if (profitEl) {
-            profitEl.textContent = fmtMoney(totalProfit) + ' دج';
-            profitEl.style.color = totalProfit >= 0 ? 'var(--gold)' : 'var(--danger)';
-        }
-
-        const purchasesCentimeEl = document.getElementById('totalPurchasesCentime');
-        if (purchasesCentimeEl) {
-            purchasesCentimeEl.textContent = totalPurchases > 0 ? formatMoneyWithWords(totalPurchases) : 'صفر سنتيم';
-        }
-
-        const salesCentimeEl = document.getElementById('totalSalesCentime');
-        if (salesCentimeEl) {
-            salesCentimeEl.textContent = totalSales > 0 ? formatMoneyWithWords(totalSales) : 'صفر سنتيم';
-        }
-
-        const profitCentimeEl = document.getElementById('totalProfitCentime');
-        if (profitCentimeEl) {
-            if (totalProfit > 0) {
-                profitCentimeEl.textContent = formatMoneyWithWords(totalProfit);
-                profitCentimeEl.style.color = 'var(--gold)';
-            } else if (totalProfit < 0) {
-                profitCentimeEl.textContent = formatMoneyWithWords(totalProfit);
-                profitCentimeEl.style.color = 'var(--danger)';
-            } else {
-                profitCentimeEl.textContent = 'صفر سنتيم';
-                profitCentimeEl.style.color = 'var(--text-dim)';
-            }
+        if (profitEl) { profitEl.textContent = fmtMoney(totalProfit) + ' دج'; profitEl.style.color = totalProfit >= 0 ? 'var(--gold)' : 'var(--danger)'; }
+        const pC = document.getElementById('totalPurchasesCentime');
+        if (pC) pC.textContent = totalPurchases > 0 ? formatMoneyWithWords(totalPurchases) : 'صفر سنتيم';
+        const sC = document.getElementById('totalSalesCentime');
+        if (sC) sC.textContent = totalSales > 0 ? formatMoneyWithWords(totalSales) : 'صفر سنتيم';
+        const prC = document.getElementById('totalProfitCentime');
+        if (prC) {
+            if (totalProfit > 0) { prC.textContent = formatMoneyWithWords(totalProfit); prC.style.color = 'var(--gold)'; }
+            else if (totalProfit < 0) { prC.textContent = formatMoneyWithWords(totalProfit); prC.style.color = 'var(--danger)'; }
+            else { prC.textContent = 'صفر سنتيم'; prC.style.color = 'var(--text-dim)'; }
         }
     }
 
@@ -1434,21 +1465,16 @@
         const purchasePrice = document.getElementById('tPurchasePrice');
         const salePrice = document.getElementById('tSalePrice');
         if (!qtyType || !qtyCount || !purchasePrice || !salePrice) return;
-
         const plates = platesOf(qtyType.value, Number(qtyCount.value || 0));
         const totalPurchase = plates * Number(purchasePrice.value || 0);
         const totalSale = plates * Number(salePrice.value || 0);
         const profit = totalSale - totalPurchase;
-
-        const totalPurchaseEl = document.getElementById('tTotalPurchase');
-        if (totalPurchaseEl) totalPurchaseEl.textContent = fmtMoney(totalPurchase) + ' دج';
-        const totalSaleEl = document.getElementById('tTotalSale');
-        if (totalSaleEl) totalSaleEl.textContent = fmtMoney(totalSale) + ' دج';
-        const profitEl = document.getElementById('tProfit');
-        if (profitEl) {
-            profitEl.textContent = fmtMoney(profit) + ' دج';
-            profitEl.style.color = profit >= 0 ? 'var(--success)' : 'var(--danger)';
-        }
+        const tP = document.getElementById('tTotalPurchase');
+        if (tP) tP.textContent = fmtMoney(totalPurchase) + ' دج';
+        const tS = document.getElementById('tTotalSale');
+        if (tS) tS.textContent = fmtMoney(totalSale) + ' دج';
+        const pEl = document.getElementById('tProfit');
+        if (pEl) { pEl.textContent = fmtMoney(profit) + ' دج'; pEl.style.color = profit >= 0 ? 'var(--success)' : 'var(--danger)'; }
     }
 
     function setFilter(filter) {
@@ -1460,21 +1486,14 @@
         });
         const btnId = filter === 'all' ? 'showAll' : filter === 'exited' ? 'showExited' : 'showPending';
         const activeBtn = document.getElementById(btnId);
-        if (activeBtn) {
-            activeBtn.style.background = 'var(--gold)';
-            activeBtn.style.color = '#1b1608';
-        }
+        if (activeBtn) { activeBtn.style.background = 'var(--gold)'; activeBtn.style.color = '#1b1608'; }
     }
 
     async function addTransaction(data) {
-        console.log('📤 Adding transaction:', data);
-
         const supplierPaid = document.getElementById('supplierPaid');
         const buyerPaid = document.getElementById('buyerPaid');
-
         data.supplier_paid = supplierPaid ? parseInt(supplierPaid.value) === 1 : false;
         data.buyer_paid = buyerPaid ? parseInt(buyerPaid.value) === 1 : false;
-
         const result = await postData('/api/transactions', data);
         if (result && result.success) {
             transactions.unshift(result.transaction);
@@ -1483,14 +1502,12 @@
             renderHome();
             renderProfits();
             toast('تمت إضافة المعاملة بنجاح 🎉');
-        } else {
-            toast('حدث خطأ في إضافة المعاملة');
-        }
+        } else toast('حدث خطأ في إضافة المعاملة');
         return result;
     }
 
     async function deleteTransaction(id) {
-        if (!confirm('هل أنت متأكد من حذف هذه المعاملة؟')) return;
+        if (!await customConfirm('هل أنت متأكد من حذف هذه المعاملة؟')) return;
         const result = await deleteData(`/api/transactions/${id}`);
         if (result && result.success) {
             transactions = transactions.filter(t => t.id != id);
@@ -1508,7 +1525,6 @@
                 const totalQty = transaction.total_qty || transaction.qty_count;
                 await updateTakenQuantity(id, totalQty);
             }
-
             const result = await putData(`/api/transactions/${id}/exit`, {});
             if (result && result.success) {
                 const transaction = transactions.find(t => t.id == id);
@@ -1528,40 +1544,35 @@
         }
     }
 
-    // ================= Quantity Functions =================
     function showQuantityModal(id) {
         const transaction = transactions.find(t => t.id == id);
         if (!transaction) return;
         const totalQty = transaction.total_qty || transaction.qty_count;
         const currentTaken = transaction.taken_qty || 0;
-
         const modalHtml = `
-                <div id="quantityModal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); display:flex; align-items:center; justify-content:center; z-index:1000;">
-                    <div style="background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); padding:30px; max-width:400px; width:90%;">
-                        <h3 style="margin-top:0; color:var(--cream);">📦 تعديل الكمية المأخوذة</h3>
-                        <p style="color:var(--text-dim);">المعاملة: ${transaction.supplier_name} → ${transaction.buyer_name}</p>
-                        <div style="margin:15px 0;">
-                            <p>الكمية الإجمالية: <strong>${fmtMoney(totalQty)}</strong> ${transaction.qty_type === 'plate' ? 'لوح' : 'كرتون'}</p>
-                            <p>الكمية المأخوذة حالياً: <strong>${fmtMoney(currentTaken)}</strong></p>
-                        </div>
-                        <div class="form-row">
-                            <label>الكمية المأخوذة الجديدة</label>
-                            <input type="number" id="takenQtyInput" min="0" max="${totalQty}" value="${currentTaken}" style="width:100%;">
-                        </div>
-                        <div style="display:flex; gap:10px; margin-top:15px;">
-                            <button class="btn" id="saveQuantityBtn" data-id="${id}">💾 حفظ</button>
-                            <button class="btn ghost" id="closeModalBtn">إلغاء</button>
-                        </div>
+            <div id="quantityModal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); display:flex; align-items:center; justify-content:center; z-index:1000;">
+                <div style="background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); padding:30px; max-width:400px; width:90%;">
+                    <h3 style="margin-top:0; color:var(--cream);">📦 تعديل الكمية المأخوذة</h3>
+                    <p style="color:var(--text-dim);">المعاملة: ${transaction.supplier_name} → ${transaction.buyer_name}</p>
+                    <div style="margin:15px 0;">
+                        <p>الكمية الإجمالية: <strong>${fmtMoney(totalQty)}</strong> ${transaction.qty_type === 'plate' ? 'لوح' : 'كرتون'}</p>
+                        <p>الكمية المأخوذة حالياً: <strong>${fmtMoney(currentTaken)}</strong></p>
+                    </div>
+                    <div class="form-row">
+                        <label>الكمية المأخوذة الجديدة</label>
+                        <input type="number" id="takenQtyInput" min="0" max="${totalQty}" value="${currentTaken}" style="width:100%;">
+                    </div>
+                    <div style="display:flex; gap:10px; margin-top:15px;">
+                        <button class="btn" id="saveQuantityBtn" data-id="${id}">💾 حفظ</button>
+                        <button class="btn ghost" id="closeModalBtn">إلغاء</button>
                     </div>
                 </div>
-            `;
+            </div>
+        `;
         const oldModal = document.getElementById('quantityModal');
         if (oldModal) oldModal.remove();
         document.body.insertAdjacentHTML('beforeend', modalHtml);
-
-        document.getElementById('closeModalBtn').addEventListener('click', () => {
-            document.getElementById('quantityModal').remove();
-        });
+        document.getElementById('closeModalBtn').addEventListener('click', () => { document.getElementById('quantityModal').remove(); });
         document.getElementById('saveQuantityBtn').addEventListener('click', function() {
             const newTaken = Number(document.getElementById('takenQtyInput').value || 0);
             if (newTaken < 0 || newTaken > totalQty) { toast('الكمية غير صالحة'); return; }
@@ -1570,8 +1581,10 @@
     }
 
     async function updateTakenQuantity(id, takenQty) {
-        const result = await putData(`/api/transactions/${id}/taken-quantity`, { taken_qty: takenQty });
-        if (result && result.success) {
+        try {
+            const url = `/api/transactions/${id}/taken-quantity`;
+            const result = await putData(url, { taken_qty: takenQty });
+            if (!result || !result.success) return;
             const transaction = transactions.find(t => t.id == id);
             if (transaction) {
                 transaction.taken_qty = takenQty;
@@ -1583,6 +1596,9 @@
             if (modal) modal.remove();
             renderTransactions();
             toast('تم تحديث الكمية المأخوذة بنجاح 🎉');
+        } catch (error) {
+            console.error('❌ EXCEPTION:', error);
+            toast('حدث خطأ أثناء تحديث الكمية');
         }
     }
 
@@ -1596,12 +1612,9 @@
                 transaction.supplier_paid_date = result.transaction?.supplier_paid_date || new Date().toISOString().split('T')[0];
                 transaction.supplier_paid_amount = transaction.total_purchase;
             }
-            renderTransactions();
-            renderPayments();
+            renderTransactions(); renderPayments();
             toast('تم تأكيد دفع البائع بنجاح 🎉');
-        } else {
-            toast('حدث خطأ في تأكيد دفع البائع');
-        }
+        } else toast('حدث خطأ في تأكيد دفع البائع');
     }
 
     async function payBuyer(id) {
@@ -1613,15 +1626,11 @@
                 transaction.buyer_paid_date = result.transaction?.buyer_paid_date || new Date().toISOString().split('T')[0];
                 transaction.buyer_paid_amount = transaction.total_sale;
             }
-            renderTransactions();
-            renderPayments();
+            renderTransactions(); renderPayments();
             toast('تم تأكيد دفع المشتري بنجاح 🎉');
-        } else {
-            toast('حدث خطأ في تأكيد دفع المشتري');
-        }
+        } else toast('حدث خطأ في تأكيد دفع المشتري');
     }
 
-    // ================= Payments Section Functions =================
     function renderPayments() {
         const buyersBody = document.getElementById('buyersUnpaidBody');
         if (buyersBody) {
@@ -1630,48 +1639,32 @@
                 const paidAmount = Number(t.buyer_paid_amount || 0);
                 return (t.buyer_paid === false || t.buyer_paid === 0) && (totalAmount - paidAmount > 0.01);
             });
-
             const buyerMap = new Map();
             unpaidBuyers.forEach(t => {
                 const name = t.buyer_name || 'غير معروف';
                 if (!buyerMap.has(name)) {
-                    buyerMap.set(name, {
-                        name: name,
-                        phone: getPhoneNumber(name, 'buyer'),
-                        count: 0,
-                        total: 0,
-                        remaining: 0,
-                        lastDate: t.date
-                    });
+                    buyerMap.set(name, { name, phone: getPhoneNumber(name, 'buyer'), count: 0, total: 0, remaining: 0, lastDate: t.date });
                 }
                 const data = buyerMap.get(name);
                 const totalAmount = Number(t.total_sale || 0);
                 const paidAmount = Number(t.buyer_paid_amount || 0);
                 const remaining = roundMoney(totalAmount - paidAmount);
-
-                data.count += 1;
-                data.total += totalAmount;
-                data.remaining += remaining;
+                data.count += 1; data.total += totalAmount; data.remaining += remaining;
                 if (t.date > data.lastDate) data.lastDate = t.date;
             });
-
             const sortedBuyers = Array.from(buyerMap.values()).sort((a, b) => b.total - a.total);
-
-            if (sortedBuyers.length === 0) {
-                buyersBody.innerHTML = '<tr class="empty-row"><td colspan="8">✅ لا يوجد مشترين غير مدفوعين</td></tr>';
-            } else {
+            if (sortedBuyers.length === 0) buyersBody.innerHTML = '<tr class="empty-row"><td colspan="8">✅ لا يوجد مشترين غير مدفوعين</td></tr>';
+            else {
                 buyersBody.innerHTML = sortedBuyers.map((b, index) => {
                     const dateObj = new Date(b.lastDate);
                     const lastDate = `${String(dateObj.getDate()).padStart(2, '0')}/${String(dateObj.getMonth() + 1).padStart(2, '0')}/${dateObj.getFullYear()}`;
                     const roundedRemaining = roundMoney(b.remaining);
                     return `
                         <tr>
-                            <td>${index + 1}</td>
-                            <td><strong>${b.name}</strong></td>
-                            <td>${b.phone}</td>
-                            <td>${b.count}</td>
+                            <td>${index + 1}</td><td><strong>${b.name}</strong></td><td>${b.phone}</td><td>${b.count}</td>
                             <td style="color:var(--danger);">${fmtMoney(b.total)} دج</td>
                             <td style="color:var(--gold); font-weight:bold;">${fmtMoney(roundedRemaining)} دج</td>
+                            <td style="color:var(--text-dim); font-size:0.7rem;">${formatMoneyWithWords(roundedRemaining)}</td>
                             <td>${lastDate}</td>
                             <td style="display:flex; gap:4px; flex-wrap:wrap;">
                                 <button class="btn sm success" data-act="pay-buyer-full" data-name="${b.name}" data-total="${b.total}" data-remaining="${roundedRemaining}" data-type="payment-buyer">✅ تسديد الكل</button>
@@ -1681,9 +1674,8 @@
                     `;
                 }).join('');
             }
-
-            const totalBuyersEl = document.getElementById('totalBuyersUnpaid');
-            if (totalBuyersEl) totalBuyersEl.textContent = sortedBuyers.length;
+            const tBU = document.getElementById('totalBuyersUnpaid');
+            if (tBU) tBU.textContent = sortedBuyers.length;
         }
 
         const suppliersBody = document.getElementById('suppliersUnpaidBody');
@@ -1693,48 +1685,32 @@
                 const paidAmount = Number(t.supplier_paid_amount || 0);
                 return (t.supplier_paid === false || t.supplier_paid === 0) && (totalAmount - paidAmount > 0.01);
             });
-
             const supplierMap = new Map();
             unpaidSuppliers.forEach(t => {
                 const name = t.supplier_name || 'غير معروف';
                 if (!supplierMap.has(name)) {
-                    supplierMap.set(name, {
-                        name: name,
-                        phone: getPhoneNumber(name, 'supplier'),
-                        count: 0,
-                        total: 0,
-                        remaining: 0,
-                        lastDate: t.date
-                    });
+                    supplierMap.set(name, { name, phone: getPhoneNumber(name, 'supplier'), count: 0, total: 0, remaining: 0, lastDate: t.date });
                 }
                 const data = supplierMap.get(name);
                 const totalAmount = Number(t.total_purchase || 0);
                 const paidAmount = Number(t.supplier_paid_amount || 0);
                 const remaining = roundMoney(totalAmount - paidAmount);
-
-                data.count += 1;
-                data.total += totalAmount;
-                data.remaining += remaining;
+                data.count += 1; data.total += totalAmount; data.remaining += remaining;
                 if (t.date > data.lastDate) data.lastDate = t.date;
             });
-
             const sortedSuppliers = Array.from(supplierMap.values()).sort((a, b) => b.total - a.total);
-
-            if (sortedSuppliers.length === 0) {
-                suppliersBody.innerHTML = '<tr class="empty-row"><td colspan="8">✅ لا يوجد موردين غير مدفوعين</td></tr>';
-            } else {
+            if (sortedSuppliers.length === 0) suppliersBody.innerHTML = '<tr class="empty-row"><td colspan="8">✅ لا يوجد موردين غير مدفوعين</td></tr>';
+            else {
                 suppliersBody.innerHTML = sortedSuppliers.map((s, index) => {
                     const dateObj = new Date(s.lastDate);
                     const lastDate = `${String(dateObj.getDate()).padStart(2, '0')}/${String(dateObj.getMonth() + 1).padStart(2, '0')}/${dateObj.getFullYear()}`;
                     const roundedRemaining = roundMoney(s.remaining);
                     return `
                         <tr>
-                            <td>${index + 1}</td>
-                            <td><strong>${s.name}</strong></td>
-                            <td>${s.phone}</td>
-                            <td>${s.count}</td>
+                            <td>${index + 1}</td><td><strong>${s.name}</strong></td><td>${s.phone}</td><td>${s.count}</td>
                             <td style="color:var(--gold);">${fmtMoney(s.total)} دج</td>
                             <td style="color:var(--gold); font-weight:bold;">${fmtMoney(roundedRemaining)} دج</td>
+                            <td style="color:var(--text-dim); font-size:0.7rem;">${formatMoneyWithWords(roundedRemaining)}</td>
                             <td>${lastDate}</td>
                             <td style="display:flex; gap:4px; flex-wrap:wrap;">
                                 <button class="btn sm success" data-act="pay-supplier-full" data-name="${s.name}" data-total="${s.total}" data-remaining="${roundedRemaining}" data-type="payment-supplier">✅ تسديد الكل</button>
@@ -1744,122 +1720,53 @@
                     `;
                 }).join('');
             }
-
-            const totalSuppliersEl = document.getElementById('totalSuppliersUnpaid');
-            if (totalSuppliersEl) totalSuppliersEl.textContent = sortedSuppliers.length;
+            const tSU = document.getElementById('totalSuppliersUnpaid');
+            if (tSU) tSU.textContent = sortedSuppliers.length;
         }
     }
 
-    function updatePaymentStats() {
-        const supplierUnpaid = transactions.filter(t => {
-            const total = Number(t.total_purchase || 0);
-            const paid = Number(t.supplier_paid_amount || 0);
-            return (t.supplier_paid === false || t.supplier_paid === 0) && (total - paid > 0.01);
-        });
-        const totalSupplierUnpaid = roundMoney(supplierUnpaid.reduce((s, t) => {
-            const total = Number(t.total_purchase || 0);
-            const paid = Number(t.supplier_paid_amount || 0);
-            return s + (total - paid);
-        }, 0));
-
-        const buyerUnpaid = transactions.filter(t => {
-            const total = Number(t.total_sale || 0);
-            const paid = Number(t.buyer_paid_amount || 0);
-            return (t.buyer_paid === false || t.buyer_paid === 0) && (total - paid > 0.01);
-        });
-        const totalBuyerUnpaid = roundMoney(buyerUnpaid.reduce((s, t) => {
-            const total = Number(t.total_sale || 0);
-            const paid = Number(t.buyer_paid_amount || 0);
-            return s + (total - paid);
-        }, 0));
-
-        const supplierPaid = transactions.filter(t => t.supplier_paid === true || t.supplier_paid === 1);
-        const totalSupplierPaid = roundMoney(supplierPaid.reduce((s, t) => s + Number(t.total_purchase || 0), 0));
-
-        const buyerPaid = transactions.filter(t => t.buyer_paid === true || t.buyer_paid === 1);
-        const totalBuyerPaid = roundMoney(buyerPaid.reduce((s, t) => s + Number(t.total_sale || 0), 0));
-
-        const supplierUnpaidEl = document.getElementById('totalSupplierUnpaid');
-        if (supplierUnpaidEl) supplierUnpaidEl.textContent = fmtMoney(totalSupplierUnpaid) + ' دج';
-
-        const buyerUnpaidEl = document.getElementById('totalBuyerUnpaid');
-        if (buyerUnpaidEl) buyerUnpaidEl.textContent = fmtMoney(totalBuyerUnpaid) + ' دج';
-
-        const supplierPaidEl = document.getElementById('totalSupplierPaid');
-        if (supplierPaidEl) supplierPaidEl.textContent = fmtMoney(totalSupplierPaid) + ' دج';
-
-        const buyerPaidEl = document.getElementById('totalBuyerPaid');
-        if (buyerPaidEl) buyerPaidEl.textContent = fmtMoney(totalBuyerPaid) + ' دج';
-    }
-
     async function payAllBuyerTransactions(buyerName) {
-        if (!confirm(`هل أنت متأكد من تسديد جميع معاملات المشتري "${buyerName}"؟`)) return;
-
-        const buyerTransactions = transactions.filter(t =>
-            t.buyer_name === buyerName &&
-            (t.buyer_paid === false || t.buyer_paid === 0)
-        );
-
-        let successCount = 0;
-        let totalPaid = 0;
-
+        if (!await customConfirm(`هل أنت متأكد من تسديد جميع معاملات المشتري "${buyerName}"؟`)) return;
+        const buyerTransactions = transactions.filter(t => t.buyer_name === buyerName && (t.buyer_paid === false || t.buyer_paid === 0));
+        let successCount = 0, totalPaid = 0;
         for (const t of buyerTransactions) {
             const totalAmount = Number(t.total_sale || 0);
             const paidAmount = Number(t.buyer_paid_amount || 0);
             const remaining = roundMoney(totalAmount - paidAmount);
-
             const result = await putData(`/api/transactions/${t.id}/pay-buyer`, {});
             if (result && result.success) {
                 t.buyer_paid = true;
                 t.buyer_paid_date = result.transaction?.buyer_paid_date || new Date().toISOString().split('T')[0];
                 t.buyer_paid_amount = totalAmount;
-                successCount++;
-                totalPaid += remaining;
+                successCount++; totalPaid += remaining;
             }
         }
-
         if (successCount > 0) {
-            renderPayments();
-            renderTransactions();
+            renderPayments(); renderTransactions();
             toast(`✅ تم تسديد ${successCount} معاملة للمشتري "${buyerName}" بمبلغ ${fmtMoney(totalPaid)} دج بنجاح`);
-        } else {
-            toast('❌ حدث خطأ في تسديد المعاملات');
-        }
+        } else toast('❌ حدث خطأ في تسديد المعاملات');
     }
 
     async function payAllSupplierTransactions(supplierName) {
-        if (!confirm(`هل أنت متأكد من تسديد جميع معاملات المورد "${supplierName}"؟`)) return;
-
-        const supplierTransactions = transactions.filter(t =>
-            t.supplier_name === supplierName &&
-            (t.supplier_paid === false || t.supplier_paid === 0)
-        );
-
-        let successCount = 0;
-        let totalPaid = 0;
-
+        if (!await customConfirm(`هل أنت متأكد من تسديد جميع معاملات المورد "${supplierName}"؟`)) return;
+        const supplierTransactions = transactions.filter(t => t.supplier_name === supplierName && (t.supplier_paid === false || t.supplier_paid === 0));
+        let successCount = 0, totalPaid = 0;
         for (const t of supplierTransactions) {
             const totalAmount = Number(t.total_purchase || 0);
             const paidAmount = Number(t.supplier_paid_amount || 0);
             const remaining = roundMoney(totalAmount - paidAmount);
-
             const result = await putData(`/api/transactions/${t.id}/pay-supplier`, {});
             if (result && result.success) {
                 t.supplier_paid = true;
                 t.supplier_paid_date = result.transaction?.supplier_paid_date || new Date().toISOString().split('T')[0];
                 t.supplier_paid_amount = totalAmount;
-                successCount++;
-                totalPaid += remaining;
+                successCount++; totalPaid += remaining;
             }
         }
-
         if (successCount > 0) {
-            renderPayments();
-            renderTransactions();
+            renderPayments(); renderTransactions();
             toast(`✅ تم تسديد ${successCount} معاملة للمورد "${supplierName}" بمبلغ ${fmtMoney(totalPaid)} دج بنجاح`);
-        } else {
-            toast('❌ حدث خطأ في تسديد المعاملات');
-        }
+        } else toast('❌ حدث خطأ في تسديد المعاملات');
     }
 
     function openPartialPaymentModal(type, name, total, remaining) {
@@ -1867,157 +1774,92 @@
         partialPaymentData.name = name;
         partialPaymentData.totalAmount = total;
         partialPaymentData.remainingAmount = remaining;
-
-        console.log('📝 Opening payment modal:', { type, name, total, remaining });
-
-        document.getElementById('paymentPersonName').textContent = `الشخص: ${name}`;
-        document.getElementById('paymentTotalAmount').textContent = `المبلغ الإجمالي: ${fmtMoney(total)} دج`;
-        document.getElementById('paymentRemainingAmount').textContent = `المبلغ المتبقي: ${fmtMoney(remaining)} دج`;
-
+        const personEl = document.getElementById('paymentPersonName');
+        if (personEl) personEl.innerHTML = `الشخص: <strong style="color:var(--cream);">${name}</strong>`;
+        const totalEl = document.getElementById('paymentTotalAmount');
+        if (totalEl) totalEl.textContent = fmtMoney(total) + ' دج';
+        const tWE = document.getElementById('paymentTotalAmountWords');
+        if (tWE) tWE.textContent = `(${formatMoneyWithWords(total)})`;
+        const remainingEl = document.getElementById('paymentRemainingAmount');
+        if (remainingEl) remainingEl.textContent = fmtMoney(remaining) + ' دج';
+        const rWE = document.getElementById('paymentRemainingAmountWords');
+        if (rWE) rWE.textContent = `(${formatMoneyWithWords(remaining)})`;
         const input = document.getElementById('paymentAmountInput');
-        if (input) {
-            input.value = '';
-            input.max = remaining;
-            input.placeholder = `أقصى مبلغ: ${fmtMoney(remaining)} دج`;
-        }
-
+        if (input) { input.value = ''; input.max = remaining; input.placeholder = `أقصى مبلغ: ${fmtMoney(remaining)} دج`; }
+        const aWE = document.getElementById('paymentAmountWords');
+        if (aWE) aWE.textContent = 'صفر دينار';
         const modal = document.getElementById('partialPaymentModal');
-        if (modal) {
-            modal.style.display = 'flex';
+        if (modal) modal.style.display = 'flex';
+    }
+
+    function updatePaymentAmountWords(value) {
+        const amount = Number(value || 0);
+        const wordsEl = document.getElementById('paymentAmountWords');
+        if (wordsEl) {
+            if (amount <= 0) { wordsEl.textContent = 'صفر دينار'; wordsEl.style.color = 'var(--text-dim)'; }
+            else { wordsEl.textContent = formatMoneyWithWords(amount); wordsEl.style.color = 'var(--gold)'; }
         }
     }
+    window.updatePaymentAmountWords = updatePaymentAmountWords;
 
     async function confirmPartialPayment() {
         const amount = Number(document.getElementById('paymentAmountInput').value || 0);
         const { type, name, totalAmount, remainingAmount: remainingAmountData } = partialPaymentData;
-
         const roundedAmount = roundMoney(amount);
         const roundedRemaining = roundMoney(remainingAmountData);
-
-        console.log('📝 Partial payment - Amount:', roundedAmount);
-        console.log('📝 Partial payment - Type:', type);
-        console.log('📝 Partial payment - Name:', name);
-        console.log('📝 Partial payment - Remaining:', roundedRemaining);
-
-        if (roundedAmount <= 0) {
-            toast('الرجاء إدخال مبلغ صحيح');
-            return;
-        }
-
-        if (roundedAmount > roundedRemaining) {
-            toast(`المبلغ المدخل (${fmtMoney(roundedAmount)} دج) يتجاوز المبلغ المتبقي (${fmtMoney(roundedRemaining)} دج)`);
-            return;
-        }
-
+        if (roundedAmount <= 0) { toast('الرجاء إدخال مبلغ صحيح'); return; }
+        if (roundedAmount > roundedRemaining) { toast(`المبلغ المدخل (${fmtMoney(roundedAmount)} دج) يتجاوز المبلغ المتبقي (${fmtMoney(roundedRemaining)} دج)`); return; }
         document.getElementById('partialPaymentModal').style.display = 'none';
-
         let transactionsToUpdate = [];
-        let totalPaid = 0;
-
         if (type === 'buyer') {
             transactionsToUpdate = transactions.filter(t => {
                 const total = Number(t.total_sale || 0);
                 const paid = Number(t.buyer_paid_amount || 0);
                 const remaining = roundMoney(total - paid);
-                return t.buyer_name === name &&
-                    (t.buyer_paid === false || t.buyer_paid === 0) &&
-                    remaining > 0.01;
+                return t.buyer_name === name && (t.buyer_paid === false || t.buyer_paid === 0) && remaining > 0.01;
             });
         } else {
             transactionsToUpdate = transactions.filter(t => {
                 const total = Number(t.total_purchase || 0);
                 const paid = Number(t.supplier_paid_amount || 0);
                 const remaining = roundMoney(total - paid);
-                return t.supplier_name === name &&
-                    (t.supplier_paid === false || t.supplier_paid === 0) &&
-                    remaining > 0.01;
+                return t.supplier_name === name && (t.supplier_paid === false || t.supplier_paid === 0) && remaining > 0.01;
             });
         }
-
-        console.log('📝 Transactions to update:', transactionsToUpdate.length);
-
-        if (transactionsToUpdate.length === 0) {
-            toast('لا توجد معاملات غير مدفوعة لهذا الشخص');
-            return;
-        }
-
+        if (transactionsToUpdate.length === 0) { toast('لا توجد معاملات غير مدفوعة لهذا الشخص'); return; }
         const sortedTransactions = [...transactionsToUpdate].sort((a, b) => a.date.localeCompare(b.date));
-
-        let remainingToPay = roundedAmount;
-        let updatedCount = 0;
-        let paidAmount = 0;
-
+        let remainingToPay = roundedAmount, updatedCount = 0, paidAmount = 0;
         for (const t of sortedTransactions) {
             if (remainingToPay <= 0.01) break;
-
             const totalAmount = type === 'buyer' ? Number(t.total_sale || 0) : Number(t.total_purchase || 0);
             const currentPaid = type === 'buyer' ? Number(t.buyer_paid_amount || 0) : Number(t.supplier_paid_amount || 0);
             const remaining = roundMoney(totalAmount - currentPaid);
-
-            console.log(`📝 Transaction ${t.id}: total=${totalAmount}, paid=${currentPaid}, remaining=${remaining}, toPay=${remainingToPay}`);
-
             if (remainingToPay >= remaining) {
-                const result = type === 'buyer' ?
-                    await putData(`/api/transactions/${t.id}/pay-buyer`, {}) :
-                    await putData(`/api/transactions/${t.id}/pay-supplier`, {});
-
+                const result = type === 'buyer' ? await putData(`/api/transactions/${t.id}/pay-buyer`, {}) : await putData(`/api/transactions/${t.id}/pay-supplier`, {});
                 if (result && result.success) {
-                    if (type === 'buyer') {
-                        t.buyer_paid = true;
-                        t.buyer_paid_date = new Date().toISOString().split('T')[0];
-                        t.buyer_paid_amount = totalAmount;
-                    } else {
-                        t.supplier_paid = true;
-                        t.supplier_paid_date = new Date().toISOString().split('T')[0];
-                        t.supplier_paid_amount = totalAmount;
-                    }
-
+                    if (type === 'buyer') { t.buyer_paid = true; t.buyer_paid_date = new Date().toISOString().split('T')[0]; t.buyer_paid_amount = totalAmount; }
+                    else { t.supplier_paid = true; t.supplier_paid_date = new Date().toISOString().split('T')[0]; t.supplier_paid_amount = totalAmount; }
                     const index = transactions.findIndex(tr => tr.id === t.id);
                     if (index !== -1) transactions[index] = t;
-
                     remainingToPay = roundMoney(remainingToPay - remaining);
-                    paidAmount += remaining;
-                    updatedCount++;
-
-                    console.log(`✅ Transaction ${t.id} fully paid`);
+                    paidAmount += remaining; updatedCount++;
                 }
             } else {
                 const newPaidAmount = roundMoney(currentPaid + remainingToPay);
-                const remainingAfter = roundMoney(totalAmount - newPaidAmount);
-
                 const updateData = {};
-                if (type === 'buyer') {
-                    t.buyer_paid_amount = newPaidAmount;
-                    updateData.buyer_paid_amount = newPaidAmount;
-                } else {
-                    t.supplier_paid_amount = newPaidAmount;
-                    updateData.supplier_paid_amount = newPaidAmount;
-                }
-
+                if (type === 'buyer') { t.buyer_paid_amount = newPaidAmount; updateData.buyer_paid_amount = newPaidAmount; }
+                else { t.supplier_paid_amount = newPaidAmount; updateData.supplier_paid_amount = newPaidAmount; }
                 const updateResult = await putData(`/api/transactions/${t.id}`, updateData);
-
                 if (updateResult && updateResult.success) {
                     const index = transactions.findIndex(tr => tr.id === t.id);
                     if (index !== -1) transactions[index] = updateResult.transaction || t;
-
-                    paidAmount += remainingToPay;
-                    remainingToPay = 0;
-                    updatedCount++;
-
-                    console.log(`✅ Transaction ${t.id} partially paid: ${newPaidAmount}/${totalAmount}, remaining: ${remainingAfter}`);
+                    paidAmount += remainingToPay; remainingToPay = 0; updatedCount++;
                 }
             }
         }
-
-        renderPayments();
-        renderTransactions();
-        updateTransactionStats();
-
-        if (updatedCount > 0) {
-            toast(`✅ تم تسديد ${fmtMoney(paidAmount)} دج بنجاح (${updatedCount} معاملة)`);
-        } else {
-            toast('❌ حدث خطأ في تسديد المبلغ');
-        }
+        renderPayments(); renderTransactions(); updateTransactionStats();
+        if (updatedCount > 0) toast(`✅ تم تسديد ${fmtMoney(paidAmount)} دج بنجاح (${updatedCount} معاملة)`);
+        else toast('❌ حدث خطأ في تسديد المبلغ');
     }
 
     function closePartialPaymentModal() {
@@ -2025,501 +1867,407 @@
     }
 
     // ================= Capital Functions =================
+    async function addCapital(data) {
+        if (!data) { toast('⚠️ البيانات غير صالحة'); return null; }
+        const amountValue = data.amount;
+        if (amountValue === undefined || amountValue === null) { toast('⚠️ الرجاء إدخال المبلغ'); return null; }
+        const amountNumber = Number(amountValue);
+        if (isNaN(amountNumber) || amountNumber <= 0) { toast('⚠️ المبلغ يجب أن يكون أكبر من صفر'); return null; }
+        const amountStr = String(amountNumber).replace(/[^0-9.]/g, '');
+        const sendData = {
+            partner_name: data.partner_name || '',
+            amount: amountStr,
+            entry_date: data.entry_date || '',
+            notes: data.notes || null
+        };
+        try {
+            const result = await postData('/api/capitals', sendData);
+            if (result && result.success) {
+                capitals.unshift(result.capital);
+                renderCapitals(); updateCapitalTotal(); updatePartnerSelect();
+                toast('✅ تمت إضافة رأس المال بنجاح 🎉');
+                return result;
+            } else { toast(result?.error || '❌ حدث خطأ في إضافة رأس المال'); return null; }
+        } catch (error) { console.error('❌ Error:', error); toast('❌ حدث خطأ في إضافة رأس المال'); return null; }
+    }
+
+    async function updateCapital(id, data) {
+        if (!id) { toast('⚠️ معرف غير صالح'); return null; }
+        if (!data || data.amount === undefined || data.amount === null) { toast('⚠️ الرجاء إدخال المبلغ'); return null; }
+        const amountNumber = Number(data.amount);
+        if (isNaN(amountNumber) || amountNumber <= 0) { toast('⚠️ المبلغ يجب أن يكون أكبر من صفر'); return null; }
+        const sendData = {
+            partner_name: data.partner_name || '',
+            amount: String(amountNumber).replace(/[^0-9.]/g, ''),
+            entry_date: data.entry_date || '',
+            notes: data.notes || null
+        };
+        try {
+            const result = await putData(`/api/capitals/${id}`, sendData);
+            if (result && result.success) {
+                const index = capitals.findIndex(c => c.id == id);
+                if (index !== -1) capitals[index] = result.capital;
+                renderCapitals(); updateCapitalTotal();
+                toast('✅ تم تحديث رأس المال بنجاح 🎉');
+                return result;
+            } else { toast(result?.error || '❌ حدث خطأ'); return null; }
+        } catch (error) { console.error('❌ Error:', error); toast('❌ حدث خطأ'); return null; }
+    }
+
     function renderCapitals() {
         const body = document.getElementById('capitalsBody');
         if (!body) return;
-
         if (capitals.length === 0) {
-            body.innerHTML = '<tr class="empty-row"><td colspan="7">لا توجد رؤوس أموال مسجّلة</td></tr>';
+            body.innerHTML = '<tr class="empty-row"><td colspan="8">لا توجد رؤوس أموال مسجّلة</td></tr>';
+            const pB = document.getElementById('partnerProfitsBody');
+            if (pB) pB.innerHTML = '<tr class="empty-row"><td colspan="5">لا توجد شركاء لتوزيع الأرباح</td></tr>';
             return;
         }
-
         const totalCapital = capitals.reduce((sum, c) => sum + Number(c.amount || 0), 0);
-        const sorted = [...capitals].sort((a, b) => b.entry_date.localeCompare(a.entry_date));
-
+        const sorted = [...capitals].sort((a, b) => {
+            const dateA = a.entry_date ? String(a.entry_date).slice(0, 10) : '';
+            const dateB = b.entry_date ? String(b.entry_date).slice(0, 10) : '';
+            return dateB.localeCompare(dateA);
+        });
         body.innerHTML = sorted.map((c, index) => {
-            const dateObj = new Date(c.entry_date);
-            const entryDate = `${String(dateObj.getDate()).padStart(2, '0')}/${String(dateObj.getMonth() + 1).padStart(2, '0')}/${dateObj.getFullYear()}`;
-
+            const entryDate = fmtDate(c.entry_date);
             const amount = Number(c.amount || 0);
-            const percentage = totalCapital > 0 ? (amount / totalCapital) * 100 : 0;
-            const formattedPercentage = percentage.toFixed(2);
-
+            const percentage = c.percentage != null ? Number(c.percentage) : (totalCapital > 0 ? (amount / totalCapital) * 100 : 0);
             let percentageColor = 'var(--blue)';
-            if (percentage >= 50) {
-                percentageColor = 'var(--blue)';
-            } else if (percentage >= 25) {
-                percentageColor = 'var(--blue)';
-            } else if (percentage >= 10) {
-                percentageColor = 'var(--blue)';
-            }
-
+            if (percentage >= 50) percentageColor = 'var(--gold)';
+            else if (percentage >= 25) percentageColor = 'var(--blue)';
+            else if (percentage >= 10) percentageColor = 'var(--success)';
+            else percentageColor = 'var(--text-dim)';
             return `
-                    <tr>
-                        <td>${index + 1}</td>
-                        <td><strong>${c.partner_name}</strong></td>
-                        <td style="color:var(--gold); font-weight:bold;">${fmtMoney(amount)} دج</td>
-                        <td>
-                            <span style="color:${percentageColor}; font-weight:bold; font-size:1.05rem;">
-                                ${formattedPercentage}%
-                            </span>
-                            <br>
-                            <small style="color:var(--text-dim); font-size:0.65rem;">
-                                (${fmtMoney(amount)} من ${fmtMoney(totalCapital)} دج)
-                            </small>
-                        </td>
-                        <td>${entryDate}</td>
-                        <td>${c.notes || '—'}</td>
-                        <td style="display:flex; gap:6px; flex-wrap:wrap;">
-                            <button class="btn sm info" data-act="edit-capital" data-id="${c.id}">✏️ تعديل</button>
-                            <button class="btn sm danger" data-act="delete-capital" data-id="${c.id}">🗑️ حذف</button>
-                        </td>
-                    </tr>
-                `;
+                <tr>
+                    <td>${index + 1}</td>
+                    <td><strong>${c.partner_name}</strong></td>
+                    <td style="color:var(--gold); font-weight:bold;">${fmtMoney(amount)} دج</td>
+                    <td>
+                        <span style="color:${percentageColor}; font-weight:bold; font-size:1.05rem;">${percentage.toFixed(2)}%</span>
+                        <br><small style="color:var(--text-dim); font-size:0.65rem;">(${fmtMoney(amount)} من ${fmtMoney(totalCapital)} دج)</small>
+                    </td>
+                    <td style="color:var(--text-dim); font-weight:bold;" id="profit-${c.id}">—</td>
+                    <td>${entryDate}</td>
+                    <td>${c.notes || '—'}</td>
+                    <td style="display:flex; gap:6px; flex-wrap:wrap;">
+                        <button class="btn sm info" data-act="edit-capital" data-id="${c.id}">✏️ تعديل</button>
+                        <button class="btn sm danger" data-act="delete-capital" data-id="${c.id}">🗑️ حذف</button>
+                    </td>
+                </tr>
+            `;
         }).join('');
-
         updateCapitalTotal();
+        updatePartnerSelect();
+        setTimeout(() => { calculatePartnerProfits(); }, 100);
     }
 
     function updateCapitalTotal() {
         const total = capitals.reduce((s, c) => s + Number(c.amount || 0), 0);
         const totalEl = document.getElementById('totalCapital');
         if (totalEl) totalEl.textContent = fmtMoney(total);
-
         const centimeEl = document.getElementById('totalCapitalCentime');
-        if (centimeEl) {
-            centimeEl.textContent = total > 0 ? formatMoneyWithWords(total) : 'صفر سنتيم';
-        }
-    }
-
-    async function addCapital(data) {
-        console.log('📤 Adding capital - full data:', JSON.stringify(data));
-
-        if (!data || data.amount === undefined || data.amount === null) {
-            toast('الرجاء إدخال المبلغ');
-            return null;
-        }
-
-        const amount = Number(data.amount);
-        console.log('📤 Amount as number:', amount);
-
-        if (isNaN(amount) || amount <= 0) {
-            toast(`المبلغ (${data.amount}) غير صحيح، الرجاء إدخال أرقام فقط`);
-            return null;
-        }
-
-        const sendData = {
-            partner_name: data.partner_name,
-            amount: amount,
-            entry_date: data.entry_date,
-            notes: data.notes || null
-        };
-
-        console.log('📤 Sending to API:', sendData);
-
-        const result = await postData('/api/capitals', sendData);
-        console.log('📥 API Response:', result);
-
-        if (result && result.success) {
-            capitals.unshift(result.capital);
-            renderCapitals();
-            updateCapitalTotal();
-            toast('تمت إضافة رأس المال بنجاح 🎉');
-        } else {
-            toast(result?.error || 'حدث خطأ في إضافة رأس المال');
-        }
-        return result;
-    }
-
-    async function updateCapital(id, data) {
-        const result = await putData(`/api/capitals/${id}`, data);
-        if (result && result.success) {
-            const index = capitals.findIndex(c => c.id == id);
-            if (index !== -1) capitals[index] = result.capital;
-            renderCapitals();
-            updateCapitalTotal();
-            toast('تم تحديث رأس المال بنجاح 🎉');
-        } else {
-            toast('حدث خطأ في تحديث رأس المال');
-        }
-        return result;
+        if (centimeEl) centimeEl.textContent = total > 0 ? formatMoneyWithWords(total) : 'صفر سنتيم';
     }
 
     async function deleteCapital(id) {
-        if (!confirm('هل أنت متأكد من حذف هذا رأس المال؟')) return;
+        if (!await customConfirm('⚠️ هل أنت متأكد من حذف هذا رأس المال؟')) return;
         const result = await deleteData(`/api/capitals/${id}`);
         if (result && result.success) {
             capitals = capitals.filter(c => c.id != id);
-            renderCapitals();
-            updateCapitalTotal();
-            toast('تم حذف رأس المال بنجاح');
-        }
+            renderCapitals(); updateCapitalTotal(); updatePartnerSelect();
+            toast('✅ تم حذف رأس المال بنجاح');
+        } else toast(result?.error || '❌ حدث خطأ');
     }
 
     function editCapital(id) {
         const capital = capitals.find(c => c.id == id);
-        if (!capital) return;
-
+        if (!capital) { toast('⚠️ رأس المال غير موجود'); return; }
         editingCapitalId = id;
-        document.getElementById('cPartnerName').value = capital.partner_name;
-        document.getElementById('cAmount').value = capital.amount;
-        document.getElementById('cEntryDate').value = capital.entry_date;
-        document.getElementById('cNotes').value = capital.notes || '';
-
+        const capitalForm = document.getElementById('capitalForm');
+        if (!capitalForm) { toast('⚠️ نموذج رأس المال غير موجود'); return; }
+        const partnerNameField = capitalForm.querySelector('#cPartnerName');
+        const amountField = capitalForm.querySelector('#cAmount');
+        const entryDateField = capitalForm.querySelector('#cEntryDate');
+        const notesField = capitalForm.querySelector('#cNotes');
+        if (!partnerNameField || !amountField || !entryDateField || !notesField) { toast('⚠️ حقول غير مكتملة'); return; }
+        partnerNameField.value = capital.partner_name || '';
+        amountField.value = capital.amount ?? '';
+        entryDateField.value = capital.entry_date || '';
+        notesField.value = capital.notes || '';
         document.querySelector('#capitalForm button[type="submit"]').textContent = 'تحديث رأس المال';
         document.getElementById('capitalForm').scrollIntoView({ behavior: 'smooth' });
-        toast('قم بتعديل البيانات ثم اضغط تحديث');
+        toast('📝 قم بتعديل البيانات ثم اضغط تحديث');
     }
 
-    // ================= Format Functions =================
-    function formatNumberToWords(number) {
-        if (number === 0) return 'صفر';
-
-        const absNumber = Math.abs(number);
-        const isNegative = number < 0;
-
-        let result = '';
-        let remaining = absNumber;
-
-        const billions = Math.floor(remaining / 1000000000);
-        if (billions > 0) {
-            result += billions + ' ';
-            if (billions === 1) {
-                result += 'مليار ';
-            } else if (billions === 2) {
-                result += 'ملياران ';
-            } else if (billions >= 3 && billions <= 10) {
-                result += 'مليارات ';
-            } else {
-                result += 'مليار ';
+    // ================= Partner Payments =================
+    async function addPartnerPayment(data) {
+        if (!data || !data.capital_id || !data.amount) { toast('⚠️ الرجاء ملء جميع الحقول'); return null; }
+        const amountNumber = Number(data.amount);
+        if (isNaN(amountNumber) || amountNumber <= 0) { toast('⚠️ المبلغ يجب أن يكون أكبر من صفر'); return null; }
+        if (!data.total_profit) {
+            const profitEl = document.getElementById('capitalTotalProfit');
+            if (profitEl) {
+                const cleaned = (profitEl.textContent || '0').replace(/,/g, '').replace(/[^0-9.-]/g, '');
+                data.total_profit = parseFloat(cleaned) || 0;
             }
-            remaining -= billions * 1000000000;
         }
-
-        const millions = Math.floor(remaining / 1000000);
-        if (millions > 0) {
-            result += millions + ' ';
-            if (millions === 1) {
-                result += 'مليون ';
-            } else if (millions === 2) {
-                result += 'مليونان ';
-            } else if (millions >= 3 && millions <= 10) {
-                result += 'ملايين ';
-            } else {
-                result += 'مليون ';
-            }
-            remaining -= millions * 1000000;
-        }
-
-        const thousands = Math.floor(remaining / 1000);
-        if (thousands > 0) {
-            result += thousands + ' ';
-            if (thousands === 1) {
-                result += 'ألف ';
-            } else if (thousands === 2) {
-                result += 'ألفان ';
-            } else if (thousands >= 3 && thousands <= 10) {
-                result += 'آلاف ';
-            } else {
-                result += 'ألف ';
-            }
-            remaining -= thousands * 1000;
-        }
-
-        if (remaining > 0) {
-            if (result.length > 0) {
-                result += 'و ';
-            }
-            result += remaining + '';
-        }
-
-        if (isNegative) {
-            result = 'خسارة ' + result;
-        }
-
-        return result.trim();
+        try {
+            const result = await postData('/api/partner-payments', data);
+            if (result && result.success) {
+                partnerPayments.unshift(result.payment);
+                renderPartnerPayments(); updatePartnerSelect(); updatePartnerInfoBox(); renderCapitals();
+                toast('✅ تم تسجيل السحب بنجاح 🎉');
+                return result;
+            } else { toast(result?.error || '❌ حدث خطأ'); return null; }
+        } catch (error) { console.error('❌ Error:', error); toast('❌ حدث خطأ'); return null; }
     }
 
-    function formatMoneyWithWords(amount) {
-        if (amount === 0) return 'صفر';
-
-        const absAmount = Math.abs(amount);
-        const isNegative = amount < 0;
-
-        const centimeAmount = Math.round(absAmount * 100);
-        let words = formatNumberToWords(centimeAmount);
-        words += ' سنتيم';
-
-        if (isNegative) {
-            words = 'خسارة ' + words;
+    function renderPartnerPayments() {
+        const body = document.getElementById('partnerPaymentsBody');
+        if (!body) return;
+        if (!Array.isArray(partnerPayments) || partnerPayments.length === 0) {
+            body.innerHTML = '<tr class="empty-row"><td colspan="9">لا توجد سحوبات مسجّلة</td></tr>';
+            return;
         }
-
-        return words;
-    }
-
-    // ================= Home Functions =================
-    function renderHome() {
-        const statWorkers = document.getElementById('statWorkers');
-        if (statWorkers) statWorkers.textContent = workers.length;
-        const today = todayStr();
-
-        const transactionsToday = transactions.filter(t => t.date === today);
-        const purchasesToday = transactionsToday.filter(t => t.type === 'purchase').length;
-        const salesTodayVal = transactionsToday.filter(t => t.type === 'sale').reduce((s, t) => s + Number(t.total_sale || 0), 0);
-        const costsTodayVal = costs.filter(c => c.date === today).reduce((s, c) => s + Number(c.amount || 0), 0);
-
-        const ordersToday = document.getElementById('statOrdersToday');
-        if (ordersToday) ordersToday.textContent = purchasesToday;
-
-        const statSalesToday = document.getElementById('statSalesToday');
-        if (statSalesToday) statSalesToday.textContent = fmtMoney(salesTodayVal);
-
-        const statCostsToday = document.getElementById('statCostsToday');
-        if (statCostsToday) statCostsToday.textContent = fmtMoney(costsTodayVal);
-
-        const purchasesTotal = transactionsToday.filter(t => t.type === 'purchase').reduce((s, t) => s + Number(t.total_purchase || 0), 0);
-        const profitToday = salesTodayVal - purchasesTotal - costsTodayVal;
-        const statProfitToday = document.getElementById('statProfitToday');
-        if (statProfitToday) statProfitToday.textContent = fmtMoney(profitToday);
-
-        const mKey = today.slice(0, 7);
-        const monthTransactions = transactions.filter(t => monthKey(t.date) === mKey);
-        const monthPurchases = monthTransactions.filter(t => t.type === 'purchase').reduce((s, t) => s + Number(t.total_purchase || 0), 0);
-        const monthSales = monthTransactions.filter(t => t.type === 'sale').reduce((s, t) => s + Number(t.total_sale || 0), 0);
-        const monthCosts = costs.filter(c => monthKey(c.date) === mKey).reduce((s, c) => s + Number(c.amount || 0), 0);
-        const profitMonth = monthSales - monthPurchases - monthCosts;
-        const statProfitMonth = document.getElementById('statProfitMonth');
-        if (statProfitMonth) statProfitMonth.textContent = fmtMoney(profitMonth);
-
-        const oBody = document.getElementById('homeOrdersBody');
-        if (oBody) {
-            const lastPurchases = transactions.filter(t => t.type === 'purchase').sort((a, b) => b.date.localeCompare(a.date)).slice(0, 5);
-            oBody.innerHTML = lastPurchases.length ?
-                lastPurchases.map(t => `<tr><td>${fmtDate(t.date)}</td><td>${t.supplier_name}</td><td>${qtyText(t.qty_type, t.qty_count)}</td></tr>`).join('') :
-                '<tr class="empty-row"><td colspan="3">لا توجد مشتريات بعد</td></tr>';
-        }
-
-        const sBody = document.getElementById('homeSalesBody');
-        if (sBody) {
-            const lastSales = transactions.filter(t => t.type === 'sale').sort((a, b) => b.date.localeCompare(a.date)).slice(0, 5);
-            sBody.innerHTML = lastSales.length ?
-                lastSales.map(t => `<tr><td>${fmtDate(t.date)}</td><td>${t.buyer_name}</td><td>${t.is_exited ? '<span class="badge exited">تم الخروج</span>' : '<span class="badge pending">قيد الانتظار</span>'}</td></tr>`).join('') :
-                '<tr class="empty-row"><td colspan="3">لا توجد مبيعات بعد</td></tr>';
-        }
-
-        const stockBody = document.getElementById('homeStockBody');
-        if (stockBody) {
-            stockBody.innerHTML = '<tr class="empty-row"><td colspan="4">تم استخدام نظام المعاملات الجديد</td></tr>';
-        }
-
-        const costsBodyHome = document.getElementById('homeCostsBody');
-        if (costsBodyHome) {
-            const lastCosts = [...costs].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 5);
-            costsBodyHome.innerHTML = lastCosts.length ?
-                lastCosts.map(c => `<tr><td>${fmtDate(c.date)}</td><td>${c.reason}</td><td>${fmtMoney(c.amount)} دج</td></tr>`).join('') :
-                '<tr class="empty-row"><td colspan="3">لا توجد تكاليف بعد</td></tr>';
-        }
-    }
-
-    // ================= PROFITS FUNCTIONS =================
-    function renderProfits() {
-        const profitMonthInput = document.getElementById('profitMonth');
-        const mKey = profitMonthInput ? profitMonthInput.value : todayStr().slice(0, 7);
-
-        console.log('📊 Calculating profits for month:', mKey);
-
-        const monthTransactions = transactions.filter(t => monthKey(t.date) === mKey);
-
-        const purchases = monthTransactions.filter(t => t.type === 'purchase');
-        const totalPurchases = purchases.reduce((s, t) => s + Number(t.total_purchase || 0), 0);
-
-        const sales = monthTransactions.filter(t => t.type === 'sale');
-        const totalSales = sales.reduce((s, t) => s + Number(t.total_sale || 0), 0);
-
-        const netProfit = monthTransactions.reduce((s, t) => s + Number(t.profit || 0), 0);
-        const transactionsCount = monthTransactions.length;
-
-        const otherCosts = costs.filter(c => monthKey(c.date) === mKey);
-        const totalOtherCosts = otherCosts.reduce((s, c) => s + Number(c.amount || 0), 0);
-
-        const wagesPaid = payments.filter(p => monthKey(p.date) === mKey);
-        const totalWagesPaid = wagesPaid.reduce((s, p) => s + Number(p.amount || 0), 0);
-
-        const buyersUnpaid = transactions.filter(t => {
-            const total = Number(t.total_sale || 0);
-            const paid = Number(t.buyer_paid_amount || 0);
-            return (t.buyer_paid === false || t.buyer_paid === 0) && (total - paid > 0.01);
+        const sorted = [...partnerPayments].sort((a, b) => {
+            const dateA = a.payment_date ? String(a.payment_date).slice(0, 10) : '';
+            const dateB = b.payment_date ? String(b.payment_date).slice(0, 10) : '';
+            return dateB.localeCompare(dateA);
         });
-        const totalBuyersUnpaid = roundMoney(buyersUnpaid.reduce((s, t) => {
-            const total = Number(t.total_sale || 0);
-            const paid = Number(t.buyer_paid_amount || 0);
-            return s + (total - paid);
-        }, 0));
-
-        const suppliersUnpaid = transactions.filter(t => {
-            const total = Number(t.total_purchase || 0);
-            const paid = Number(t.supplier_paid_amount || 0);
-            return (t.supplier_paid === false || t.supplier_paid === 0) && (total - paid > 0.01);
-        });
-        const totalSuppliersUnpaid = roundMoney(suppliersUnpaid.reduce((s, t) => {
-            const total = Number(t.total_purchase || 0);
-            const paid = Number(t.supplier_paid_amount || 0);
-            return s + (total - paid);
-        }, 0));
-
-        const totalProfitWithLoss = netProfit - totalOtherCosts - totalWagesPaid;
-
-        const pfTotalPurchases = document.getElementById('pfTotalPurchases');
-        if (pfTotalPurchases) pfTotalPurchases.textContent = fmtMoney(totalPurchases) + ' دج';
-
-        const pfTotalSales = document.getElementById('pfTotalSales');
-        if (pfTotalSales) pfTotalSales.textContent = fmtMoney(totalSales) + ' دج';
-
-        const pfNetProfit = document.getElementById('pfNetProfit');
-        if (pfNetProfit) {
-            pfNetProfit.textContent = fmtMoney(netProfit) + ' دج';
-            pfNetProfit.style.color = netProfit >= 0 ? 'var(--success)' : 'var(--danger)';
-        }
-
-        const pfTransactionsCount = document.getElementById('pfTransactionsCount');
-        if (pfTransactionsCount) pfTransactionsCount.textContent = transactionsCount;
-
-        const pfBuyersUnpaid = document.getElementById('pfBuyersUnpaid');
-        if (pfBuyersUnpaid) {
-            pfBuyersUnpaid.textContent = fmtMoney(totalBuyersUnpaid) + ' دج';
-            pfBuyersUnpaid.style.color = totalBuyersUnpaid > 0 ? 'var(--danger)' : 'var(--success)';
-        }
-
-        const pfSuppliersUnpaid = document.getElementById('pfSuppliersUnpaid');
-        if (pfSuppliersUnpaid) {
-            pfSuppliersUnpaid.textContent = fmtMoney(totalSuppliersUnpaid) + ' دج';
-            pfSuppliersUnpaid.style.color = totalSuppliersUnpaid > 0 ? 'var(--gold)' : 'var(--success)';
-        }
-
-        const pfWagesPaid = document.getElementById('pfWagesPaid');
-        if (pfWagesPaid) {
-            pfWagesPaid.textContent = fmtMoney(totalWagesPaid) + ' دج';
-            pfWagesPaid.style.color = totalWagesPaid > 0 ? 'var(--blue)' : 'var(--text-dim)';
-        }
-
-        const pfOtherCosts = document.getElementById('pfOtherCosts');
-        if (pfOtherCosts) {
-            pfOtherCosts.textContent = fmtMoney(totalOtherCosts) + ' دج';
-            pfOtherCosts.style.color = totalOtherCosts > 0 ? 'var(--cream-dim)' : 'var(--text-dim)';
-        }
-
-        const pfTotalProfitWithLoss = document.getElementById('pfTotalProfitWithLoss');
-        if (pfTotalProfitWithLoss) {
-            pfTotalProfitWithLoss.textContent = fmtMoney(totalProfitWithLoss) + ' دج';
-            pfTotalProfitWithLoss.style.color = totalProfitWithLoss >= 0 ? 'var(--gold)' : 'var(--danger)';
-            
-            const note = document.querySelector('.profit-note');
-            if (note) {
-                note.textContent = `(الربح الصافي بعد خصم ${fmtMoney(totalWagesPaid)} دج أجور العمال)`;
-            }
-        }
-
-        setTimeout(() => {
-            if (profitChart) {
-                updateChart();
-            } else {
-                initProfitChart();
-            }
-        }, 200);
+        body.innerHTML = sorted.map((p, index) => {
+            const amount = Number(p.amount || 0);
+            const partnerName = p.capital?.partner_name || 'غير معروف';
+            const paymentDate = p.payment_date ? fmtDate(p.payment_date) : '—';
+            const createdDate = p.created_at ? fmtDate(p.created_at) : '—';
+            const updatedDate = p.updated_at ? fmtDate(p.updated_at) : '—';
+            return `
+                <tr>
+                    <td>${p.id}</td><td>${index + 1}</td><td><strong>${partnerName}</strong></td>
+                    <td style="color:var(--danger); font-weight:bold;">${fmtMoney(amount)} دج</td>
+                    <td style="color:var(--text-dim); font-size:0.7rem;">${formatMoneyWithWords(amount)}</td>
+                    <td>${paymentDate}</td><td>${p.notes || '—'}</td>
+                    <td style="font-size:0.7rem; color:var(--text-dim);"><div>إنشاء: ${createdDate}</div><div>تحديث: ${updatedDate}</div></td>
+                    <td style="display:flex; gap:4px; flex-wrap:wrap;">
+                        <button class="btn sm info" data-act="edit-partner-payment" data-id="${p.id}">✏️ تعديل</button>
+                        <button class="btn sm danger" data-act="delete-partner-payment" data-id="${p.id}">🗑️ حذف</button>
+                    </td>
+                </tr>
+            `;
+        }).join('');
     }
 
-    // ================= CHART FUNCTIONS =================
+    function getTotalPaidToPartner(capitalId) {
+        if (!Array.isArray(partnerPayments)) return 0;
+        return partnerPayments
+            .filter(p => Number(p.capital_id) === Number(capitalId))
+            .reduce((sum, p) => sum + Number(p.amount || 0), 0);
+    }
+
+    function calculatePartnerProfits() {
+        if (typeof renderProfits === 'function') renderProfits();
+    }
+
+    function updatePartnerSelect() {
+        const select = document.getElementById('pPartnerId');
+        if (!select) return;
+        const currentValue = select.value;
+        select.innerHTML = '<option value="">-- اختر الشريك --</option>';
+        if (!Array.isArray(capitals) || capitals.length === 0) return;
+        const totalCapital = capitals.reduce((sum, c) => sum + Number(c.amount || 0), 0);
+        let totalProfitWithLoss = 0;
+        const capitalTotalProfitEl = document.getElementById('capitalTotalProfit');
+        if (capitalTotalProfitEl) {
+            const profitText = capitalTotalProfitEl.textContent || '0';
+            totalProfitWithLoss = parseFloat(profitText.replace(/[^0-9.-]/g, '')) || 0;
+        }
+        capitals.forEach(c => {
+            const option = document.createElement('option');
+            option.value = c.id;
+            const amount = Number(c.amount || 0);
+            let percentage = c.percentage != null ? Number(c.percentage) : (totalCapital > 0 ? (amount / totalCapital) * 100 : 0);
+            const profitShare = (totalProfitWithLoss * percentage) / 100;
+            const totalEntitlement = amount + profitShare;
+            option.textContent = `${c.partner_name} (${fmtMoney(totalEntitlement)} دج)`;
+            select.appendChild(option);
+        });
+        if (currentValue) select.value = currentValue;
+    }
+
+    function updatePartnerInfoBox() {
+        const select = document.getElementById('pPartnerId');
+        if (!select) return;
+        const capitalId = select.value;
+        const infoBox = document.getElementById('partnerInfoBox');
+        if (!capitalId || !infoBox) { if (infoBox) infoBox.style.display = 'none'; return; }
+        const capital = capitals.find(c => Number(c.id) === Number(capitalId));
+        if (!capital) { infoBox.style.display = 'none'; return; }
+        const capitalAmount = Number(capital.amount || 0);
+        const totalEntitlement = getPartnerTotalEntitlement(capitalId);
+        const profitShare = totalEntitlement - capitalAmount;
+        const totalWithdrawn = getTotalPaidToPartner(capitalId);
+        const remainingAmount = Math.max(0, totalEntitlement - totalWithdrawn);
+        const infoPartnerName = document.getElementById('infoPartnerName');
+        const infoOriginalAmount = document.getElementById('infoOriginalAmount');
+        const infoTotalWithdrawn = document.getElementById('infoTotalWithdrawn');
+        const infoRemainingAmount = document.getElementById('infoRemainingAmount');
+        if (infoPartnerName) infoPartnerName.textContent = capital.partner_name;
+        if (infoOriginalAmount) {
+            infoOriginalAmount.innerHTML = `
+                ${fmtMoney(capitalAmount)} دج
+                <br><small style="color:var(--success); font-size:0.65rem;">+ ${fmtMoney(profitShare)} دج (أرباح)</small>
+                <br><strong style="color:var(--gold); font-size:0.9rem;">= ${fmtMoney(totalEntitlement)} دج</strong>
+            `;
+        }
+        if (infoTotalWithdrawn) infoTotalWithdrawn.textContent = fmtMoney(totalWithdrawn) + ' دج';
+        if (infoRemainingAmount) infoRemainingAmount.textContent = fmtMoney(remainingAmount) + ' دج';
+        infoBox.style.display = 'block';
+    }
+
+    function getPartnerTotalEntitlement(capitalId) {
+        try {
+            if (!Array.isArray(capitals)) return 0;
+            const capital = capitals.find(c => Number(c.id) === Number(capitalId));
+            if (!capital) return 0;
+            const capitalAmount = Number(capital.amount || 0);
+            let percentage = 0;
+            if (capital.percentage != null) percentage = Number(capital.percentage);
+            else {
+                const totalCapital = capitals.reduce((s, c) => s + Number(c.amount || 0), 0);
+                percentage = totalCapital > 0 ? (capitalAmount / totalCapital) * 100 : 0;
+            }
+            let totalProfit = 0;
+            const el = document.getElementById('capitalTotalProfit');
+            if (el) {
+                const cleaned = (el.textContent || '0').replace(/,/g, '').replace(/[^0-9.-]/g, '');
+                totalProfit = parseFloat(cleaned) || 0;
+            }
+            const profitShare = (totalProfit * percentage) / 100;
+            return capitalAmount + profitShare;
+        } catch (err) { console.error('❌ getPartnerTotalEntitlement:', err); return 0; }
+    }
+
+    async function deletePartnerPayment(id) {
+        if (!await customConfirm('⚠️ هل أنت متأكد من حذف هذا السحب؟')) return;
+        const result = await deleteData(`/api/partner-payments/${id}`);
+        if (result && result.success) {
+            partnerPayments = partnerPayments.filter(p => p.id != id);
+            renderPartnerPayments(); updatePartnerInfoBox(); renderCapitals();
+            toast('✅ تم حذف السحب بنجاح');
+        } else toast(result?.error || '❌ حدث خطأ');
+    }
+
+    // ================= Monthly Profits =================
+    let lastSavedProfit = {};
+    async function saveMonthlyProfit(year, month, stats) {
+        const key = `${year}-${month}`;
+        const statsKey = `${year}-${month}-${stats.totalProfitWithLoss}-${stats.transactionsCount}`;
+        if (lastSavedProfit[key] === statsKey) return null;
+        lastSavedProfit[key] = statsKey;
+        const data = {
+            year: year, month: month,
+            total_purchases: stats.totalPurchases || 0,
+            total_sales: stats.totalSales || 0,
+            net_profit: stats.netProfit || 0,
+            transactions_count: stats.transactionsCount || 0,
+            buyers_unpaid: stats.totalBuyersUnpaid || 0,
+            suppliers_unpaid: stats.totalSuppliersUnpaid || 0,
+            wages_paid: stats.totalWagesPaid || 0,
+            other_costs: stats.totalOtherCosts || 0,
+            total_profit_with_loss: stats.totalProfitWithLoss || 0,
+            notes: null
+        };
+        try {
+            const result = await postData('/api/monthly-profits', data);
+            if (result && result.success) {
+                const existingIndex = monthlyProfits.findIndex(p => String(p.year) === String(year) && String(p.month) === String(month));
+                if (existingIndex !== -1) monthlyProfits[existingIndex] = result.profit;
+                else monthlyProfits.unshift(result.profit);
+                return result;
+            }
+            return null;
+        } catch (error) { console.error('❌ خطأ في الحفظ:', error); return null; }
+    }
+
+    function renderMonthlyProfits() {
+        const body = document.getElementById('monthlyProfitsBody');
+        if (!body) return;
+        if (!Array.isArray(monthlyProfits) || monthlyProfits.length === 0) {
+            body.innerHTML = '<tr class="empty-row"><td colspan="10">لا توجد أرباح محفوظة</td></tr>';
+            return;
+        }
+        const sorted = [...monthlyProfits].sort((a, b) => {
+            const keyA = `${a.year}-${a.month}`;
+            const keyB = `${b.year}-${b.month}`;
+            return keyB.localeCompare(keyA);
+        });
+        body.innerHTML = sorted.map((p, index) => {
+            const monthNames = ['جانفي', 'فيفري', 'مارس', 'أفريل', 'ماي', 'جوان', 'جويلية', 'أوت', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
+            const monthNum = parseInt(p.month, 10);
+            const monthName = monthNames[monthNum - 1] || p.month;
+            const createdDate = p.created_at ? fmtDate(p.created_at) : '—';
+            return `
+                <tr>
+                    <td>${index + 1}</td><td><strong>${p.year}</strong></td>
+                    <td><strong style="color:var(--gold);">${monthName}</strong></td>
+                    <td style="color:var(--gold);">${fmtMoney(p.total_purchases)} دج</td>
+                    <td style="color:var(--success);">${fmtMoney(p.total_sales)} دج</td>
+                    <td style="color:${p.net_profit >= 0 ? 'var(--success)' : 'var(--danger)'};">${fmtMoney(p.net_profit)} دج</td>
+                    <td>${p.transactions_count}</td>
+                    <td style="color:var(--gold); font-weight:bold;">${fmtMoney(p.total_profit_with_loss)} دج</td>
+                    <td>${createdDate}</td>
+                    <td><button class="btn sm danger" data-act="delete-monthly-profit" data-id="${p.id}">🗑️ حذف</button></td>
+                </tr>
+            `;
+        }).join('');
+    }
+
+    async function deleteMonthlyProfit(id) {
+        if (!await customConfirm('⚠️ هل أنت متأكد من حذف هذا السجل؟')) return;
+        const result = await deleteData(`/api/monthly-profits/${id}`);
+        if (result && result.success) {
+            monthlyProfits = monthlyProfits.filter(p => p.id != id);
+            renderMonthlyProfits();
+            toast('✅ تم حذف السجل بنجاح');
+        } else toast(result?.error || '❌ حدث خطأ');
+    }
+
+    // ================= Chart =================
     let profitChart = null;
     let currentChartType = 'bar';
 
     function initProfitChart() {
         const canvas = document.getElementById('profitChartCanvas');
-        if (!canvas) {
-            console.warn('⚠️ Canvas element not found');
-            return;
-        }
-
+        if (!canvas) return;
         const chartData = getLast12MonthsData();
-        console.log('📊 Chart data:', chartData);
-
         const ctx = canvas.getContext('2d');
-
-        if (profitChart) {
-            profitChart.destroy();
-            profitChart = null;
-        }
-
+        if (profitChart) { profitChart.destroy(); profitChart = null; }
         profitChart = new Chart(ctx, {
             type: currentChartType,
             data: {
                 labels: chartData.labels,
-                datasets: [{
-                    label: '💵 الأرباح',
-                    data: chartData.profits,
-                    backgroundColor: 'rgba(219, 167, 67, 0.7)',
-                    borderColor: '#dba743',
-                    borderWidth: 2,
-                    borderRadius: 4,
-                    tension: 0.3,
-                    fill: currentChartType === 'line'
-                }, {
-                    label: '💰 المبيعات',
-                    data: chartData.sales,
-                    backgroundColor: 'rgba(126, 166, 131, 0.7)',
-                    borderColor: '#7ea683',
-                    borderWidth: 2,
-                    borderRadius: 4,
-                    tension: 0.3,
-                    fill: currentChartType === 'line'
-                }, {
-                    label: '🛒 المشتريات',
-                    data: chartData.purchases,
-                    backgroundColor: 'rgba(193, 85, 75, 0.7)',
-                    borderColor: '#c1554b',
-                    borderWidth: 2,
-                    borderRadius: 4,
-                    tension: 0.3,
-                    fill: currentChartType === 'line'
-                }]
+                datasets: [
+                    { label: '💵 الأرباح', data: chartData.profits, backgroundColor: 'rgba(219, 167, 67, 0.7)', borderColor: '#dba743', borderWidth: 2, borderRadius: 4, tension: 0.3, fill: currentChartType === 'line' },
+                    { label: '💰 المبيعات', data: chartData.sales, backgroundColor: 'rgba(126, 166, 131, 0.7)', borderColor: '#7ea683', borderWidth: 2, borderRadius: 4, tension: 0.3, fill: currentChartType === 'line' },
+                    { label: '🛒 المشتريات', data: chartData.purchases, backgroundColor: 'rgba(193, 85, 75, 0.7)', borderColor: '#c1554b', borderWidth: 2, borderRadius: 4, tension: 0.3, fill: currentChartType === 'line' }
+                ]
             },
             options: {
-                responsive: true,
-                maintainAspectRatio: false,
+                responsive: true, maintainAspectRatio: false,
                 plugins: {
-                    legend: {
-                        labels: {
-                            color: '#eae6dd',
-                            font: { size: 12, family: 'IBM Plex Sans Arabic' },
-                            usePointStyle: true,
-                            pointStyle: 'circle',
-                            padding: 20
-                        }
-                    },
+                    legend: { labels: { color: '#eae6dd', font: { size: 12, family: 'IBM Plex Sans Arabic' }, usePointStyle: true, pointStyle: 'circle', padding: 20 } },
                     tooltip: {
-                        backgroundColor: 'rgba(21, 20, 23, 0.9)',
-                        titleColor: '#f3ead8',
-                        bodyColor: '#eae6dd',
-                        borderColor: '#dba743',
-                        borderWidth: 1,
-                        cornerRadius: 8,
-                        padding: 12,
-                        callbacks: {
-                            label: function(context) {
-                                return context.dataset.label + ': ' + fmtMoney(context.raw) + ' دج';
-                            }
-                        }
+                        backgroundColor: 'rgba(21, 20, 23, 0.9)', titleColor: '#f3ead8', bodyColor: '#eae6dd',
+                        borderColor: '#dba743', borderWidth: 1, cornerRadius: 8, padding: 12,
+                        callbacks: { label: function(context) { return context.dataset.label + ': ' + fmtMoney(context.raw) + ' دج'; } }
                     }
                 },
                 scales: {
-                    x: {
-                        grid: { color: 'rgba(43, 41, 46, 0.3)' },
-                        ticks: { color: '#948e84', font: { size: 10, family: 'IBM Plex Sans Arabic' } }
-                    },
+                    x: { grid: { color: 'rgba(43, 41, 46, 0.3)' }, ticks: { color: '#948e84', font: { size: 10, family: 'IBM Plex Sans Arabic' } } },
                     y: {
                         grid: { color: 'rgba(43, 41, 46, 0.3)' },
                         ticks: {
-                            color: '#948e84',
-                            font: { size: 10, family: 'IBM Plex Sans Arabic' },
+                            color: '#948e84', font: { size: 10, family: 'IBM Plex Sans Arabic' },
                             callback: function(value) {
                                 if (value >= 1000000) return (value / 1000000).toFixed(1) + 'M';
                                 if (value >= 1000) return (value / 1000).toFixed(0) + 'K';
@@ -2530,51 +2278,44 @@
                 }
             }
         });
-
-        console.log('✅ Chart initialized successfully');
     }
 
     function getLast12MonthsData() {
-        const labels = [];
-        const profits = [];
-        const sales = [];
-        const purchases = [];
-
-        const today = new Date();
-        const currentMonth = today.getMonth();
-        const currentYear = today.getFullYear();
-
-        const monthNames = ['جانفي', 'فيفري', 'مارس', 'أفريل', 'ماي', 'جوان',
-            'جويلية', 'أوت', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'
-        ];
-
-        for (let i = 11; i >= 0; i--) {
-            const date = new Date(currentYear, currentMonth - i, 1);
-            const mKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
-
-            labels.push(monthNames[date.getMonth()] + ' ' + date.getFullYear());
-
+        const labels = [], profits = [], sales = [], purchases = [];
+        const selectedYear = '2026';
+        const monthNames = ['جانفي', 'فيفري', 'مارس', 'أفريل', 'ماي', 'جوان', 'جويلية', 'أوت', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
+        for (let i = 0; i < 12; i++) {
+            const monthNum = i + 1;
+            const monthStr = String(monthNum).padStart(2, '0');
+            const mKey = `${selectedYear}-${monthStr}`;
+            labels.push(monthNames[i] + ' ' + selectedYear);
             const monthTransactions = transactions.filter(t => monthKey(t.date) === mKey);
-            const monthPurchases = monthTransactions.filter(t => t.type === 'purchase')
-                .reduce((s, t) => s + Number(t.total_purchase || 0), 0);
-            const monthSales = monthTransactions.filter(t => t.type === 'sale')
-                .reduce((s, t) => s + Number(t.total_sale || 0), 0);
-            const monthProfit = monthTransactions.reduce((s, t) => s + Number(t.profit || 0), 0);
-
+            let monthPurchases = 0;
+            monthTransactions.filter(t => t.type === 'purchase' || (!t.type && t.purchase_price > 0)).forEach(t => {
+                const qtyCount = Number(t.qty_count || 0);
+                const qtyType = t.qty_type || 'plate';
+                let plates = qtyCount;
+                if (qtyType === 'carton12') plates = qtyCount * 12;
+                monthPurchases += plates * Number(t.purchase_price || 0);
+            });
+            let monthSales = 0;
+            monthTransactions.filter(t => t.type === 'sale' || (!t.type && t.sale_price > 0)).forEach(t => {
+                const qtyCount = Number(t.qty_count || 0);
+                const qtyType = t.qty_type || 'plate';
+                let plates = qtyCount;
+                if (qtyType === 'carton12') plates = qtyCount * 12;
+                monthSales += plates * Number(t.sale_price || 0);
+            });
+            const monthProfit = monthSales - monthPurchases;
             purchases.push(roundMoney(monthPurchases));
             sales.push(roundMoney(monthSales));
             profits.push(roundMoney(monthProfit));
         }
-
         return { labels, profits, sales, purchases };
     }
 
     function updateChart() {
-        if (!profitChart) {
-            initProfitChart();
-            return;
-        }
-
+        if (!profitChart) { initProfitChart(); return; }
         const chartData = getLast12MonthsData();
         profitChart.data.labels = chartData.labels;
         profitChart.data.datasets[0].data = chartData.profits;
@@ -2585,21 +2326,13 @@
 
     function setChartType(type) {
         currentChartType = type;
-
         document.querySelectorAll('.chart-type-btn').forEach(btn => {
             btn.style.background = 'var(--panel-2)';
             btn.style.color = 'var(--text-dim)';
         });
-
         const activeBtn = document.getElementById(type === 'bar' ? 'chartTypeBar' : 'chartTypeLine');
-        if (activeBtn) {
-            activeBtn.style.background = 'var(--gold)';
-            activeBtn.style.color = '#1b1608';
-        }
-
-        setTimeout(() => {
-            initProfitChart();
-        }, 100);
+        if (activeBtn) { activeBtn.style.background = 'var(--gold)'; activeBtn.style.color = '#1b1608'; }
+        setTimeout(() => { initProfitChart(); }, 100);
     }
 
     // ================= Payment Buttons =================
@@ -2612,89 +2345,481 @@
         if (supplierBtn && supplierHidden) {
             supplierBtn.onclick = function(e) {
                 e.preventDefault();
-                const currentValue = parseInt(supplierHidden.value);
-                const newValue = currentValue === 0 ? 1 : 0;
+                const newValue = parseInt(supplierHidden.value) === 0 ? 1 : 0;
                 supplierHidden.value = newValue;
-
                 if (newValue === 1) {
                     this.innerHTML = '✅ تم الدفع';
-                    this.style.background = 'var(--success-soft)';
-                    this.style.color = '#a8cbad';
-                    this.style.borderColor = '#33422f';
+                    this.style.background = 'var(--success-soft)'; this.style.color = '#a8cbad'; this.style.borderColor = '#33422f';
                     toast('تم تغيير حالة دفع البائع إلى مدفوع');
                 } else {
                     this.innerHTML = '❌ لم يتم الدفع';
-                    this.style.background = 'var(--danger-soft)';
-                    this.style.color = '#f0a49c';
-                    this.style.borderColor = '#4a2a26';
+                    this.style.background = 'var(--danger-soft)'; this.style.color = '#f0a49c'; this.style.borderColor = '#4a2a26';
                     toast('تم تغيير حالة دفع البائع إلى غير مدفوع');
                 }
             };
         }
-
         if (buyerBtn && buyerHidden) {
             buyerBtn.onclick = function(e) {
                 e.preventDefault();
-                const currentValue = parseInt(buyerHidden.value);
-                const newValue = currentValue === 0 ? 1 : 0;
+                const newValue = parseInt(buyerHidden.value) === 0 ? 1 : 0;
                 buyerHidden.value = newValue;
-
                 if (newValue === 1) {
                     this.innerHTML = '✅ تم الدفع';
-                    this.style.background = 'var(--success-soft)';
-                    this.style.color = '#a8cbad';
-                    this.style.borderColor = '#33422f';
+                    this.style.background = 'var(--success-soft)'; this.style.color = '#a8cbad'; this.style.borderColor = '#33422f';
                     toast('تم تغيير حالة دفع المشتري إلى مدفوع');
                 } else {
                     this.innerHTML = '❌ لم يتم الدفع';
-                    this.style.background = 'var(--danger-soft)';
-                    this.style.color = '#f0a49c';
-                    this.style.borderColor = '#4a2a26';
+                    this.style.background = 'var(--danger-soft)'; this.style.color = '#f0a49c'; this.style.borderColor = '#4a2a26';
                     toast('تم تغيير حالة دفع المشتري إلى غير مدفوع');
                 }
             };
         }
     }
 
-    // ================= Calculator =================
-    function initCalc() {
-        const display = document.getElementById('calcDisplay');
-        if (!display) return;
-        let expr = '';
+    // ================= Home Functions =================
+    function renderHome() {
+        const today = todayStr();
+        const currentMonth = today.slice(0, 7);
+        const statWorkers = document.getElementById('statWorkers');
+        if (statWorkers) statWorkers.textContent = workers.length;
 
-        function updateDisplay() { display.textContent = expr === '' ? '0' : expr; }
-
-        function isOperator(ch) { return ['+', '-', '*', '/'].includes(ch); }
-
-        document.getElementById('calcGrid').addEventListener('click', (e) => {
-            const btn = e.target.closest('button');
-            if (!btn) return;
-            const a = btn.dataset.a;
-            if (a === 'clear') { expr = ''; } else if (a === 'back') { expr = expr.slice(0, -1); } else if (a === 'num') { expr += btn.textContent.trim(); } else if (a === 'dot') {
-                const parts = expr.split(/[+\-*/]/);
-                const last = parts[parts.length - 1];
-                if (!last.includes('.')) expr += (last === '' ? '0.' : '.');
-            } else if (a === 'op') {
-                if (expr === '') return;
-                const lastChar = expr[expr.length - 1];
-                if (isOperator(lastChar)) expr = expr.slice(0, -1) + btn.dataset.op;
-                else expr += btn.dataset.op;
-            } else if (a === 'eq') {
-                if (expr === '') return;
-                try {
-                    const cleanExpr = expr.replace(/[^0-9+\-*/.]/g, '');
-                    if (!cleanExpr) { return; }
-                    const result = Function('"use strict"; return (' + cleanExpr + ')')();
-                    expr = (Number.isFinite(result)) ? String(Math.round(result * 1000000) / 1000000) : 'خطأ';
-                } catch (err) { expr = 'خطأ'; }
-            }
-            updateDisplay();
+        const todayTransactions = transactions.filter(t => {
+            if (!t.date) return false;
+            return String(t.date).slice(0, 10) === today;
         });
-        updateDisplay();
+
+        const todayPurchases = todayTransactions.filter(t => t.type === 'purchase' || (!t.type && t.purchase_price > 0));
+        const ordersToday = document.getElementById('statOrdersToday');
+        if (ordersToday) ordersToday.textContent = todayPurchases.length;
+
+        const todaySales = todayTransactions.filter(t => t.type === 'sale' || (!t.type && t.sale_price > 0));
+        let totalSalesToday = 0;
+        todaySales.forEach(t => {
+            const qtyCount = Number(t.qty_count || 0);
+            const qtyType = t.qty_type || 'plate';
+            let plates = qtyCount;
+            if (qtyType === 'carton12') plates = qtyCount * 12;
+            totalSalesToday += plates * Number(t.sale_price || 0);
+        });
+        const statSalesToday = document.getElementById('statSalesToday');
+        if (statSalesToday) statSalesToday.textContent = fmtMoney(totalSalesToday) + ' دج';
+        const statSalesTodayCentime = document.getElementById('statSalesTodayCentime');
+        if (statSalesTodayCentime) statSalesTodayCentime.textContent = totalSalesToday > 0 ? formatMoneyWithWords(totalSalesToday) : 'صفر سنتيم';
+
+        const todayCosts = costs.filter(c => {
+            if (!c.date) return false;
+            return String(c.date).slice(0, 10) === today;
+        });
+        const totalCostsToday = todayCosts.reduce((s, c) => s + Number(c.amount || 0), 0);
+        const statCostsToday = document.getElementById('statCostsToday');
+        if (statCostsToday) statCostsToday.textContent = fmtMoney(totalCostsToday) + ' دج';
+        const statCostsTodayCentime = document.getElementById('statCostsTodayCentime');
+        if (statCostsTodayCentime) statCostsTodayCentime.textContent = totalCostsToday > 0 ? formatMoneyWithWords(totalCostsToday) : 'صفر سنتيم';
+
+        let totalPurchasesToday = 0;
+        todayPurchases.forEach(t => {
+            const qtyCount = Number(t.qty_count || 0);
+            const qtyType = t.qty_type || 'plate';
+            let plates = qtyCount;
+            if (qtyType === 'carton12') plates = qtyCount * 12;
+            totalPurchasesToday += plates * Number(t.purchase_price || 0);
+        });
+
+        const profitToday = totalSalesToday - totalPurchasesToday - totalCostsToday;
+        const statProfitToday = document.getElementById('statProfitToday');
+        if (statProfitToday) {
+            statProfitToday.textContent = fmtMoney(profitToday) + ' دج';
+            statProfitToday.style.color = profitToday >= 0 ? 'var(--gold)' : 'var(--danger)';
+        }
+        const statProfitTodayCentime = document.getElementById('statProfitTodayCentime');
+        if (statProfitTodayCentime) {
+            statProfitTodayCentime.textContent = profitToday > 0 ? formatMoneyWithWords(profitToday) : 'صفر سنتيم';
+            statProfitTodayCentime.style.color = profitToday >= 0 ? 'var(--gold)' : 'var(--danger)';
+        }
+
+        const monthTransactions = transactions.filter(t => {
+            if (!t.date) return false;
+            return String(t.date).slice(0, 7) === currentMonth;
+        });
+        const monthCosts = costs.filter(c => {
+            if (!c.date) return false;
+            return String(c.date).slice(0, 7) === currentMonth;
+        });
+        let monthPurchasesTotal = 0;
+        monthTransactions.filter(t => t.type === 'purchase' || (!t.type && t.purchase_price > 0)).forEach(t => {
+            const qtyCount = Number(t.qty_count || 0);
+            const qtyType = t.qty_type || 'plate';
+            let plates = qtyCount;
+            if (qtyType === 'carton12') plates = qtyCount * 12;
+            monthPurchasesTotal += plates * Number(t.purchase_price || 0);
+        });
+        let monthSalesTotal = 0;
+        monthTransactions.filter(t => t.type === 'sale' || (!t.type && t.sale_price > 0)).forEach(t => {
+            const qtyCount = Number(t.qty_count || 0);
+            const qtyType = t.qty_type || 'plate';
+            let plates = qtyCount;
+            if (qtyType === 'carton12') plates = qtyCount * 12;
+            monthSalesTotal += plates * Number(t.sale_price || 0);
+        });
+        const monthCostsTotal = monthCosts.reduce((s, c) => s + Number(c.amount || 0), 0);
+        const profitMonth = monthSalesTotal - monthPurchasesTotal - monthCostsTotal;
+        const statProfitMonth = document.getElementById('statProfitMonth');
+        if (statProfitMonth) {
+            statProfitMonth.textContent = fmtMoney(profitMonth) + ' دج';
+            statProfitMonth.style.color = profitMonth >= 0 ? 'var(--gold)' : 'var(--danger)';
+        }
+        const statProfitMonthCentime = document.getElementById('statProfitMonthCentime');
+        if (statProfitMonthCentime) {
+            statProfitMonthCentime.textContent = profitMonth > 0 ? formatMoneyWithWords(profitMonth) : 'صفر سنتيم';
+            statProfitMonthCentime.style.color = profitMonth >= 0 ? 'var(--gold)' : 'var(--danger)';
+        }
+
+        const undeliveredBody = document.getElementById('homeUndeliveredBody');
+        if (undeliveredBody) {
+            const undelivered = transactions.filter(t => t.is_exited === false || t.is_exited === 0);
+            if (undelivered.length === 0) undeliveredBody.innerHTML = '<tr class="empty-row"><td colspan="6">✅ جميع السلع تم خروجها</td></tr>';
+            else {
+                undeliveredBody.innerHTML = undelivered.map(t => {
+                    const qtyCount = Number(t.qty_count || 0);
+                    const qtyType = t.qty_type || 'plate';
+                    const unitLabel = qtyType === 'plate' ? 'لوح' : 'كرتون';
+                    const remaining = t.remaining_qty || t.total_qty || qtyCount;
+                    const tDate = t.date ? String(t.date).slice(0, 10) : '';
+                    return `<tr><td>${tDate ? fmtDate(tDate) : '—'}</td><td>${t.supplier_name || '—'}</td><td>${t.buyer_name || '—'}</td><td>${t.egg_type || 'بيض'}</td><td>${remaining} ${unitLabel}</td><td><span class="badge pending">⏳ قيد الانتظار</span></td></tr>`;
+                }).join('');
+            }
+        }
+
+        const ordersBody = document.getElementById('homeOrdersBody');
+        if (ordersBody) {
+            const todayPurchasesList = todayPurchases
+                .filter(t => String(t.date || '').slice(0, 10) === today)
+                .sort((a, b) => b.id - a.id).slice(0, 10);
+            if (todayPurchasesList.length === 0) ordersBody.innerHTML = '<tr class="empty-row"><td colspan="4">لا توجد طلبيات اليوم</td></tr>';
+            else {
+                ordersBody.innerHTML = todayPurchasesList.map(t => {
+                    const qtyCount = Number(t.qty_count || 0);
+                    const qtyType = t.qty_type || 'plate';
+                    let plates = qtyCount;
+                    if (qtyType === 'carton12') plates = qtyCount * 12;
+                    const total = plates * Number(t.purchase_price || 0);
+                    const unitLabel = qtyType === 'plate' ? 'لوح' : 'كرتون';
+                    const tDate = t.date ? String(t.date).slice(0, 10) : '';
+                    return `<tr><td>${tDate ? fmtDate(tDate) : '—'}</td><td>${t.supplier_name || '—'}</td><td>${qtyCount} ${unitLabel}</td><td>${fmtMoney(total)} دج</td></tr>`;
+                }).join('');
+            }
+        }
+
+        const costsBodyHome = document.getElementById('homeCostsBody');
+        if (costsBodyHome) {
+            const todayCostsList = costs.filter(c => {
+                if (!c.date) return false;
+                return String(c.date).slice(0, 10) === today;
+            }).sort((a, b) => b.id - a.id);
+            if (todayCostsList.length === 0) costsBodyHome.innerHTML = '<tr class="empty-row"><td colspan="3">لا توجد تكاليف اليوم</td></tr>';
+            else {
+                costsBodyHome.innerHTML = todayCostsList.map(c => {
+                    const cDate = c.date ? String(c.date).slice(0, 10) : '';
+                    return `<tr><td>${cDate ? fmtDate(cDate) : '—'}</td><td>${c.reason}</td><td>${fmtMoney(c.amount)} دج</td></tr>`;
+                }).join('');
+            }
+        }
     }
 
-    // ================= DOMContentLoaded =================
-    document.addEventListener('DOMContentLoaded', function() {
+    // ================= PROFITS FUNCTIONS =================
+    function populateYearSelect() {
+        const yearSelect = document.getElementById('profitYear');
+        if (!yearSelect) return;
+        const START_YEAR = 2026;
+        const END_YEAR = 2100;
+        const currentValue = yearSelect.value;
+        yearSelect.innerHTML = '';
+        for (let year = START_YEAR; year <= END_YEAR; year++) {
+            const option = document.createElement('option');
+            option.value = String(year);
+            option.textContent = String(year);
+            yearSelect.appendChild(option);
+        }
+        if (currentValue && Number(currentValue) >= START_YEAR && Number(currentValue) <= END_YEAR) yearSelect.value = currentValue;
+        else yearSelect.value = String(START_YEAR);
+    }
+
+    function resetProfitsFilter() {
+        const yearSelect = document.getElementById('profitYear');
+        const monthSelect = document.getElementById('profitMonth');
+        if (yearSelect) yearSelect.value = String(new Date().getFullYear());
+        if (monthSelect) monthSelect.value = 'all';
+        renderProfits();
+        toast('✅ تم إعادة تعيين الفلترة');
+    }
+
+    function renderProfits() {
+        const profitYearInput = document.getElementById('profitYear');
+        const profitMonthInput = document.getElementById('profitMonth');
+        const currentDate = new Date();
+        const currentYear = '2026';
+        const currentMonth = String(currentDate.getMonth() + 1).padStart(2, '0');
+        populateYearSelect();
+        if (profitMonthInput && !profitMonthInput.value) profitMonthInput.value = currentMonth;
+        const year = profitYearInput ? profitYearInput.value : currentYear;
+        const month = profitMonthInput ? profitMonthInput.value : currentMonth;
+
+        const inSelectedPeriod = (iso) => {
+            if (!iso) return false;
+            const dateKey = String(iso).slice(0, 10);
+            const itemYear = dateKey.slice(0, 4);
+            const itemMonth = dateKey.slice(5, 7);
+            if (itemYear !== year) return false;
+            if (month !== 'all' && itemMonth !== month) return false;
+            return true;
+        };
+
+        const periodTransactions = transactions.filter(t => inSelectedPeriod(t.date));
+        const periodCosts = costs.filter(c => inSelectedPeriod(c.date));
+        const periodPayments = payments.filter(p => inSelectedPeriod(p.date));
+
+        const purchases = periodTransactions.filter(t => t.type === 'purchase' || (!t.type && t.purchase_price > 0));
+        let totalPurchases = 0;
+        purchases.forEach(t => {
+            const qtyCount = Number(t.qty_count || 0);
+            const qtyType = t.qty_type || 'plate';
+            let plates = qtyCount;
+            if (qtyType === 'carton12') plates = qtyCount * 12;
+            totalPurchases += plates * Number(t.purchase_price || 0);
+        });
+
+        const sales = periodTransactions.filter(t => t.type === 'sale' || (!t.type && t.sale_price > 0));
+        let totalSales = 0;
+        sales.forEach(t => {
+            const qtyCount = Number(t.qty_count || 0);
+            const qtyType = t.qty_type || 'plate';
+            let plates = qtyCount;
+            if (qtyType === 'carton12') plates = qtyCount * 12;
+            totalSales += plates * Number(t.sale_price || 0);
+        });
+
+        const netProfit = totalSales - totalPurchases;
+        const transactionsCount = periodTransactions.length;
+        const totalOtherCosts = periodCosts.reduce((s, c) => s + Number(c.amount || 0), 0);
+        const wagesPaid = periodPayments.filter(p => Number(p.amount) > 0);
+        const totalWagesPaid = wagesPaid.reduce((s, p) => s + Number(p.amount || 0), 0);
+
+        const buyersUnpaid = periodTransactions.filter(t => {
+            const total = Number(t.total_sale || 0);
+            const paid = Number(t.buyer_paid_amount || 0);
+            return (t.buyer_paid === false || t.buyer_paid === 0) && (total - paid > 0.01);
+        });
+        const totalBuyersUnpaid = roundMoney(buyersUnpaid.reduce((s, t) => {
+            const total = Number(t.total_sale || 0);
+            const paid = Number(t.buyer_paid_amount || 0);
+            return s + (total - paid);
+        }, 0));
+
+        const suppliersUnpaid = periodTransactions.filter(t => {
+            const total = Number(t.total_purchase || 0);
+            const paid = Number(t.supplier_paid_amount || 0);
+            return (t.supplier_paid === false || t.supplier_paid === 0) && (total - paid > 0.01);
+        });
+        const totalSuppliersUnpaid = roundMoney(suppliersUnpaid.reduce((s, t) => {
+            const total = Number(t.total_purchase || 0);
+            const paid = Number(t.supplier_paid_amount || 0);
+            return s + (total - paid);
+        }, 0));
+
+        const totalProfitWithLoss = netProfit - totalOtherCosts - totalWagesPaid;
+
+        if (month && month !== 'all') {
+            const stats = {
+                totalPurchases, totalSales, netProfit, transactionsCount,
+                totalBuyersUnpaid, totalSuppliersUnpaid,
+                totalWagesPaid, totalOtherCosts, totalProfitWithLoss
+            };
+            saveMonthlyProfit(year, month, stats).then(result => {
+                if (result) renderMonthlyProfits();
+            });
+        }
+
+        const savedProfit = monthlyProfits.find(p => String(p.year) === String(year) && String(p.month) === String(month));
+
+        const displayData = savedProfit ? {
+            totalPurchases: Number(savedProfit.total_purchases || 0),
+            totalSales: Number(savedProfit.total_sales || 0),
+            netProfit: Number(savedProfit.net_profit || 0),
+            transactionsCount: Number(savedProfit.transactions_count || 0),
+            totalBuyersUnpaid: Number(savedProfit.buyers_unpaid || 0),
+            totalSuppliersUnpaid: Number(savedProfit.suppliers_unpaid || 0),
+            totalWagesPaid: Number(savedProfit.wages_paid || 0),
+            totalOtherCosts: Number(savedProfit.other_costs || 0),
+            totalProfitWithLoss: Number(savedProfit.total_profit_with_loss || 0)
+        } : {
+            totalPurchases, totalSales, netProfit, transactionsCount,
+            totalBuyersUnpaid, totalSuppliersUnpaid,
+            totalWagesPaid, totalOtherCosts, totalProfitWithLoss
+        };
+
+        const pfTotalPurchases = document.getElementById('pfTotalPurchases');
+        if (pfTotalPurchases) {
+            pfTotalPurchases.textContent = fmtMoney(displayData.totalPurchases) + ' دج';
+            const cE = document.getElementById('pfTotalPurchasesCentime');
+            if (cE) cE.textContent = displayData.totalPurchases > 0 ? formatMoneyWithWords(displayData.totalPurchases) : 'صفر سنتيم';
+        }
+
+        const pfTotalSales = document.getElementById('pfTotalSales');
+        if (pfTotalSales) {
+            pfTotalSales.textContent = fmtMoney(displayData.totalSales) + ' دج';
+            const cE = document.getElementById('pfTotalSalesCentime');
+            if (cE) cE.textContent = displayData.totalSales > 0 ? formatMoneyWithWords(displayData.totalSales) : 'صفر سنتيم';
+        }
+
+        const pfNetProfit = document.getElementById('pfNetProfit');
+        if (pfNetProfit) {
+            pfNetProfit.textContent = fmtMoney(displayData.netProfit) + ' دج';
+            pfNetProfit.style.color = displayData.netProfit >= 0 ? 'var(--success)' : 'var(--danger)';
+            const cE = document.getElementById('pfNetProfitCentime');
+            if (cE) {
+                cE.textContent = displayData.netProfit > 0 ? formatMoneyWithWords(displayData.netProfit) : 'صفر سنتيم';
+                cE.style.color = displayData.netProfit >= 0 ? 'var(--success)' : 'var(--danger)';
+            }
+        }
+
+        const pfTransactionsCount = document.getElementById('pfTransactionsCount');
+        if (pfTransactionsCount) pfTransactionsCount.textContent = displayData.transactionsCount;
+
+        const pfBuyersUnpaid = document.getElementById('pfBuyersUnpaid');
+        if (pfBuyersUnpaid) {
+            pfBuyersUnpaid.textContent = fmtMoney(displayData.totalBuyersUnpaid) + ' دج';
+            pfBuyersUnpaid.style.color = displayData.totalBuyersUnpaid > 0 ? 'var(--danger)' : 'var(--success)';
+            const cE = document.getElementById('pfBuyersUnpaidCentime');
+            if (cE) cE.textContent = formatMoneyWithWords(displayData.totalBuyersUnpaid);
+        }
+
+        const pfSuppliersUnpaid = document.getElementById('pfSuppliersUnpaid');
+        if (pfSuppliersUnpaid) {
+            pfSuppliersUnpaid.textContent = fmtMoney(displayData.totalSuppliersUnpaid) + ' دج';
+            pfSuppliersUnpaid.style.color = displayData.totalSuppliersUnpaid > 0 ? 'var(--gold)' : 'var(--success)';
+            const cE = document.getElementById('pfSuppliersUnpaidCentime');
+            if (cE) cE.textContent = formatMoneyWithWords(displayData.totalSuppliersUnpaid);
+        }
+
+        const pfWagesPaid = document.getElementById('pfWagesPaid');
+        if (pfWagesPaid) {
+            pfWagesPaid.textContent = fmtMoney(displayData.totalWagesPaid) + ' دج';
+            pfWagesPaid.style.color = displayData.totalWagesPaid > 0 ? 'var(--blue)' : 'var(--text-dim)';
+            const cE = document.getElementById('pfWagesPaidCentime');
+            if (cE) cE.textContent = formatMoneyWithWords(displayData.totalWagesPaid);
+        }
+
+        const pfOtherCosts = document.getElementById('pfOtherCosts');
+        if (pfOtherCosts) {
+            pfOtherCosts.textContent = fmtMoney(displayData.totalOtherCosts) + ' دج';
+            pfOtherCosts.style.color = displayData.totalOtherCosts > 0 ? 'var(--cream-dim)' : 'var(--text-dim)';
+            const cE = document.getElementById('pfOtherCostsCentime');
+            if (cE) cE.textContent = formatMoneyWithWords(displayData.totalOtherCosts);
+        }
+
+        const pfTotalProfitWithLossEl = document.getElementById('pfTotalProfitWithLoss');
+        if (pfTotalProfitWithLossEl) {
+            pfTotalProfitWithLossEl.textContent = fmtMoney(displayData.totalProfitWithLoss) + ' دج';
+            pfTotalProfitWithLossEl.style.color = displayData.totalProfitWithLoss >= 0 ? 'var(--gold)' : 'var(--danger)';
+            const cE = document.getElementById('pfTotalProfitWithLossCentime');
+            if (cE) {
+                cE.textContent = formatMoneyWithWords(displayData.totalProfitWithLoss);
+                cE.style.color = displayData.totalProfitWithLoss >= 0 ? 'var(--gold)' : 'var(--danger)';
+            }
+        }
+
+        const note = document.querySelector('.profit-note');
+        if (note) note.textContent = `(الربح الصافي بعد خصم ${fmtMoney(displayData.totalWagesPaid)} دج أجور العمال)`;
+
+        const capitalTotalSales = document.getElementById('capitalTotalSales');
+        if (capitalTotalSales) capitalTotalSales.textContent = fmtMoney(displayData.totalSales) + ' دج';
+
+        const TotalProfitWithLoss = savedProfit ? Number(savedProfit.total_profit_with_loss || 0) : totalProfitWithLoss;
+        const capitalTotalProfit = document.getElementById('capitalTotalProfit');
+        if (capitalTotalProfit) capitalTotalProfit.textContent = fmtMoney(TotalProfitWithLoss) + ' دج';
+
+        const partnerProfitsBody = document.getElementById('partnerProfitsBody');
+        if (partnerProfitsBody) {
+            if (Array.isArray(capitals) && capitals.length > 0) {
+                const totalCapital = capitals.reduce((sum, c) => sum + Number(c.amount || 0), 0);
+                partnerProfitsBody.innerHTML = capitals.map((c, index) => {
+                    const capitalAmount = Number(c.amount || 0);
+                    let percentage = c.percentage != null ? Number(c.percentage) : (totalCapital > 0 ? (capitalAmount / totalCapital) * 100 : 0);
+                    const profitShare = (TotalProfitWithLoss * percentage) / 100;
+                    const totalEntitlement = capitalAmount + profitShare;
+                    const status = totalEntitlement > 0 ? '<span class="badge paid">✅ مستحق</span>' : '<span class="badge pending">⏳ لا شيء</span>';
+                    const centimes = Math.round(Number(totalEntitlement || 0) * 100);
+                    return `
+                        <tr>
+                            <td>${index + 1}</td>
+                            <td><strong>${c.partner_name || 'بدون اسم'}</strong></td>
+                            <td><strong style="color:var(--blue);">${percentage.toFixed(2)}%</strong></td>
+                            <td style="color:var(--gold); font-weight:bold; font-size:1.05rem;">
+                                ${fmtMoney(totalEntitlement)} دج
+                                <br><small style="color:var(--text-dim); font-size:0.65rem;">(${centimes.toLocaleString('en-US')} سنتيم)</small>
+                                <br><small style="color:var(--success); font-size:0.6rem;">رأس المال: ${fmtMoney(capitalAmount)} دج + أرباح (${percentage.toFixed(2)}%): ${fmtMoney(profitShare)} دج</small>
+                            </td>
+                            <td>${status}</td>
+                        </tr>
+                    `;
+                }).join('');
+            } else {
+                partnerProfitsBody.innerHTML = '<tr class="empty-row"><td colspan="5">لا توجد شركاء لتوزيع الأرباح</td></tr>';
+            }
+        }
+
+        const capitalPeriod = document.getElementById('capitalPeriod');
+        if (Array.isArray(capitals) && capitals.length > 0) {
+            const sortedCapitals = [...capitals].sort((a, b) => {
+                const dateA = a.entry_date ? String(a.entry_date).slice(0, 10) : '';
+                const dateB = b.entry_date ? String(b.entry_date).slice(0, 10) : '';
+                return dateB.localeCompare(dateA);
+            });
+            const latestCapital = sortedCapitals[0];
+            const latestDate = String(latestCapital.entry_date).slice(0, 10);
+            const today = todayStr();
+            const startDate = new Date(latestDate + 'T00:00:00');
+            const endDate = new Date(today + 'T00:00:00');
+            const difference = endDate - startDate;
+            const daysDifference = Math.floor(difference / (1000 * 60 * 60 * 24));
+            if (capitalPeriod) capitalPeriod.textContent = `${daysDifference} يوم`;
+        } else {
+            if (capitalPeriod) capitalPeriod.textContent = '0 يوم';
+        }
+
+        setTimeout(() => {
+            try { if (profitChart) updateChart(); else initProfitChart(); }
+            catch (error) { console.error('❌ خطأ في الرسم:', error); }
+        }, 200);
+    }
+
+    // ================= Custom Confirm =================
+    function customConfirm(message, title = 'تأكيد العملية') {
+        return new Promise((resolve) => {
+            const modal = document.getElementById('customConfirmModal');
+            const titleEl = document.getElementById('customConfirmTitle');
+            const messageEl = document.getElementById('customConfirmMessage');
+            const okBtn = document.getElementById('customConfirmOk');
+            const cancelBtn = document.getElementById('customConfirmCancel');
+            titleEl.textContent = title;
+            messageEl.textContent = message;
+            modal.classList.add('show');
+            const cleanup = () => {
+                modal.classList.remove('show');
+                okBtn.removeEventListener('click', confirmHandler);
+                cancelBtn.removeEventListener('click', cancelHandler);
+            };
+            const confirmHandler = () => { cleanup(); resolve(true); };
+            const cancelHandler = () => { cleanup(); resolve(false); };
+            okBtn.addEventListener('click', confirmHandler);
+            cancelBtn.addEventListener('click', cancelHandler);
+        });
+    }
+
+    // ================= Setup Event Listeners =================
+    function setupEventListeners() {
+
+        // ===== Nav =====
         document.getElementById('nav').addEventListener('click', (e) => {
             const item = e.target.closest('.nav-item');
             if (!item) return;
@@ -2704,25 +2829,23 @@
             document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
             const panel = document.getElementById('panel-' + target);
             if (panel) panel.classList.add('active');
-            document.getElementById('pageTitle').textContent = titles[target][0];
-            document.getElementById('pageDesc').textContent = titles[target][1];
+
+            if (titles[target]) {
+                document.getElementById('pageTitle').textContent = titles[target][0];
+                document.getElementById('pageDesc').textContent = titles[target][1];
+            }
             document.getElementById('sidebar').classList.remove('open');
-            document.getElementById('sideCalc').classList.toggle('show', target === 'transactions');
 
             if (target === 'home') renderHome();
             if (target === 'profits') renderProfits();
             if (target === 'transactions') renderTransactions();
             if (target === 'costs') renderCosts();
-            if (target === 'people') {
-                renderPeople();
-            }
+            if (target === 'people') renderPeople();
             if (target === 'payments') renderPayments();
-            if (target === 'capitals') {
-                renderCapitals();
-                updateCapitalTotal();
-            }
+            if (target === 'capitals') { renderCapitals(); updateCapitalTotal(); }
         });
 
+        // ===== Hamburger =====
         document.getElementById('hamburger').addEventListener('click', () => {
             document.getElementById('sidebar').classList.toggle('open');
         });
@@ -2732,12 +2855,20 @@
 
         const cDate = document.getElementById('cDate');
         if (cDate) cDate.value = todayStr();
-
         const tDate = document.getElementById('tDate');
         if (tDate) tDate.value = todayStr();
-
         const cEntryDate = document.getElementById('cEntryDate');
         if (cEntryDate) cEntryDate.value = todayStr();
+
+        const pPaymentDate = document.getElementById('pPaymentDate');
+        if (pPaymentDate) {
+            const now = new Date();
+            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+            pPaymentDate.value = now.toISOString().slice(0, 16);
+        }
+
+        const pPartnerId = document.getElementById('pPartnerId');
+        if (pPartnerId) pPartnerId.addEventListener('change', updatePartnerInfoBox);
 
         const profitMonth = document.getElementById('profitMonth');
         if (profitMonth) {
@@ -2746,27 +2877,12 @@
         }
 
         const refreshBtn = document.getElementById('refreshProfitsBtn');
-        if (refreshBtn) {
-            refreshBtn.addEventListener('click', function() {
-                renderProfits();
-                toast('✅ تم تحديث الأرباح');
-            });
-        }
+        if (refreshBtn) refreshBtn.addEventListener('click', () => { renderProfits(); toast('✅ تم تحديث الأرباح'); });
 
         const chartTypeBar = document.getElementById('chartTypeBar');
         const chartTypeLine = document.getElementById('chartTypeLine');
-
-        if (chartTypeBar) {
-            chartTypeBar.addEventListener('click', function() {
-                setChartType('bar');
-            });
-        }
-
-        if (chartTypeLine) {
-            chartTypeLine.addEventListener('click', function() {
-                setChartType('line');
-            });
-        }
+        if (chartTypeBar) chartTypeBar.addEventListener('click', () => setChartType('bar'));
+        if (chartTypeLine) chartTypeLine.addEventListener('click', () => setChartType('line'));
 
         const confirmBtn = document.getElementById('confirmPartialPaymentBtn');
         if (confirmBtn) confirmBtn.addEventListener('click', confirmPartialPayment);
@@ -2775,54 +2891,33 @@
         if (closeBtn) closeBtn.addEventListener('click', closePartialPaymentModal);
 
         const modal = document.getElementById('partialPaymentModal');
-        if (modal) {
-            modal.addEventListener('click', function(e) {
-                if (e.target === this) {
-                    closePartialPaymentModal();
-                }
-            });
-        }
+        if (modal) modal.addEventListener('click', function(e) { if (e.target === this) closePartialPaymentModal(); });
 
         const paymentInput = document.getElementById('paymentAmountInput');
-        if (paymentInput) {
-            paymentInput.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter') {
-                    confirmPartialPayment();
-                }
-            });
-        }
-
-        const cAmountInput = document.getElementById('cAmount');
-        if (cAmountInput) {
-            cAmountInput.addEventListener('input', function() {
-                this.value = this.value.replace(/[^0-9]/g, '');
-            });
-        }
+        if (paymentInput) paymentInput.addEventListener('keydown', function(e) { if (e.key === 'Enter') confirmPartialPayment(); });
 
         initPaymentButtons();
 
-        loadAllData().then(() => {
-            renderWorkers();
-            renderCosts();
-            renderTransactions();
-            renderPeople();
-            renderPayments();
-            renderCapitals();
-            renderProfits();
-            renderHome();
-            updateTransactionStats();
-            updateTransactionTotals();
-            updateCapitalTotal();
-            initCalc();
-        });
-    });
+        // ===== Global Refresh =====
+        const globalRefreshBtn = document.getElementById('globalRefreshBtn');
+        if (globalRefreshBtn) {
+            globalRefreshBtn.addEventListener('click', function() {
+                this.style.transform = 'rotate(360deg)';
+                setTimeout(() => { window.location.reload(); }, 200);
+            });
+        }
+    }
 
-    // ================= Form Submissions =================
+    // ================= Global Submit Handler =================
     document.addEventListener('submit', function(e) {
         const form = e.target;
+        const knownForms = ['workerForm', 'personForm', 'costForm', 'transactionForm', 'capitalForm', 'partnerPaymentForm'];
+        if (knownForms.includes(form.id)) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
 
         if (form.id === 'workerForm') {
-            e.preventDefault();
             const data = {
                 name: document.getElementById('wName').value.trim(),
                 phone: document.getElementById('wPhone').value.trim(),
@@ -2833,7 +2928,6 @@
         }
 
         if (form.id === 'personForm') {
-            e.preventDefault();
             const data = {
                 full_name: document.getElementById('pFullName').value.trim(),
                 phone: document.getElementById('pPhone').value.trim() || null,
@@ -2863,7 +2957,6 @@
         }
 
         if (form.id === 'costForm') {
-            e.preventDefault();
             const data = {
                 date: document.getElementById('cDate').value,
                 reason: document.getElementById('cReason').value.trim(),
@@ -2875,7 +2968,6 @@
         }
 
         if (form.id === 'transactionForm') {
-            e.preventDefault();
             const date = document.getElementById('tDate').value;
             const supplierName = document.getElementById('tSupplierName').value.trim();
             const eggType = document.getElementById('tEggType').value;
@@ -2885,30 +2977,20 @@
             const buyerName = document.getElementById('tBuyerName').value.trim();
             const salePrice = Number(document.getElementById('tSalePrice').value || 0);
             const notes = document.getElementById('tNotes').value.trim();
-
             if (!date || !supplierName || qtyCount <= 0 || purchasePrice <= 0 || !buyerName || salePrice <= 0) {
                 toast('الرجاء ملء جميع الحقول المطلوبة');
                 return;
             }
-
             const data = {
-                date: date,
-                type: 'purchase',
-                supplier_name: supplierName,
-                egg_type: eggType || null,
-                qty_type: qtyType,
-                qty_count: qtyCount,
-                purchase_price: purchasePrice,
-                buyer_name: buyerName,
-                sale_price: salePrice,
-                notes: notes || null,
-                is_exited: false
+                date, type: 'purchase', supplier_name: supplierName,
+                egg_type: eggType || null, qty_type: qtyType,
+                qty_count: qtyCount, purchase_price: purchasePrice,
+                buyer_name: buyerName, sale_price: salePrice,
+                notes: notes || null, is_exited: false
             };
-
             const submitBtn = form.querySelector('button[type="submit"]');
             submitBtn.disabled = true;
             submitBtn.textContent = 'جاري الإضافة...';
-
             addTransaction(data).finally(() => {
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'تسجيل المعاملة';
@@ -2921,79 +3003,84 @@
         }
 
         if (form.id === 'capitalForm') {
-            e.preventDefault();
-
-            const partnerNameInput = document.querySelector('#cPartnerName');
-            const amountInput = document.querySelector('input[name="amount"]') || document.querySelector('#cAmount');
-            const entryDateInput = document.querySelector('#cEntryDate');
-            const notesInput = document.querySelector('#cNotes');
-
-            if (!amountInput) {
-                toast('حدث خطأ: مدخل المبلغ غير موجود');
-                return;
-            }
-
-            const partnerName = partnerNameInput ? partnerNameInput.value.trim() : '';
-            const amountRaw = amountInput.value;
-            const entryDate = entryDateInput ? entryDateInput.value : '';
-            const notes = notesInput ? notesInput.value.trim() : '';
-
-            const cleanAmount = String(amountRaw).replace(/[^0-9.]/g, '');
-            const amount = parseFloat(cleanAmount);
-
-            if (!partnerName) {
-                toast('الرجاء إدخال اسم الشريك');
-                return;
-            }
-
-            if (!amountRaw || amountRaw === '' || amountRaw === '0') {
-                toast('الرجاء إدخال المبلغ');
-                return;
-            }
-
-            if (isNaN(amount) || amount <= 0) {
-                toast(`المبلغ "${amountRaw}" غير صحيح، الرجاء إدخال أرقام فقط`);
-                return;
-            }
-
-            if (!entryDate) {
-                toast('الرجاء اختيار تاريخ الإدخال');
-                return;
-            }
-
-            const data = {
-                partner_name: partnerName,
-                amount: amount,
-                entry_date: entryDate,
-                notes: notes || null
-            };
-
+            const partnerNameField = form.querySelector('#cPartnerName');
+            const amountField = form.querySelector('#cAmount');
+            const entryDateField = form.querySelector('#cEntryDate');
+            const notesField = form.querySelector('#cNotes');
+            if (!partnerNameField || !amountField || !entryDateField) { toast('⚠️ حدث خطأ في النموذج'); return; }
+            const partnerName = String(partnerNameField.value ?? '').trim();
+            const amountRaw = String(amountField.value ?? '').trim();
+            const entryDate = String(entryDateField.value ?? '').trim();
+            const notes = notesField ? String(notesField.value ?? '').trim() : '';
+            if (!partnerName) { toast('⚠️ الرجاء إدخال اسم الشريك'); partnerNameField.focus(); return; }
+            const normalizedAmount = amountRaw.replace(/,/g, '.').replace(/[^0-9.]/g, '');
+            const amountNumber = Number(normalizedAmount);
+            if (!amountRaw || !Number.isFinite(amountNumber) || amountNumber <= 0) { toast('⚠️ المبلغ يجب أن يكون أكبر من صفر'); amountField.focus(); return; }
+            if (!entryDate) { toast('⚠️ الرجاء اختيار تاريخ الإدخال'); entryDateField.focus(); return; }
+            const data = { partner_name: partnerName, amount: amountNumber, entry_date: entryDate, notes: notes || null };
             const submitBtn = form.querySelector('button[type="submit"]');
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'جاري الإضافة...';
-
-            if (editingCapitalId) {
-                updateCapital(editingCapitalId, data).finally(() => {
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'تحديث رأس المال';
-                    editingCapitalId = null;
-                    form.reset();
-                    const cEntryDate = document.getElementById('cEntryDate');
-                    if (cEntryDate) cEntryDate.value = todayStr();
-                });
-            } else {
-                addCapital(data).finally(() => {
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'إضافة رأس المال';
-                    form.reset();
-                    const cEntryDate = document.getElementById('cEntryDate');
-                    if (cEntryDate) cEntryDate.value = todayStr();
-                });
+            const originalText = submitBtn ? submitBtn.textContent : 'إضافة رأس المال';
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = editingCapitalId ? '⏳ جاري التحديث...' : '⏳ جاري الإضافة...';
             }
+            const promise = editingCapitalId ? updateCapital(editingCapitalId, data) : addCapital(data);
+            Promise.resolve(promise).finally(() => {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = editingCapitalId ? 'تحديث رأس المال' : originalText;
+                }
+                if (!editingCapitalId) {
+                    form.reset();
+                    const cED = form.querySelector('#cEntryDate');
+                    if (cED) cED.value = todayStr();
+                }
+                editingCapitalId = null;
+            });
+        }
+
+        if (form.id === 'partnerPaymentForm') {
+            const partnerIdField = document.getElementById('pPartnerId');
+            const amountField = document.getElementById('pAmount');
+            const dateField = document.getElementById('pPaymentDate');
+            const notesField = document.getElementById('pNotes');
+            if (!partnerIdField || !amountField || !dateField) { toast('⚠️ حدث خطأ في النموذج'); return; }
+            const capitalId = partnerIdField.value;
+            const amountValue = amountField.value;
+            const paymentDate = dateField.value;
+            const notes = notesField ? notesField.value.trim() : '';
+            if (!capitalId) { toast('⚠️ الرجاء اختيار الشريك'); partnerIdField.focus(); return; }
+            if (!amountValue || amountValue === '') { toast('⚠️ الرجاء إدخال المبلغ'); amountField.focus(); return; }
+            const amount = Number(amountValue);
+            if (isNaN(amount) || amount <= 0) { toast('⚠️ المبلغ يجب أن يكون أكبر من صفر'); amountField.focus(); return; }
+            const totalEntitlement = getPartnerTotalEntitlement(capitalId);
+            const totalWithdrawn = getTotalPaidToPartner(capitalId);
+            const remaining = Math.max(0, totalEntitlement - totalWithdrawn);
+            if (amount > remaining) {
+                toast(`⚠️ المبلغ (${fmtMoney(amount)} دج) يتجاوز المبلغ المستحق المتبقي (${fmtMoney(remaining)} دج)`);
+                amountField.focus(); return;
+            }
+            if (!paymentDate) { toast('⚠️ الرجاء اختيار تاريخ السحب'); dateField.focus(); return; }
+            const data = { capital_id: capitalId, amount: amount, payment_date: paymentDate, notes: notes || null };
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalText = submitBtn ? submitBtn.textContent : '💸 تسجيل السحب';
+            if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = '⏳ جاري الحفظ...'; }
+            addPartnerPayment(data).finally(() => {
+                if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = originalText; }
+                form.reset();
+                const pDate = document.getElementById('pPaymentDate');
+                if (pDate) {
+                    const now = new Date();
+                    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+                    pDate.value = now.toISOString().slice(0, 16);
+                }
+                const infoBox = document.getElementById('partnerInfoBox');
+                if (infoBox) infoBox.style.display = 'none';
+            });
         }
     });
 
-    // ================= Global Click Events =================
+    // ================= Global Click Handler =================
     document.addEventListener('click', function(e) {
         const btn = e.target.closest('button');
         if (!btn) return;
@@ -3002,39 +3089,23 @@
         else if (btn.id === 'showSuppliers') setPeopleFilter('suppliers');
         else if (btn.id === 'showBuyers') setPeopleFilter('buyers');
 
-        if (btn.dataset.act === 'edit' && btn.dataset.type === 'people') {
-            editPerson(btn.dataset.id);
-        }
-        if (btn.dataset.act === 'del' && btn.dataset.type === 'people') {
-            deletePerson(btn.dataset.id);
-        }
+        if (btn.dataset.act === 'edit' && btn.dataset.type === 'people') editPerson(btn.dataset.id);
+        if (btn.dataset.act === 'del' && btn.dataset.type === 'people') deletePerson(btn.dataset.id);
+        if (btn.dataset.act === 'edit-partner-payment') editPartnerPayment(btn.dataset.id);
+        if (btn.dataset.act === 'delete-partner-payment') deletePartnerPayment(btn.dataset.id);
+        if (btn.dataset.act === 'delete-monthly-profit') deleteMonthlyProfit(btn.dataset.id);
 
         if (btn.dataset.act && btn.closest('#workersList')) {
             const id = btn.dataset.id;
             const act = btn.dataset.act;
-
-            if (!id) {
-                console.warn('Worker ID not found');
-                return;
-            }
-
-            if (act === 'present' || act === 'absent' || act === 'rest') {
-                markAttendance(id, act);
-            } else if (act === 'pay') {
-                processPayment(id);
-            } else if (act === 'delete') {
-                deleteWorker(id);
-            } else if (act === 'toggle') {
-                const body = document.getElementById('body-' + id);
-                if (body) {
-                    body.classList.toggle('open');
-                }
-            }
+            if (!id) return;
+            if (act === 'present' || act === 'absent' || act === 'rest') { e.preventDefault(); markAttendance(id, act); }
+            else if (act === 'pay') { e.preventDefault(); processPayment(id); }
+            else if (act === 'delete') { e.preventDefault(); deleteWorker(id); }
+            else if (act === 'toggle') { const body = document.getElementById('body-' + id); if (body) body.classList.toggle('open'); }
         }
 
-        if (btn.dataset.id && btn.dataset.type === 'cost') {
-            deleteCost(btn.dataset.id);
-        }
+        if (btn.dataset.id && btn.dataset.type === 'cost') deleteCost(btn.dataset.id);
 
         if (btn.dataset.type === 'transaction') {
             if (btn.dataset.act === 'del') deleteTransaction(btn.dataset.id);
@@ -3048,453 +3119,387 @@
         else if (btn.id === 'showExited') setFilter('exited');
         else if (btn.id === 'showPending') setFilter('pending');
 
-        if (btn.dataset.type === 'payment-buyer' && btn.dataset.act === 'pay-buyer-full') {
-            payAllBuyerTransactions(btn.dataset.name);
-        }
-
-        if (btn.dataset.type === 'payment-supplier' && btn.dataset.act === 'pay-supplier-full') {
-            payAllSupplierTransactions(btn.dataset.name);
-        }
-
+        if (btn.dataset.type === 'payment-buyer' && btn.dataset.act === 'pay-buyer-full') payAllBuyerTransactions(btn.dataset.name);
+        if (btn.dataset.type === 'payment-supplier' && btn.dataset.act === 'pay-supplier-full') payAllSupplierTransactions(btn.dataset.name);
         if (btn.dataset.type === 'payment-buyer' && btn.dataset.act === 'pay-buyer-partial') {
-            const name = btn.dataset.name;
-            const total = Number(btn.dataset.total || 0);
-            const remaining = Number(btn.dataset.remaining || 0);
-            openPartialPaymentModal('buyer', name, total, remaining);
+            openPartialPaymentModal('buyer', btn.dataset.name, Number(btn.dataset.total || 0), Number(btn.dataset.remaining || 0));
         }
-
         if (btn.dataset.type === 'payment-supplier' && btn.dataset.act === 'pay-supplier-partial') {
-            const name = btn.dataset.name;
-            const total = Number(btn.dataset.total || 0);
-            const remaining = Number(btn.dataset.remaining || 0);
-            openPartialPaymentModal('supplier', name, total, remaining);
+            openPartialPaymentModal('supplier', btn.dataset.name, Number(btn.dataset.total || 0), Number(btn.dataset.remaining || 0));
         }
 
-        if (btn.dataset.act === 'edit-capital') {
-            editCapital(btn.dataset.id);
-        }
-        if (btn.dataset.act === 'delete-capital') {
-            deleteCapital(btn.dataset.id);
-        }
+        if (btn.dataset.act === 'edit-capital') editCapital(btn.dataset.id);
+        if (btn.dataset.act === 'delete-capital') deleteCapital(btn.dataset.id);
     });
 
-    // ================= AUTOCOMPLETE FUNCTIONS =================
-    let activeSuggestion = null;
-    let suggestionTimeout = null;
-
-    async function fetchPeople() {
-        try {
-            const response = await fetch('/api/people', {
-                headers: {
-                    'Accept': 'application/json',
-                    'X-Requested-With': 'XMLHttpRequest'
-                }
-            });
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            const data = await response.json();
-            console.log('✅ People data loaded:', data);
-            return data;
-        } catch (error) {
-            console.error('❌ Error fetching people:', error);
-            return [];
-        }
-    }
-
-    function showSupplierSuggestions(inputElement) {
-        const suggestionsDiv = document.getElementById('supplierSuggestions');
-        if (!suggestionsDiv) {
-            console.warn('⚠️ supplierSuggestions element not found');
-            return;
-        }
-
-        const suppliers = people.filter(p => p.type === 'supplier' || p.type === 'both');
-        
-        console.log('📊 Suppliers found:', suppliers.length);
-
-        if (suppliers.length === 0) {
-            suggestionsDiv.innerHTML = `
-                <div style="padding:15px 14px; color:var(--text-dim); text-align:center; font-size:0.85rem;">
-                    <span style="display:block; font-size:1.2rem; margin-bottom:5px;">📭</span>
-                    لا يوجد بائعون مسجلون
-                </div>
-            `;
-            suggestionsDiv.style.display = 'block';
-            return;
-        }
-
-        suggestionsDiv.innerHTML = suppliers.map(p => `
-            <div class="suggestion-item" 
-                 data-name="${p.full_name}" 
-                 data-phone="${p.phone || ''}" 
-                 data-address="${p.address || ''}"
-                 onclick="window.selectSupplier('${p.full_name.replace(/'/g, "\\'")}')"
-                 onmouseover="this.style.background='var(--panel)'" 
-                 onmouseout="this.style.background='transparent'"
-                 style="padding:12px 16px; cursor:pointer; border-bottom:1px solid var(--border-soft); transition:background 0.2s; display:flex; justify-content:space-between; align-items:center;">
-                <div>
-                    <span style="color:var(--cream); font-weight:500; font-size:0.95rem;">${p.full_name}</span>
-                    ${p.phone ? `<span style="color:var(--text-dim); font-size:0.75rem; margin-right:8px;">📞 ${p.phone}</span>` : ''}
-                </div>
-                ${p.address ? `<span style="color:var(--text-dim); font-size:0.7rem;">📍 ${p.address}</span>` : ''}
-            </div>
-        `).join('');
-
-        const rect = inputElement.getBoundingClientRect();
-        suggestionsDiv.style.position = 'fixed';
-        suggestionsDiv.style.top = (rect.bottom + 4) + 'px';
-        suggestionsDiv.style.left = rect.left + 'px';
-        suggestionsDiv.style.width = rect.width + 'px';
-        suggestionsDiv.style.maxHeight = '250px';
-        suggestionsDiv.style.overflowY = 'auto';
-        suggestionsDiv.style.background = 'var(--panel-2)';
-        suggestionsDiv.style.border = '1px solid var(--border)';
-        suggestionsDiv.style.borderRadius = '10px';
-        suggestionsDiv.style.boxShadow = '0 8px 30px rgba(0,0,0,0.5)';
-        suggestionsDiv.style.zIndex = '9999';
-        suggestionsDiv.style.display = 'block';
-        suggestionsDiv.style.padding = '4px 0';
-        
-        suggestionsDiv.style.scrollbarWidth = 'thin';
-        suggestionsDiv.style.scrollbarColor = 'var(--gold) var(--panel-2)';
-    }
-
-    function showBuyerSuggestions(inputElement) {
-        const suggestionsDiv = document.getElementById('buyerSuggestions');
-        if (!suggestionsDiv) {
-            console.warn('⚠️ buyerSuggestions element not found');
-            return;
-        }
-
-        const buyers = people.filter(p => p.type === 'buyer' || p.type === 'both');
-        
-        console.log('📊 Buyers found:', buyers.length);
-
-        if (buyers.length === 0) {
-            suggestionsDiv.innerHTML = `
-                <div style="padding:15px 14px; color:var(--text-dim); text-align:center; font-size:0.85rem;">
-                    <span style="display:block; font-size:1.2rem; margin-bottom:5px;">📭</span>
-                    لا يوجد مشترون مسجلون
-                </div>
-            `;
-            suggestionsDiv.style.display = 'block';
-            return;
-        }
-
-        suggestionsDiv.innerHTML = buyers.map(p => `
-            <div class="suggestion-item" 
-                 data-name="${p.full_name}" 
-                 data-phone="${p.phone || ''}" 
-                 data-address="${p.address || ''}"
-                 onclick="window.selectBuyer('${p.full_name.replace(/'/g, "\\'")}')"
-                 onmouseover="this.style.background='var(--panel)'" 
-                 onmouseout="this.style.background='transparent'"
-                 style="padding:12px 16px; cursor:pointer; border-bottom:1px solid var(--border-soft); transition:background 0.2s; display:flex; justify-content:space-between; align-items:center;">
-                <div>
-                    <span style="color:var(--cream); font-weight:500; font-size:0.95rem;">${p.full_name}</span>
-                    ${p.phone ? `<span style="color:var(--text-dim); font-size:0.75rem; margin-right:8px;">📞 ${p.phone}</span>` : ''}
-                </div>
-                ${p.address ? `<span style="color:var(--text-dim); font-size:0.7rem;">📍 ${p.address}</span>` : ''}
-            </div>
-        `).join('');
-
-        const rect = inputElement.getBoundingClientRect();
-        suggestionsDiv.style.position = 'fixed';
-        suggestionsDiv.style.top = (rect.bottom + 4) + 'px';
-        suggestionsDiv.style.left = rect.left + 'px';
-        suggestionsDiv.style.width = rect.width + 'px';
-        suggestionsDiv.style.maxHeight = '250px';
-        suggestionsDiv.style.overflowY = 'auto';
-        suggestionsDiv.style.background = 'var(--panel-2)';
-        suggestionsDiv.style.border = '1px solid var(--border)';
-        suggestionsDiv.style.borderRadius = '10px';
-        suggestionsDiv.style.boxShadow = '0 8px 30px rgba(0,0,0,0.5)';
-        suggestionsDiv.style.zIndex = '9999';
-        suggestionsDiv.style.display = 'block';
-        suggestionsDiv.style.padding = '4px 0';
-        
-        suggestionsDiv.style.scrollbarWidth = 'thin';
-        suggestionsDiv.style.scrollbarColor = 'var(--gold) var(--panel-2)';
-    }
-
-    window.selectSupplier = function(name) {
-        const input = document.getElementById('tSupplierName');
-        const suggestions = document.getElementById('supplierSuggestions');
-        if (input) {
-            input.value = name;
-            input.dispatchEvent(new Event('input'));
-        }
-        if (suggestions) {
-            suggestions.style.display = 'none';
-        }
-        toast(`✅ تم اختيار البائع: ${name}`);
-    };
-
-    window.selectBuyer = function(name) {
-        const input = document.getElementById('tBuyerName');
-        const suggestions = document.getElementById('buyerSuggestions');
-        if (input) {
-            input.value = name;
-            input.dispatchEvent(new Event('input'));
-        }
-        if (suggestions) {
-            suggestions.style.display = 'none';
-        }
-        toast(`✅ تم اختيار المشتري: ${name}`);
-    };
-
-    function showAllSuppliers() {
-        const input = document.getElementById('tSupplierName');
-        if (!input) {
-            console.warn('⚠️ tSupplierName input not found');
-            return;
-        }
-        
-        if (people.length === 0) {
-            toast('⚠️ لا يوجد أشخاص مسجلون، قم بإضافة أشخاص أولاً');
-            return;
-        }
-        
-        showSupplierSuggestions(input);
-    }
-
-    function showAllBuyers() {
-        const input = document.getElementById('tBuyerName');
-        if (!input) {
-            console.warn('⚠️ tBuyerName input not found');
-            return;
-        }
-        
-        if (people.length === 0) {
-            toast('⚠️ لا يوجد أشخاص مسجلون، قم بإضافة أشخاص أولاً');
-            return;
-        }
-        
-        showBuyerSuggestions(input);
-    }
-
-    // ================= AUTOCOMPLETE EVENT LISTENERS =================
+    // ================= Autocomplete Event Listeners =================
     document.addEventListener('click', function(e) {
         const target = e.target;
-        
         if (target.id === 'tSupplierName') {
-            e.preventDefault();
-            e.stopPropagation();
-            setTimeout(() => {
-                if (people.length > 0) {
-                    showAllSuppliers();
-                } else {
-                    toast('⚠️ لا يوجد أشخاص مسجلون، قم بإضافة أشخاص أولاً');
-                }
-            }, 50);
+            e.preventDefault(); e.stopPropagation();
+            setTimeout(() => { if (people.length > 0) showAllSuppliers(); }, 50);
         }
-        
         if (target.id === 'tBuyerName') {
-            e.preventDefault();
-            e.stopPropagation();
-            setTimeout(() => {
-                if (people.length > 0) {
-                    showAllBuyers();
-                } else {
-                    toast('⚠️ لا يوجد أشخاص مسجلون، قم بإضافة أشخاص أولاً');
-                }
-            }, 50);
+            e.preventDefault(); e.stopPropagation();
+            setTimeout(() => { if (people.length > 0) showAllBuyers(); }, 50);
         }
     });
 
-    document.addEventListener('input', function(e) {
-        const target = e.target;
-        
-        if (target.id === 'tSupplierName') {
-            const value = target.value.trim().toLowerCase();
-            const suggestionsDiv = document.getElementById('supplierSuggestions');
-            if (!suggestionsDiv) return;
-            
-            if (value === '') {
-                showAllSuppliers();
-                return;
-            }
-            
-            const suppliers = people.filter(p => 
-                (p.type === 'supplier' || p.type === 'both') && 
-                p.full_name.toLowerCase().includes(value)
-            );
-            
-            if (suppliers.length === 0) {
-                suggestionsDiv.innerHTML = `
-                    <div style="padding:15px 14px; color:var(--text-dim); text-align:center; font-size:0.85rem;">
-                        لا توجد نتائج مطابقة لـ "${value}"
-                    </div>
-                `;
-                suggestionsDiv.style.display = 'block';
-                return;
-            }
-            
-            suggestionsDiv.innerHTML = suppliers.map(p => `
-                <div class="suggestion-item" 
-                     data-name="${p.full_name}"
-                     onclick="window.selectSupplier('${p.full_name.replace(/'/g, "\\'")}')"
-                     onmouseover="this.style.background='var(--panel)'" 
-                     onmouseout="this.style.background='transparent'"
-                     style="padding:12px 16px; cursor:pointer; border-bottom:1px solid var(--border-soft); transition:background 0.2s; display:flex; justify-content:space-between; align-items:center;">
-                    <div>
-                        <span style="color:var(--cream); font-weight:500; font-size:0.95rem;">${p.full_name}</span>
-                        ${p.phone ? `<span style="color:var(--text-dim); font-size:0.75rem; margin-right:8px;">📞 ${p.phone}</span>` : ''}
-                    </div>
-                    ${p.address ? `<span style="color:var(--text-dim); font-size:0.7rem;">📍 ${p.address}</span>` : ''}
-                </div>
-            `).join('');
-            
-            const rect = target.getBoundingClientRect();
-            suggestionsDiv.style.position = 'fixed';
-            suggestionsDiv.style.top = (rect.bottom + 4) + 'px';
-            suggestionsDiv.style.left = rect.left + 'px';
-            suggestionsDiv.style.width = rect.width + 'px';
-            suggestionsDiv.style.maxHeight = '250px';
-            suggestionsDiv.style.overflowY = 'auto';
-            suggestionsDiv.style.background = 'var(--panel-2)';
-            suggestionsDiv.style.border = '1px solid var(--border)';
-            suggestionsDiv.style.borderRadius = '10px';
-            suggestionsDiv.style.boxShadow = '0 8px 30px rgba(0,0,0,0.5)';
-            suggestionsDiv.style.zIndex = '9999';
-            suggestionsDiv.style.display = 'block';
-            suggestionsDiv.style.padding = '4px 0';
-        }
-        
-        if (target.id === 'tBuyerName') {
-            const value = target.value.trim().toLowerCase();
-            const suggestionsDiv = document.getElementById('buyerSuggestions');
-            if (!suggestionsDiv) return;
-            
-            if (value === '') {
-                showAllBuyers();
-                return;
-            }
-            
-            const buyers = people.filter(p => 
-                (p.type === 'buyer' || p.type === 'both') && 
-                p.full_name.toLowerCase().includes(value)
-            );
-            
-            if (buyers.length === 0) {
-                suggestionsDiv.innerHTML = `
-                    <div style="padding:15px 14px; color:var(--text-dim); text-align:center; font-size:0.85rem;">
-                        لا توجد نتائج مطابقة لـ "${value}"
-                    </div>
-                `;
-                suggestionsDiv.style.display = 'block';
-                return;
-            }
-            
-            suggestionsDiv.innerHTML = buyers.map(p => `
-                <div class="suggestion-item" 
-                     data-name="${p.full_name}"
-                     onclick="window.selectBuyer('${p.full_name.replace(/'/g, "\\'")}')"
-                     onmouseover="this.style.background='var(--panel)'" 
-                     onmouseout="this.style.background='transparent'"
-                     style="padding:12px 16px; cursor:pointer; border-bottom:1px solid var(--border-soft); transition:background 0.2s; display:flex; justify-content:space-between; align-items:center;">
-                    <div>
-                        <span style="color:var(--cream); font-weight:500; font-size:0.95rem;">${p.full_name}</span>
-                        ${p.phone ? `<span style="color:var(--text-dim); font-size:0.75rem; margin-right:8px;">📞 ${p.phone}</span>` : ''}
-                    </div>
-                    ${p.address ? `<span style="color:var(--text-dim); font-size:0.7rem;">📍 ${p.address}</span>` : ''}
-                </div>
-            `).join('');
-            
-            const rect = target.getBoundingClientRect();
-            suggestionsDiv.style.position = 'fixed';
-            suggestionsDiv.style.top = (rect.bottom + 4) + 'px';
-            suggestionsDiv.style.left = rect.left + 'px';
-            suggestionsDiv.style.width = rect.width + 'px';
-            suggestionsDiv.style.maxHeight = '250px';
-            suggestionsDiv.style.overflowY = 'auto';
-            suggestionsDiv.style.background = 'var(--panel-2)';
-            suggestionsDiv.style.border = '1px solid var(--border)';
-            suggestionsDiv.style.borderRadius = '10px';
-            suggestionsDiv.style.boxShadow = '0 8px 30px rgba(0,0,0,0.5)';
-            suggestionsDiv.style.zIndex = '9999';
-            suggestionsDiv.style.display = 'block';
-            suggestionsDiv.style.padding = '4px 0';
-        }
+    document.addEventListener('focus', function(e) {
+        if (e.target.id === 'tSupplierName' && people.length > 0) showAllSuppliers();
+        if (e.target.id === 'tBuyerName' && people.length > 0) showAllBuyers();
     });
 
     document.addEventListener('click', function(e) {
-        const supplierInput = document.getElementById('tSupplierName');
-        const buyerInput = document.getElementById('tBuyerName');
-        const supplierSuggestions = document.getElementById('supplierSuggestions');
-        const buyerSuggestions = document.getElementById('buyerSuggestions');
-        
-        if (supplierSuggestions && supplierInput) {
-            if (!e.target.closest('#tSupplierName') && !e.target.closest('#supplierSuggestions')) {
-                supplierSuggestions.style.display = 'none';
-            }
+        if (!e.target.closest('#tSupplierName') && !e.target.closest('#supplierSuggestions')) {
+            const s = document.getElementById('supplierSuggestions');
+            if (s) s.style.display = 'none';
         }
-        
-        if (buyerSuggestions && buyerInput) {
-            if (!e.target.closest('#tBuyerName') && !e.target.closest('#buyerSuggestions')) {
-                buyerSuggestions.style.display = 'none';
-            }
+        if (!e.target.closest('#tBuyerName') && !e.target.closest('#buyerSuggestions')) {
+            const s = document.getElementById('buyerSuggestions');
+            if (s) s.style.display = 'none';
         }
     });
 
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
-            const supplierSuggestions = document.getElementById('supplierSuggestions');
-            const buyerSuggestions = document.getElementById('buyerSuggestions');
-            if (supplierSuggestions) supplierSuggestions.style.display = 'none';
-            if (buyerSuggestions) buyerSuggestions.style.display = 'none';
+            const ss = document.getElementById('supplierSuggestions');
+            const bs = document.getElementById('buyerSuggestions');
+            if (ss) ss.style.display = 'none';
+            if (bs) bs.style.display = 'none';
         }
     });
-
-    async function loadPeopleForAutocomplete() {
-        const data = await fetchPeople();
-        if (data && data.length > 0) {
-            people = data;
-            console.log('✅ People loaded for autocomplete:', people.length);
-        } else {
-            console.warn('⚠️ No people data available');
-        }
-    }
-
-    function initAutocomplete() {
-        console.log('🔄 Initializing autocomplete...');
-        loadPeopleForAutocomplete();
-    }
 
     // ================= Input Events =================
     document.addEventListener('input', function(e) {
         const target = e.target;
-        if (target.id === 'tQtyType' || target.id === 'tQtyCount' ||
-            target.id === 'tPurchasePrice' || target.id === 'tSalePrice') {
+        if (target.id === 'tQtyType' || target.id === 'tQtyCount' || target.id === 'tPurchasePrice' || target.id === 'tSalePrice') {
             updateTransactionTotals();
         }
     });
 
-    document.addEventListener('focus', function(e) {
-        if (e.target.id === 'tSupplierName') {
-            if (people.length > 0) {
-                showAllSuppliers();
+    // ================= Partner Payment Edit Modal =================
+    async function editPartnerPayment(id) {
+        const payment = partnerPayments.find(p => Number(p.id) === Number(id));
+        if (!payment) { toast('⚠️ السحب غير موجود'); return; }
+        const partnerName = payment.capital?.partner_name || 'غير معروف';
+        const currentAmount = Number(payment.amount || 0);
+        const currentDate = payment.payment_date ? String(payment.payment_date).slice(0, 16) : '';
+        const currentNotes = payment.notes || '';
+        const modalHtml = `
+            <div id="editPartnerPaymentModal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); display:flex; align-items:center; justify-content:center; z-index:99999;">
+                <div style="background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); padding:30px; max-width:500px; width:90%; max-height:90vh; overflow-y:auto;">
+                    <h3 style="margin-top:0; color:var(--cream);">✏️ تعديل السحب</h3>
+                    <p style="color:var(--text-dim);">الشريك: <strong style="color:var(--cream);">${partnerName}</strong></p>
+                    <div style="margin:15px 0; padding:15px; background:var(--panel-2); border-radius:9px;">
+                        <p style="margin:5px 0;">المبلغ الحالي: <strong style="color:var(--gold);">${fmtMoney(currentAmount)} دج</strong></p>
+                        <p style="margin:5px 0; color:var(--text-dim); font-size:0.75rem;">(${formatMoneyWithWords(currentAmount)})</p>
+                    </div>
+                    <div class="form-row">
+                        <label>المبلغ الجديد (دج)</label>
+                        <input type="number" id="editPaymentAmount" min="0" step="1" value="${currentAmount}" style="width:100%; padding:10px; background:var(--panel-2); border:1px solid var(--border); border-radius:9px; color:var(--text);">
+                        <small style="color:var(--text-dim); font-size:0.7rem;" id="editPaymentAmountWords">${formatMoneyWithWords(currentAmount)}</small>
+                    </div>
+                    <div class="form-row">
+                        <label>تاريخ السحب</label>
+                        <input type="datetime-local" id="editPaymentDate" value="${currentDate}" style="width:100%; padding:10px; background:var(--panel-2); border:1px solid var(--border); border-radius:9px; color:var(--text);">
+                    </div>
+                    <div class="form-row">
+                        <label>ملاحظات</label>
+                        <input type="text" id="editPaymentNotes" value="${currentNotes.replace(/"/g, '&quot;')}" placeholder="ملاحظات إضافية" style="width:100%; padding:10px; background:var(--panel-2); border:1px solid var(--border); border-radius:9px; color:var(--text);">
+                    </div>
+                    <div style="display:flex; gap:10px; margin-top:15px;">
+                        <button type="button" class="btn" id="saveEditPaymentBtn" style="flex:1;">💾 حفظ التعديلات</button>
+                        <button type="button" class="btn ghost" id="closeEditPaymentBtn" style="flex:1;">❌ إلغاء</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        const oldModal = document.getElementById('editPartnerPaymentModal');
+        if (oldModal) oldModal.remove();
+        document.body.insertAdjacentHTML('beforeend', modalHtml);
+        const modal = document.getElementById('editPartnerPaymentModal');
+        const closeBtn = document.getElementById('closeEditPaymentBtn');
+        const saveBtn = document.getElementById('saveEditPaymentBtn');
+        const amountInput = document.getElementById('editPaymentAmount');
+        const amountWordsEl = document.getElementById('editPaymentAmountWords');
+        if (amountInput) {
+            amountInput.addEventListener('input', function() {
+                const val = Number(this.value || 0);
+                if (amountWordsEl) amountWordsEl.textContent = val > 0 ? formatMoneyWithWords(val) : 'صفر دينار';
+            });
+        }
+        if (closeBtn) closeBtn.addEventListener('click', function() { modal.remove(); });
+        if (modal) modal.addEventListener('click', function(e) { if (e.target === this) this.remove(); });
+        if (saveBtn) {
+            saveBtn.addEventListener('click', async function() {
+                const newAmount = Number(amountInput.value || 0);
+                const newDate = document.getElementById('editPaymentDate').value;
+                const newNotes = document.getElementById('editPaymentNotes').value.trim();
+                if (newAmount <= 0) { toast('⚠️ المبلغ يجب أن يكون أكبر من صفر'); amountInput.focus(); return; }
+                if (!newDate) { toast('⚠️ الرجاء اختيار تاريخ السحب'); return; }
+                this.disabled = true;
+                this.textContent = '⏳ جاري الحفظ...';
+                try {
+                    const updateData = { amount: newAmount, payment_date: newDate, notes: newNotes || null };
+                    const profitEl = document.getElementById('capitalTotalProfit');
+                    if (profitEl) {
+                        const cleaned = (profitEl.textContent || '0').replace(/,/g, '').replace(/[^0-9.-]/g, '');
+                        updateData.total_profit = parseFloat(cleaned) || 0;
+                    }
+                    const result = await putData(`/api/partner-payments/${id}`, updateData);
+                    if (result && result.success) {
+                        const index = partnerPayments.findIndex(p => Number(p.id) === Number(id));
+                        if (index !== -1) partnerPayments[index] = result.payment;
+                        renderPartnerPayments(); updatePartnerSelect(); updatePartnerInfoBox(); renderCapitals();
+                        modal.remove();
+                        toast('✅ تم تحديث السحب بنجاح 🎉');
+                    } else toast(result?.error || '❌ حدث خطأ');
+                } catch (error) { console.error('❌ Error:', error); toast('❌ حدث خطأ'); }
+                finally { this.disabled = false; this.textContent = '💾 حفظ التعديلات'; }
+            });
+        }
+        if (amountInput) setTimeout(() => amountInput.focus(), 100);
+    }
+
+    // ================= Initialize =================
+    function init() {
+        setupEventListeners();
+        loadAllData().then(() => {
+            renderWorkers();
+            renderCosts();
+            renderTransactions();
+            renderPeople();
+            renderPayments();
+            renderCapitals();
+            renderProfits();
+            renderHome();
+            updateTransactionStats();
+            updateTransactionTotals();
+            updateCapitalTotal();
+            if (typeof renderCapitalProfits === 'function') {
+                renderCapitalProfits();
+                calculatePartnerProfits();
+            }
+            setTimeout(() => {
+                calculatePartnerProfits();
+                renderProfits();
+            }, 100);
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+
+})();
+</script>
+
+<div id="customConfirmModal" class="custom-confirm-overlay">
+    <div class="custom-confirm-box">
+        <div class="custom-confirm-icon">⚠️</div>
+        <h3 id="customConfirmTitle">تأكيد العملية</h3>
+        <p id="customConfirmMessage">هل أنت متأكد؟</p>
+        <div class="custom-confirm-actions">
+            <button type="button" id="customConfirmCancel">إلغاء</button>
+            <button type="button" id="customConfirmOk">تأكيد</button>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================ -->
+<!--  🧮 سكربت الآلة الحاسبة                       -->
+<!-- ============================================ -->
+<script>
+(function() {
+    'use strict';
+    function initCalculator() {
+        const display = document.getElementById('calcDisplay');
+        const expressionEl = document.getElementById('calcExpression');
+        const grid = document.getElementById('calcGrid');
+        const clearAllBtn = document.getElementById('calcClearAll');
+        if (!display || !grid) return;
+        console.log('🧮 Calculator initialized');
+        let currentInput = '0', previousInput = '', operation = null, shouldResetDisplay = false, fullExpression = '';
+        function updateDisplay() { display.textContent = currentInput; }
+        function updateExpression() { if (expressionEl) expressionEl.innerHTML = fullExpression || '&nbsp;'; }
+        function inputDigit(digit) {
+            if (shouldResetDisplay) { currentInput = digit; shouldResetDisplay = false; }
+            else { if (currentInput === '0' && digit !== '.') currentInput = digit; else currentInput += digit; }
+            updateDisplay();
+        }
+        function inputDecimal() {
+            if (shouldResetDisplay) { currentInput = '0.'; shouldResetDisplay = false; updateDisplay(); return; }
+            if (!currentInput.includes('.')) currentInput += '.';
+            updateDisplay();
+        }
+        function calculate(a, b, op) {
+            a = parseFloat(a); b = parseFloat(b);
+            switch (op) {
+                case '+': return a + b;
+                case '-': return a - b;
+                case '*': return a * b;
+                case '/': return b !== 0 ? a / b : 'خطأ';
+                default: return b;
             }
         }
-        if (e.target.id === 'tBuyerName') {
-            if (people.length > 0) {
-                showAllBuyers();
+        function handleOperator(op) {
+            const current = parseFloat(currentInput);
+            if (operation && !shouldResetDisplay) {
+                const result = calculate(previousInput, current, operation);
+                if (result === 'خطأ') { currentInput = 'خطأ'; operation = null; previousInput = ''; shouldResetDisplay = true; updateDisplay(); return; }
+                currentInput = String(result);
+                updateDisplay();
+            }
+            previousInput = parseFloat(currentInput);
+            operation = op;
+            shouldResetDisplay = true;
+            const opSymbols = { '+': ' + ', '-': ' - ', '*': ' × ', '/': ' ÷ ' };
+            fullExpression = currentInput + (opSymbols[op] || ' ' + op + ' ');
+            updateExpression();
+        }
+        function handleEquals() {
+            const current = parseFloat(currentInput);
+            if (operation && !isNaN(previousInput) && !isNaN(current)) {
+                const result = calculate(previousInput, current, operation);
+                const opSymbols = { '+': ' + ', '-': ' - ', '*': ' × ', '/': ' ÷ ' };
+                const opSymbol = opSymbols[operation] || ' ' + operation + ' ';
+                fullExpression = previousInput + opSymbol + current + ' =';
+                updateExpression();
+                currentInput = String(result);
+                operation = null; previousInput = ''; shouldResetDisplay = true;
+                updateDisplay();
             }
         }
-    });
-
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('#tSupplierName') && !e.target.closest('#supplierSuggestions')) {
-            const suggestions = document.getElementById('supplierSuggestions');
-            if (suggestions) suggestions.style.display = 'none';
+        function clearAll() {
+            currentInput = '0'; previousInput = ''; operation = null; shouldResetDisplay = false; fullExpression = '';
+            updateDisplay(); updateExpression();
         }
-        if (!e.target.closest('#tBuyerName') && !e.target.closest('#buyerSuggestions')) {
-            const suggestions = document.getElementById('buyerSuggestions');
-            if (suggestions) suggestions.style.display = 'none';
+        function backspace() {
+            if (currentInput.length > 1) currentInput = currentInput.slice(0, -1);
+            else currentInput = '0';
+            updateDisplay();
         }
-    });
+        function handlePercentage() {
+            const current = parseFloat(currentInput);
+            if (!isNaN(current)) {
+                fullExpression = currentInput + '% =';
+                updateExpression();
+                currentInput = String(current / 100);
+                updateDisplay();
+            }
+        }
+        document.querySelectorAll('.calc-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault(); e.stopPropagation();
+                const value = this.dataset.value;
+                const type = this.dataset.type;
+                if (type === 'clear') clearAll();
+                else if (type === 'back') backspace();
+                else if (type === 'percent') handlePercentage();
+                else if (type === 'eq') handleEquals();
+                else if (type === 'op') handleOperator(value);
+                else if (type === 'dot') inputDecimal();
+                else inputDigit(value);
+            });
+        });
+        if (clearAllBtn) clearAllBtn.addEventListener('click', function(e) { e.preventDefault(); clearAll(); });
+        document.addEventListener('keydown', function(e) {
+            const target = e.target;
+            const isEditable = target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.tagName === 'SELECT' || target.isContentEditable);
+            if (isEditable) return;
+            const panel = document.getElementById('panel-calculator');
+            if (!panel || !panel.classList.contains('active')) return;
+            const key = e.key;
+            if (key >= '0' && key <= '9') { inputDigit(key); e.preventDefault(); }
+            else if (key === '.') { inputDecimal(); e.preventDefault(); }
+            else if (key === '+') { handleOperator('+'); e.preventDefault(); }
+            else if (key === '-') { handleOperator('-'); e.preventDefault(); }
+            else if (key === '*') { handleOperator('*'); e.preventDefault(); }
+            else if (key === '/') { handleOperator('/'); e.preventDefault(); }
+            else if (key === 'Enter' || key === '=') { handleEquals(); e.preventDefault(); }
+            else if (key === 'Escape' || key === 'c' || key === 'C') { clearAll(); e.preventDefault(); }
+            else if (key === 'Backspace') { backspace(); e.preventDefault(); }
+            else if (key === '%') { handlePercentage(); e.preventDefault(); }
+        });
+        updateDisplay();
+        updateExpression();
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initCalculator);
+    else initCalculator();
+})();
+</script>
 
+<!-- ============================================ -->
+<!--  🎬 سكربت شاشة الترحيب (الوحيد)              -->
+<!-- ============================================ -->
+<script>
+(function() {
+    'use strict';
+    console.log('🎬 Splash script loaded');
+    const SPLASH_KEY = 'gareh_splash_shown';
+    const TOTAL_DURATION = 2800;
+    const FADE_DURATION = 700;
+    function removeSplash() {
+        const splash = document.getElementById('splashScreen');
+        if (!splash) return;
+        splash.classList.add('splash-hide');
+        setTimeout(function() {
+            if (splash && splash.parentNode) {
+                splash.classList.add('splash-removed');
+                splash.parentNode.removeChild(splash);
+                console.log('🎬 Splash removed from DOM ✅');
+            }
+        }, FADE_DURATION);
+    }
+    function shouldSkipSplash() {
+        try { return sessionStorage.getItem(SPLASH_KEY) === 'true'; }
+        catch (e) { return false; }
+    }
+    function markAsShown() {
+        try { sessionStorage.setItem(SPLASH_KEY, 'true'); }
+        catch (e) {}
+    }
+    function startAnimations(splash) {
+        const chars = splash.querySelectorAll('.splash-char');
+        const egg = document.getElementById('splashEgg');
+        const sub = document.getElementById('splashSub');
+        const bar = document.getElementById('splashBar');
+        const fill = document.getElementById('splashFill');
+        chars.forEach((char, index) => {
+            setTimeout(function() { char.classList.add('visible'); }, 150 + (index * 120));
+        });
+        setTimeout(function() {
+            if (bar) bar.classList.add('visible');
+            if (fill) fill.style.width = '100%';
+        }, 500);
+        setTimeout(function() { if (sub) sub.classList.add('visible'); }, 600);
+        setTimeout(function() { if (chars[0]) chars[0].classList.add('gold'); }, 800);
+        setTimeout(function() {
+            if (egg) {
+                egg.style.background = 'linear-gradient(160deg, #f5c842, #dba743, #b5822f)';
+                egg.style.boxShadow = '0 8px 50px rgba(219, 167, 67, 0.6)';
+                egg.style.animation = 'none';
+            }
+        }, 1000);
+    }
+    function initSplash() {
+        const splash = document.getElementById('splashScreen');
+        if (!splash) { console.warn('⚠️ Splash screen not found'); return; }
+        if (shouldSkipSplash()) {
+            console.log('⏭️ تخطي شاشة الترحيب (عُرضت مسبقاً)');
+            removeSplash();
+            return;
+        }
+        markAsShown();
+        console.log('🎬 عرض شاشة الترحيب...');
+        startAnimations(splash);
+        setTimeout(function() { removeSplash(); }, TOTAL_DURATION);
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initSplash);
+    else setTimeout(initSplash, 50);
 })();
 </script>
 

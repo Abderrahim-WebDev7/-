@@ -1,5 +1,5 @@
 <section class="panel active" id="panel-home">
-    <div class="grid cols-6" style="margin-bottom:18px;">
+    <div class="grid cols-6">
         <div class="card stat-card">
             <div class="stat-label">عدد العمّال</div>
             <div class="stat-num" id="statWorkers">0</div>
@@ -9,51 +9,72 @@
             <div class="stat-num" id="statOrdersToday">0</div>
         </div>
         <div class="card stat-card">
-            <div class="stat-label">مبيعات اليوم <small>(دج)</small></div>
-            <div class="stat-num" id="statSalesToday">0</div>
+            <div class="stat-label">مبيعات اليوم</div>
+            <div class="stat-num" id="statSalesToday">0 دج</div>
+            <small id="statSalesTodayCentime">صفر سنتيم</small>
         </div>
         <div class="card stat-card">
-            <div class="stat-label">تكاليف اليوم <small>(دج)</small></div>
-            <div class="stat-num" id="statCostsToday">0</div>
+            <div class="stat-label">تكاليف اليوم</div>
+            <div class="stat-num" id="statCostsToday">0 دج</div>
+            <small id="statCostsTodayCentime">صفر سنتيم</small>
         </div>
         <div class="card stat-card">
-            <div class="stat-label">أرباح اليوم <small>(دج)</small></div>
-            <div class="stat-num" id="statProfitToday">0</div>
+            <div class="stat-label">الربح الصافي اليوم</div>
+            <div class="stat-num" id="statProfitToday">0 دج</div>
+            <small id="statProfitTodayCentime">صفر سنتيم</small>
         </div>
         <div class="card stat-card">
-            <div class="stat-label">أرباح الشهر <small>(دج)</small></div>
-            <div class="stat-num" id="statProfitMonth">0</div>
+            <div class="stat-label">أرباح هذا الشهر</div>
+            <div class="stat-num" id="statProfitMonth">0 دج</div>
+            <small id="statProfitMonthCentime">صفر سنتيم</small>
         </div>
     </div>
-    <div class="grid cols-2" style="margin-bottom:18px;">
-        <div class="card">
-            <h3><span class="badge-dot"></span> آخر الطلبيات</h3>
-            <table>
-                <thead><tr><th>التاريخ</th><th>الزبون</th><th>الكمية</th></tr></thead>
-                <tbody id="homeOrdersBody"><tr class="empty-row"><td colspan="3">لا توجد طلبيات بعد</td></tr></tbody>
-            </table>
-        </div>
-        <div class="card">
-            <h3><span class="badge-dot"></span> آخر عمليات البيع</h3>
-            <table>
-                <thead><tr><th>التاريخ</th><th>الزبون</th><th>الحالة</th></tr></thead>
-                <tbody id="homeSalesBody"><tr class="empty-row"><td colspan="3">لا توجد مبيعات بعد</td></tr></tbody>
-            </table>
-        </div>
-    </div>
-    <div class="card" style="margin-bottom:18px;">
-        <h3><span class="badge-dot"></span> الكمية المتبقية من البيض غير المباع</h3>
-        <p style="font-size:0.76rem; color:var(--text-dim); margin-top:-8px; margin-bottom:14px;">دفعات الطلبيات التي ما زال منها كمية لم تُباع بعد، مرتبة حسب تاريخ الشراء.</p>
-        <table>
-            <thead><tr><th>تاريخ الشراء</th><th>الزبون / المصدر</th><th>النوع</th><th>الكمية المتبقية (بيضة)</th></tr></thead>
-            <tbody id="homeStockBody"><tr class="empty-row"><td colspan="4">لا توجد كمية متبقية</td></tr></tbody>
-        </table>
-    </div>
+
     <div class="card">
-        <h3><span class="badge-dot"></span> آخر التكاليف</h3>
-        <table>
-            <thead><tr><th>التاريخ</th><th>السبب</th><th>المبلغ</th></tr></thead>
-            <tbody id="homeCostsBody"><tr class="empty-row"><td colspan="3">لا توجد تكاليف بعد</td></tr></tbody>
-        </table>
+        <h3><span class="badge-dot"></span> السلع التي لم يتم خروجها</h3>
+        <p class="card-kicker">جميع الدفعات المعلّقة عبر الأيام السابقة والحالية</p>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>التاريخ</th>
+                        <th>المورد</th>
+                        <th>المشتري</th>
+                        <th>النوع</th>
+                        <th>الكمية</th>
+                        <th>الحالة</th>
+                    </tr>
+                </thead>
+                <tbody id="homeUndeliveredBody">
+                    <tr class="empty-row"><td colspan="6">جميع السلع تم خروجها</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="grid cols-1">
+        <div class="card">
+            <h3><span class="badge-dot"></span> آخر الطلبيات (اليوم)</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>التاريخ</th><th>المورد</th><th>الكمية</th><th>المبلغ</th></tr></thead>
+                    <tbody id="homeOrdersBody">
+                        <tr class="empty-row"><td colspan="4">لا توجد طلبيات اليوم</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3><span class="badge-dot"></span> تكاليف اليوم</h3>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>التاريخ</th><th>السبب</th><th>المبلغ</th></tr></thead>
+                <tbody id="homeCostsBody">
+                    <tr class="empty-row"><td colspan="3">لا توجد تكاليف اليوم</td></tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </section>

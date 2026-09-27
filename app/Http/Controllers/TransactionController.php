@@ -230,4 +230,67 @@ public function paySupplier($id)
         return response()->json(['error' => $e->getMessage()], 500);
     }
 }
+
+public function updateTakenQuantity(Request $request, $id)
+{
+    try {
+        $transaction = Transaction::find($id);
+
+        if (!$transaction) {
+            return response()->json([
+                'error' => 'المعاملة غير موجودة'
+            ], 404);
+        }
+
+        $takenQty = (int) $request->input('taken_qty', 0);
+
+        $totalQty = (int) (
+            $transaction->total_qty ?: $transaction->qty_count
+        );
+
+        // منع القيم غير الصحيحة
+        if ($takenQty < 0) {
+            $takenQty = 0;
+        }
+
+        if ($takenQty > $totalQty) {
+            $takenQty = $totalQty;
+        }
+
+        // حساب الكمية المتبقية
+        $remainingQty = $totalQty - $takenQty;
+
+        // تحديد حالة الكمية
+        if ($remainingQty <= 0) {
+            $status = 'empty';
+        } elseif ($takenQty > 0 && $remainingQty > 0) {
+            $status = 'partial';
+        } else {
+            $status = 'full';
+        }
+
+        // تحديث المعاملة
+        $transaction->taken_qty = $takenQty;
+        $transaction->remaining_qty = $remainingQty;
+        $transaction->quantity_status = $status;
+
+        $transaction->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'تم تحديث الكمية المأخوذة بنجاح',
+            'transaction' => $transaction
+        ]);
+
+    } catch (\Exception $e) {
+
+        Log::error(
+            'Error updating taken quantity: ' . $e->getMessage()
+        );
+
+        return response()->json([
+            'error' => $e->getMessage()
+        ], 500);
+    }
+}
 }
