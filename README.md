@@ -1,66 +1,374 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+<div align="center">
 
-## About Laravel
+# 🥚 GARE7
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### نظام إدارة شركة البيض — نظام محاسبي متكامل لشركات تربية وبيع البيض
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+![Laravel](https://img.shields.io/badge/Laravel-11.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
+![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?style=for-the-badge&logo=php&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-8.0+-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![Chart.js](https://img.shields.io/badge/Chart.js-4.x-FF6384?style=for-the-badge&logo=chart.js&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+**نظام محاسبي عربي متكامل، مصمم خصيصاً لشركات تربية وبيع البيض**
 
-## Learning Laravel
+[المزايا](#-المزايا) • [اللقطات](#-لقطات-الشاشة) • [التثبيت](#-التثبيت) • [الاستخدام](#-الاستخدام) • [المساهمة](#-المساهمة)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+</div>
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 📖 نظرة عامة
 
-## Laravel Sponsors
+**GARE7** هو نظام إدارة أعمال متكامل، مفتوح المصدر، مصمم خصيصاً لشركات **تربية وبيع البيض**. يوفر النظام حلاً شاملاً لإدارة:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- 📦 **المشتريات والمبيعات** — تسجيل وربط كل عملية شراء بعملية بيع
+- 👷 **العمّال والأجور** — حضور، غياب، رواتب، ودفعات
+- 💰 **رأس المال والشركاء** — توزيع الأرباح، سحوبات الشركاء، النسب المئوية
+- 📊 **الأرباح الشهرية** — تقارير مفصلة، رسوم بيانية، وحفظ تاريخي
+- 💸 **المدفوعات** — متابعة المديونيات للعملاء والموردين
+- 📋 **التكاليف** — تسجيل ومتابعة جميع المصروفات
+- 🧮 **آلة حاسبة** — مدمجة للاستخدام السريع
+- 📈 **لوحة تحكم** — ملخص شامل بالعربية
 
-### Premium Partners
+النظام مصمم بواجهة عربية بالكامل (RTL) مع تصميم عصري داكن، ويعمل محلياً بدون الحاجة لاتصال بالإنترنت.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+---
 
-## Contributing
+## 🎯 المشاكل التي يحلها
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+إدارة شركة بيض تقليدية تواجه عدة تحديات:
 
-## Code of Conduct
+| # | المشكلة التقليدية | الحل في GARE7 |
+|---|-------------------|----------------|
+| 1 | 📝 **السجلات الورقية** — ضياع دفاتر الحسابات | 💾 قاعدة بيانات رقمية آمنة مع نسخ احتياطي |
+| 2 | 🧮 **حساب يدوي معقد** — أخطاء في حساب الأرباح وتوزيعها | 🎯 حساب تلقائي دقيق للنسب والأرباح |
+| 3 | 👥 **خلط حسابات الشركاء** — صعوبة معرفة نصيب كل شريك | 📊 تتبع منفصل لكل شريك مع نسبته المئوية |
+| 4 | 💸 **متابعة المديونيات** — نسيان من دفع ومن لم يدفع | 🔔 تنبيهات واضحة بالمبالغ غير المسددة |
+| 5 | 👷 **حساب أجور العمال** — حساب يدوي لأيام الحضور والراحة | 🖱️ تسجيل حضور بضغطة زر + حساب تلقائي |
+| 6 | 📈 **غياب التقارير** — عدم معرفة أداء الشهر | 📊 تقارير شهرية + رسوم بيانية تفاعلية |
+| 7 | 🥚 **تتبع البيض المباع** — عدم معرفة الكميات المتبقية | 📦 تتبع دقيق للكميات المتبقية مع كل بيع |
+| 8 | 🔗 **فصل المشتريات عن المبيعات** — عدم معرفة الربح الحقيقي | 🔗 ربط تلقائي بين الشراء والبيع لمعرفة الربح الفوري |
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## ✨ المزايا
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 🎨 واجهة وتجربة المستخدم
+- ✅ **واجهة عربية بالكامل** (RTL) مع خطوط احترافية
+- ✅ **تصميم داكن عصري** مريح للعين
+- ✅ **تصميم متجاوب** — يعمل على الحاسوب والهاتف
+- ✅ **شاشة ترحيب متحركة** (Splash Screen)
+- ✅ **آلة حاسبة جانبية** مدمجة
+- ✅ **زر تحديث سريع** لكل الصفحة
 
-## License
+### 📦 المشتريات والمبيعات
+- ✅ **ربط تلقائي** بين الشراء والبيع في عملية واحدة
+- ✅ **تتبع الكميات**: كامل / جزئي / فارغ
+- ✅ **حساب الربح الفوري** لكل عملية
+- ✅ **تحديث ديناميكي** للإجماليات أثناء الكتابة
+- ✅ **دعم اللوح والكرتون** (تحويل تلقائي)
+- ✅ **حالة الدفع** للبائع والمشتري (مدفوع / غير مدفوع)
+- ✅ **تأكيد خروج البضاعة** بضغطة زر
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 👷 العمّال والأجور
+- ✅ **تسجيل الحضور/الغياب/الراحة** يومياً بضغطة زر
+- ✅ **حساب تلقائي** للراتب حسب أيام الحضور
+- ✅ **دفع كامل أو جزئي** للراتب
+- ✅ **سجل كامل** لكل دفعة
+- ✅ **حساب المتبقي** تلقائياً
+- ✅ **منع تكرار التسجيل** لنفس اليوم
+
+### 💰 رأس المال والشركاء
+- ✅ **إدارة متعددة الشركاء** مع نسب مئوية
+- ✅ **حساب تلقائي للنسب** عند إضافة/حذف شريك
+- ✅ **توزيع الأرباح** حسب النسبة
+- ✅ **تسجيل السحوبات** من حصة كل شريك
+- ✅ **منع السحب أكثر من المستحق**
+- ✅ **عرض المبلغ المستحق** = رأس المال + الأرباح
+
+### 📊 الأرباح الشهرية
+- ✅ **حفظ تلقائي** لأرباح كل شهر
+- ✅ **فلترة حسب السنة** (2026 → 2100) والشهر
+- ✅ **رسوم بيانية تفاعلية** (أشرطة / خطوط)
+- ✅ **مقارنة** المشتريات/المبيعات/الأرباح
+- ✅ **حساب صافي الربح** بعد خصم المصروفات
+- ✅ **دعم السنة المالية** الكاملة
+
+### 💸 المدفوعات
+- ✅ **قائمة المشترين غير المدفوعين** مع المبالغ
+- ✅ **قائمة الموردين غير المدفوعين**
+- ✅ **تسديد كامل** أو **جزئي**
+- ✅ **توزيع المبلغ** على عدة معاملات تلقائياً
+- ✅ **تتبع المدفوع والمتبقي** لكل شخص
+
+### 📋 التكاليف والأشخاص
+- ✅ **تسجيل التكاليف** اليومية بالسبب والمبلغ
+- ✅ **إدارة الموردين والمشترين** (نوع: بائع/مشتري/كلاهما)
+- ✅ **إكمال تلقائي** للأسماء في النماذج
+- ✅ **بيانات كاملة**: اسم، هاتف، عنوان، ملاحظات
+
+### 🔢 إضافات
+- ✅ **كتابة المبالغ بالحروف** (سنتيم جزائري) تلقائياً
+- ✅ **تصدير الأرقام** بصيغة واضحة
+- ✅ **تأكيد مخصص** قبل الحذف
+- ✅ **إشعارات Toast** أنيقة
+- ✅ **معالجة الأخطاء** بلطف
+
+---
+
+## 🖼️ لقطات الشاشة
+
+<div align="center">
+
+### 🏠 الرئيسية
+![Dashboard](https://via.placeholder.com/800x450/0b0b0d/dba743?text=Dashboard)
+
+### 📦 المشتريات والمبيعات
+![Transactions](https://via.placeholder.com/800x450/0b0b0d/dba743?text=Transactions)
+
+### 👷 العمّال
+![Workers](https://via.placeholder.com/800x450/0b0b0d/dba743?text=Workers)
+
+### 💰 رأس المال
+![Capital](https://via.placeholder.com/800x450/0b0b0d/dba743?text=Capital)
+
+### 📊 الأرباح الشهرية
+![Profits](https://via.placeholder.com/800x450/0b0b0d/dba743?text=Profits)
+
+</div>
+
+> 💡 **ملاحظة**: استبدل الصور أعلاه بلقطات حقيقية من النظام
+
+---
+
+## 🛠️ التقنيات المستخدمة
+
+### Backend
+| التقنية | الإصدار | الاستخدام |
+|---------|---------|-----------|
+| [Laravel](https://laravel.com) | 11.x | إطار العمل الرئيسي |
+| [PHP](https://php.net) | 8.2+ | لغة البرمجة |
+| [MySQL](https://mysql.com) | 8.0+ | قاعدة البيانات (أو SQLite) |
+
+### Frontend
+| التقنية | الإصدار | الاستخدام |
+|---------|---------|-----------|
+| Vanilla JavaScript | ES6+ | منطق الواجهة |
+| [Chart.js](https://chartjs.org) | 4.x | الرسوم البيانية |
+| CSS3 | - | التنسيق |
+| Google Fonts | - | الخطوط العربية |
+
+### الأدوات
+| الأداة | الاستخدام |
+|--------|-----------|
+| [Composer](https://getcomposer.org) | إدارة مكتبات PHP |
+| [NPM](https://npmjs.com) | إدارة مكتبات Frontend |
+| [Vite](https://vitejs.dev) | بناء الأصول |
+| [Git](https://git-scm.com) | التحكم بالإصدارات |
+
+---
+
+## 📋 المتطلبات
+
+قبل التثبيت، تأكد من توفر:
+
+| المتطلب | الإصدار الأدنى | ملاحظات |
+|---------|----------------|---------|
+| **PHP** | 8.2 | مع إضافات: BCMath, Ctype, cURL, DOM, Fileinfo, JSON, Mbstring, OpenSSL, PCRE, PDO, Tokenizer, XML |
+| **Composer** | 2.x | [تحميل](https://getcomposer.org/download/) |
+| **Node.js** | 18.x | [تحميل](https://nodejs.org) |
+| **NPM** | 9.x | يأتي مع Node.js |
+| **MySQL** | 8.0 | أو SQLite (أبسط) |
+| **Git** | 2.x | [تحميل](https://git-scm.com) |
+
+### ✅ التحقق من التثبيت
+
+```bash
+php --version        # يجب أن يكون 8.2+
+composer --version   # يجب أن يكون 2.x
+node --version       # يجب أن يكون 18+
+npm --version        # يجب أن يكون 9+
+git --version        # يجب أن يكون 2.x
+
+---
+
+## 📥 التحميل والتثبيت خطوة بخطوة
+
+### 🔽 الخطوة 1: تحميل المشروع
+
+#### الطريقة A: باستخدام Git (موصى به)
+
+```bash
+# 1. افتح Terminal / CMD / Git Bash
+# 2. انتقل إلى المجلد الذي تريد المشروع فيه
+cd "C:\Users\YourName\Desktop"
+
+# 3. استنسخ المشروع
+git clone https://github.com/Abderrahim-WebDev7/-.git
+
+# 4. ادخل إلى مجلد المشروع
+cd -
+
+composer install
+⚠️ إذا واجهت خطأ:
+
+Composer could not find a composer.json file
+
+⚙️ الخطوة 3: إعداد ملف البيئة .env
+3.1 نسخ ملف البيئة
+bash
+# في Windows
+copy .env.example .env
+
+# في Linux/Mac
+cp .env.example .env
+
+php artisan key:generate
+
+
+
+
+
+
+
+
+
+
+
+📄 محتوى ملف .env الكامل مع الشرح
+هذا هو محتوى .env الموصى به بعد التعديل:
+
+env
+# ============================================
+#  إعدادات التطبيق الأساسية
+# ============================================
+APP_NAME=GARE7
+APP_ENV=local
+APP_KEY=base64:xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+APP_DEBUG=true
+APP_TIMEZONE=Africa/Algiers
+APP_URL=http://127.0.0.1:8000
+
+# ============================================
+#  إعدادات اللغة والمنطقة
+# ============================================
+APP_LOCALE=ar
+APP_FALLBACK_LOCALE=en
+APP_FAKER_LOCALE=ar_DZ
+
+# ============================================
+#  إعدادات الصيانة
+# ============================================
+APP_MAINTENANCE_DRIVER=file
+
+# ============================================
+#  إعدادات الأمان
+# ============================================
+BCRYPT_ROUNDS=12
+
+# ============================================
+#  إعدادات السجلات (Logs)
+# ============================================
+LOG_CHANNEL=stack
+LOG_STACK=single
+LOG_DEPRECATIONS_CHANNEL=null
+LOG_LEVEL=debug
+
+# ============================================
+#  إعدادات قاعدة البيانات
+#  ⚠️ اختر إحدى الطريقتين:
+# ============================================
+
+# ----- الطريقة 1: SQLite (الأبسط - بدون تثبيت) -----
+DB_CONNECTION=sqlite
+# لا تحتاج أي إعدادات إضافية
+
+# ----- الطريقة 2: MySQL (إذا كان مثبتاً) -----
+# علّق الأسطر أعلاه، وأزل التعليق عن الأسطر التالية
+# DB_CONNECTION=mysql
+# DB_HOST=127.0.0.1
+# DB_PORT=3306
+# DB_DATABASE=gareh
+# DB_USERNAME=root
+# DB_PASSWORD=
+
+# ============================================
+#  إعدادات الجلسات (Sessions)
+# ============================================
+SESSION_DRIVER=database
+SESSION_LIFETIME=120
+SESSION_ENCRYPT=false
+SESSION_PATH=/
+SESSION_DOMAIN=null
+
+# ============================================
+#  إعدادات البث والطوابير
+# ============================================
+BROADCAST_CONNECTION=log
+QUEUE_CONNECTION=database
+
+# ============================================
+#  إعدادات التخزين المؤقت (Cache)
+# ============================================
+CACHE_STORE=database
+CACHE_PREFIX=
+
+# ============================================
+#  إعدادات نظام الملفات
+# ============================================
+FILESYSTEM_DISK=local
+
+# ============================================
+#  إعدادات Redis (اختياري)
+# ============================================
+REDIS_CLIENT=phpredis
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+
+# ============================================
+#  إعدادات Memcached (اختياري)
+# ============================================
+MEMCACHED_HOST=127.0.0.1
+
+# ============================================
+#  إعدادات البريد الإلكتروني
+# ============================================
+MAIL_MAILER=log
+MAIL_HOST=127.0.0.1
+MAIL_PORT=2525
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS="hello@gare7.local"
+MAIL_FROM_NAME="${APP_NAME}"
+
+# ============================================
+#  إعدادات AWS S3 (اختياري - للتخزين السحابي)
+# ============================================
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_DEFAULT_REGION=us-east-1
+AWS_BUCKET=
+AWS_USE_PATH_STYLE_ENDPOINT=false
+
+# ============================================
+#  إعدادات Frontend (Vite)
+# ============================================
+VITE_APP_NAME="${APP_NAME}"
+
+تأكد أن .env يحتوي:
+
+DB_CONNECTION=sqlite
+
+ثم:
+
+bash
+php artisan migrate
+
+📦 الخطوة 6: تثبيت مكتبات Frontend
+bash
+npm install
+
